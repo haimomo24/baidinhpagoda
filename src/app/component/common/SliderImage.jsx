@@ -6,18 +6,18 @@ import React, { useState, useEffect } from "react";
 const slidesData = [
   {
     id: 1,
-    image: "https://mia.vn/media/uploads/blog-du-lich/tong-hop-cac-kinh-nghiem-hanh-huong-chua-bai-dinh-huu-ich-1-1641327672.jpg",
-    text: "BLOG\nChinh phục Hokkaido: Khám phá biển băng trời và vùng đất của bộ tộc Ainu",
+    image: "/images/123.jpg",
+    text: "",
   },
   {
     id: 2,
-    image: "https://mia.vn/media/uploads/blog-du-lich/tong-hop-cac-kinh-nghiem-hanh-huong-chua-bai-dinh-huu-ich-2-1641327672.jpg",
-    text: "BLOG\nKhám phá Tokyo sầm uất và nét văn hóa truyền thống",
+    image: "/images/DJI_0162.JPG",
+    text: "",
   },
   {
     id: 3,
-    image: "https://mia.vn/media/uploads/blog-du-lich/tong-hop-cac-kinh-nghiem-hanh-huong-chua-bai-dinh-huu-ich-2-1641327672.jpg",
-    text: "BLOG\nKyoto: Vùng đất của những ngôi chùa cổ kính",
+    image: "/images/DSC03101.JPG",
+    text: "",
   },
 ];
 
@@ -39,7 +39,7 @@ const SliderImage = () => {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full h-[600px] overflow-hidden">
+    <div className="relative w-full h-[700px] overflow-hidden">
       <div
         className="flex transition-transform duration-700 ease-in-out h-full"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -49,7 +49,7 @@ const SliderImage = () => {
             <img
               src={slide.image}
               alt=""
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover transition-transform duration-500 "
             />
             <div className="absolute bottom-20 left-10 text-white text-3xl md:text-5xl leading-snug drop-shadow-lg">
               {slide.text.split("\n").map((line, i) => (

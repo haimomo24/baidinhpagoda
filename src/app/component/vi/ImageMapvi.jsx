@@ -2,7 +2,6 @@
 'use client'
 import React, { useState } from 'react';
 
-
 const regionsData = [
   {
     name: 'Bảo Tháp',
@@ -27,19 +26,18 @@ const regionsData = [
     ]
   },
    {
-    name: 'Hokkaido',
+    name: 'Khách Xá ',
     prefectures: ['Sapporo', 'Hakodate', 'Asahikawa', 'Otaru'],
     description: 'Hokkaido, hòn đảo phía bắc, nổi tiếng với thiên nhiên hoang sơ, mùa đông phủ đầy tuyết trắng và các lễ hội tuyết ngoạn mục.',
     images: [
-      'https://images.unsplash.com/photo-1522775279809-b4722a578c77?q=80&w=1974&auto=format&fit=crop', // Lavender fields
-      'https://images.unsplash.com/photo-1560982523-b1c411a30b63?q=80&w=2070&auto=format&fit=crop', // Sapporo Snow Festival
-      'https://images.unsplash.com/photo-1613589613148-18e11e51b6a1?q=80&w=2070&auto=format&fit=crop', // Otaru Canal
-      'https://images.unsplash.com/photo-1603140223595-b210f8373b88?q=80&w=2070&auto=format&fit=crop', // Winter landscape
+      '/images/khachxa/khacxa1.JPG', 
+      '/images/khachxa/khachxa2.JPG', 
+      '/images/khachxa/khachxa3.JPG', 
+      '/images/khachxa/khachxa4.JPG', 
     ]
   }
 ];
 
-// SVG Icon cho các nút
 const ArrowLeftIcon = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -51,7 +49,6 @@ const ArrowRightIcon = (props) => (
     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
   </svg>
 );
-
 
 const ImageMapen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -71,11 +68,11 @@ const ImageMapen = () => {
   const currentRegion = regionsData[currentIndex];
 
   return (
-    <div className="bg-[#f8f9fa] min-h-screen w-full mt-[-150px] flex justify-center items-center font-sans">
+    <div className="bg-[#f8f9fa] min-h-screen w-full mt-[-100px] flex justify-center items-center font-sans">
       <main className="container mx-auto flex flex-col lg:flex-row items-center gap-12 p-8">
         
         {/* === Cột bên trái: Slider === */}
-        <div className="w-full lg:w-2/5">
+        <div className="w-full lg:w-1/3">
           <h1 className="text-4xl font-bold text-gray-800 mb-6">Địa Điểm checkin </h1>
           
           <div className="bg-white rounded-lg shadow-xl p-4 relative">
@@ -120,16 +117,11 @@ const ImageMapen = () => {
         </div>
 
         {/* === Cột bên phải: Bản đồ === */}
-        <div className="w-full lg:w-3/5">
-          {/* !!! QUAN TRỌNG:
-            Thay thế src="..." bằng đường dẫn đến file ảnh bản đồ của bạn.
-            Bạn có thể đặt ảnh trong thư mục `public` và gọi nó trực tiếp.
-            Ví dụ: nếu ảnh là `public/map.png`, src sẽ là "/map.png"
-          */}
+        <div className="w-full lg:w-2/3 flex justify-center">
           <img 
-            src="/images/Ban do Lo trinh Bai Dinh - Thung Ui-01.jpg" // <-- THAY THẾ BẰNG ẢNH CỦA BẠN
+            src="https://viettourist.vn/upload/u23569/5/2017-01-09/so-do-bd-chuan_b-n-xe-trung-tam.jpg"
             alt="Bản đồ các vùng của Nhật Bản" 
-            className="w-auto ml-[100px] h-[500px] object-contain"
+            className="w-full h-[550px] object-cover border-0 rounded-none shadow-none"
           />
         </div>
 
