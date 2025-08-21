@@ -1,4 +1,3 @@
-// src/FamousPlaces.jsx
 import React from "react";
 
 const placesData = [
@@ -23,16 +22,28 @@ const FamousPlaces = () => {
       <div className="flex gap-4 mb-4">
         {/* Ô lớn bên trái */}
         <div className="flex-1 relative overflow-hidden rounded-lg" style={{ height: "400px" }}>
-          <img src={placesData[0].img} alt={placesData[0].title} className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-white font-semibold">{placesData[0].title}</div>
+          <img
+            src={placesData[0].img}
+            alt={placesData[0].title}
+            className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+          />
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-white font-semibold">
+            {placesData[0].title}
+          </div>
         </div>
 
         {/* 4 ô nhỏ bên phải */}
         <div className="flex-1 grid grid-cols-2 gap-4">
           {placesData.slice(1, 5).map((place, idx) => (
             <div key={idx} className="relative overflow-hidden rounded-lg" style={{ height: "195px" }}>
-              <img src={place.img} alt={place.title} className="w-full h-full object-cover" />
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">{place.title}</div>
+              <img
+                src={place.img}
+                alt={place.title}
+                className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+              />
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">
+                {place.title}
+              </div>
             </div>
           ))}
         </div>
@@ -44,16 +55,28 @@ const FamousPlaces = () => {
         <div className="flex-1 grid grid-cols-2 gap-4">
           {placesData.slice(5, 9).map((place, idx) => (
             <div key={idx} className="relative overflow-hidden rounded-lg" style={{ height: "195px" }}>
-              <img src={place.img} alt={place.title} className="w-full h-full object-cover" />
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">{place.title}</div>
+              <img
+                src={place.img}
+                alt={place.title}
+                className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+              />
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">
+                {place.title}
+              </div>
             </div>
           ))}
         </div>
 
         {/* Ô lớn bên phải */}
         <div className="flex-1 relative overflow-hidden rounded-lg" style={{ height: "400px" }}>
-          <img src={placesData[9].img} alt={placesData[9].title} className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-white font-semibold">{placesData[9].title}</div>
+          <img
+            src={placesData[9].img}
+            alt={placesData[9].title}
+            className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+          />
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-white font-semibold">
+            {placesData[9].title}
+          </div>
         </div>
       </div>
     </div>
