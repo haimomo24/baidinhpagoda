@@ -1,12 +1,5 @@
-import React from 'react'
-import PageHome from './component/homepage/PageHome'
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return (
-    <div>
-      <PageHome/>
-    </div>
-  )
+export default function Home() {
+  redirect("/vi");
 }
-
-export default page
