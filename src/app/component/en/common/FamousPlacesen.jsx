@@ -14,7 +14,7 @@ const placesData = [
 
 const FamousPlacesen = () => {
   return (
-   <div className="max-w-[1200px] mx-auto px-4 py-8">
+   <div className="max-w-[1200px]  mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8 ">Places to Visit </h1>
 
       {/* Hàng 1 */}
