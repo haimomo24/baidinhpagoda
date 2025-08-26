@@ -1,6 +1,7 @@
 // app/vi/layout.jsx
 import "../globals.css";
 import HeaderPageVi from "../component/common/HeaderPage.vi";
+import FooterPage from "../component/common/FooterPage";
 
 export const metadata = {
   title: "Bái Đính",
@@ -18,6 +19,7 @@ export default function ViLayout({ children }) {
       <body>
         <HeaderPageVi />
         {children}
+        <FooterPage/>
       </body>
     </html>
   );

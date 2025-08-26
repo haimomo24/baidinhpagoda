@@ -1,6 +1,11 @@
+// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-     reactStrictMode: true,
-};
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '10mb', // bạn có thể chỉnh thành 20mb, 50mb...
+    },
+  },
+}
 
-export default nextConfig;
+export default nextConfig
