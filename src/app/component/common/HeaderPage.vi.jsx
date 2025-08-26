@@ -14,7 +14,15 @@ export default function HeaderPageVi() {
 
   const menuItems = [
     { name: "Trang Chủ", link: "#" },
-    { name: "Dịch vụ", link: "#" },
+    { name: "Dịch vụ",
+       link: "#" ,
+       subMenu: [
+        { name: "Xe Điện", link: "#" },
+        { name: "Khách sạn", link: "#" },
+        
+      ],
+      
+      },
     { name: "Sự kiện", link: "#" },
     {
       name: "Điểm đến",

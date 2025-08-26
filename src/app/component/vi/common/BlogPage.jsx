@@ -50,7 +50,7 @@ const BlogPage = () => {
   return (
     <div className="bg-[#FFFFFF] py-10">
          <div className="relative max-w-6xl mx-auto">
-           <h2 className="text-3xl font-bold mb-6">Blog</h2>
+           <h2 className="text-3xl font-bold mb-6">Bai Dinh complex</h2>
    
            {/* Nút trái */}
            {currentIndex > 0 && (
