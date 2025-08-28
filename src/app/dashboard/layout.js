@@ -2,7 +2,7 @@ import SiderbarDashboard from "../component/dashboard/common/SiderbarDashboard";
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="min-h-screen grid grid-cols-[16rem_1fr_10px] grid-rows-[40px_1fr_10px]">
+    <div className="min-h-screen  grid grid-cols-[16rem_1fr_10px] grid-rows-[40px_1fr_10px]">
       {/* Sidebar bên trái */}
       <SiderbarDashboard />
 

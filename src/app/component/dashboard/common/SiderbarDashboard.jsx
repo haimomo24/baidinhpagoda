@@ -15,7 +15,7 @@ const SiderbarDashboard = () => {
   ]
 
   return (
-    <aside className="row-span-3 bg-[#374151] text-white p-4 flex flex-col">
+    <aside className="row-span-3 boder  bg-[#374151] text-white p-4 flex flex-col">
       <h2 className="text-2xl font-bold mb-8 text-center border-b border-gray-600 pb-4">
         Trang quản trị
       </h2>

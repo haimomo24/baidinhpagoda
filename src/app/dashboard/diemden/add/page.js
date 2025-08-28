@@ -1,11 +1,10 @@
 import VisiteDashboard from '@/app/component/dashboard/VisiteDashboard'
-import VisitTable from '@/app/component/dashboard/VisitTable'
 import React from 'react'
 
 const page = () => {
   return (
     <div>
-        <VisitTable/>
+        <VisiteDashboard/>
     </div>
   )
 }
