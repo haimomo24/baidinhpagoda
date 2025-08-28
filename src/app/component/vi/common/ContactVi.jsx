@@ -103,7 +103,7 @@ const ContactVi = () => {
     }
   };
   return (
-    <div className="min-h-screen mt-[60px]">
+    <div className="min-h-screen ">
      
      
 

@@ -13,11 +13,11 @@ export default function HeaderPageVi() {
   const lang = "vi";
 
   const menuItems = [
-    { name: "Trang Chủ", link: "#" },
+    { name: "Trang Chủ", link: "/vi" },
     { name: "Dịch vụ",
        link: "#" ,
        subMenu: [
-        { name: "Xe Điện", link: "#" },
+        { name: "Xe Điện", link: "/vi/car" },
         { name: "Khách sạn", link: "/vi/hotel" },
         
       ],
@@ -38,7 +38,7 @@ export default function HeaderPageVi() {
     { name: "Liên hệ",
        link: "#" ,
       subMenu: [
-        { name: "Tuyển Dụng ", link: "#" },
+        { name: "Tuyển Dụng ", link: "/vi/recruitment" },
         { name: "Liên hệ ngay ", link: "/vi/contact" },
         
       ],},

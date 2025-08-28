@@ -1,12 +1,14 @@
 // src/app/api/blog/route.js
 import { NextResponse } from "next/server";
 import { getConnection } from "@/lib/db";
+import { writeFile } from "fs/promises";
+import path from "path";
 
+// ================== POST: Thêm Blog ==================
 export async function POST(req) {
   try {
     const formData = await req.formData();
 
-    // Lấy đúng tên field từ frontend
     const name = formData.get("name");
     const title_1 = formData.get("title_1");
     const title_2 = formData.get("title_2");
@@ -22,11 +24,27 @@ export async function POST(req) {
       );
     }
 
-    const image1Name = images_1 instanceof File ? images_1.name : null;
-    const image2Name = images_2 instanceof File ? images_2.name : null;
+    // Lưu file vào thư mục public/uploads
+    let image1Name = null;
+    if (images_1 && images_1 instanceof File) {
+      const bytes = await images_1.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      image1Name = Date.now() + "-" + images_1.name; // tránh trùng tên
+      const filePath = path.join(process.cwd(), "public/uploads", image1Name);
+      await writeFile(filePath, buffer);
+    }
 
+    let image2Name = null;
+    if (images_2 && images_2 instanceof File) {
+      const bytes = await images_2.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+      image2Name = Date.now() + "-" + images_2.name;
+      const filePath = path.join(process.cwd(), "public/uploads", image2Name);
+      await writeFile(filePath, buffer);
+    }
+
+    // Lưu vào database
     const pool = await getConnection();
-
     await pool
       .request()
       .input("name", name)
@@ -53,6 +71,7 @@ export async function POST(req) {
   }
 }
 
+// ================== GET: Lấy danh sách Blog ==================
 export async function GET() {
   try {
     const pool = await getConnection();
