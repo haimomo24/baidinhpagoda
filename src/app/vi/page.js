@@ -1,3 +1,4 @@
+import HeaderBookingvi from "../component/common/HeaderBookingvi";
 import SliderImage from "../component/common/SliderImage";
 import AllVisit from "../component/vi/common/AllVisit";
 import BlogPage from "../component/vi/common/BlogPage";
@@ -9,6 +10,7 @@ import ImageMapen from "../component/vi/ImageMapvi";
 export default function ViHome() {
   return (
   <>
+  <HeaderBookingvi/>
   <SliderImage/>
   <ImageMapen/>
   <FamousPlaces/>

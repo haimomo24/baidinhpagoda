@@ -18,7 +18,7 @@ export default function HeaderPageVi() {
        link: "#" ,
        subMenu: [
         { name: "Xe Điện", link: "#" },
-        { name: "Khách sạn", link: "#" },
+        { name: "Khách sạn", link: "/vi/hotel" },
         
       ],
       
@@ -32,9 +32,16 @@ export default function HeaderPageVi() {
         { name: "Tam Chúc", link: "#" },
         { name: "Phố cổ", link: "#" },
         { name: "Sân Golf", link: "#" },
+         { name: "Tam cốc ", link: "#" },
       ],
     },
-    { name: "Liên hệ", link: "#" },
+    { name: "Liên hệ",
+       link: "#" ,
+      subMenu: [
+        { name: "Tuyển Dụng ", link: "#" },
+        { name: "Liên hệ ngay ", link: "/vi/contact" },
+        
+      ],},
   ];
 
   const languages = [
@@ -47,7 +54,7 @@ export default function HeaderPageVi() {
   };
 
   return (
-    <header className={`w-full border-b shadow-sm bg-white ${libre.className}`}>
+    <header className={`w-full  bg-white ${libre.className}`}>
       <div className="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
         {/* Logo */}
         <div className="flex items-center gap-2 font-bold text-lg text-gray-900">
@@ -73,7 +80,7 @@ export default function HeaderPageVi() {
               {/* Submenu */}
               {item.subMenu && (
                 <div
-                  className="absolute left-0 top-full mt-2 hidden group-hover:block
+                  className="absolute left-0 top-full  hidden group-hover:block
                              bg-white rounded shadow-lg min-w-[180px] z-50"
                 >
                   {item.subMenu.map((sub, i) => (
