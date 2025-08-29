@@ -9,7 +9,7 @@ const BlogPage = () => {
     { img: "https://bizweb.dktcdn.net/100/366/377/files/tam-coc-ninh-binh-31a3e3c7-0fa2-446a-b1b1-3a1e4f1bbe7e.jpg?v=1698027951505", title: "Tam Cốc" },
     { img: "https://disantrangan.vn/wp-content/uploads/2021/09/san_golf_trang_an_09.jpg", title: "Sân golf Tràng An" },
     { img: "https://bizweb.dktcdn.net/100/366/377/files/anh-chup-o-pho-co-hoa-lu.jpg?v=1669954575118", title: "Phố cổ Hoa Lư" },
-    { img: "https://dulichninhbinh.com.vn/mypicture/images/2025/thang4/4819630545197582578089964363516723848938798n.jpg", title: "Phong cảnh Ninh Bình" },
+    { img: "https://dulichninhbinh.com.vn/mypicture/images/2025/thang4/4819630545197582578089964363516723848938798n.jpg", title: "Chùa Bái Đính" },
     { img: "https://mia.vn/media/uploads/blog-du-lich/tuyet-tinh-coc-ninh-binh-1-1690702331.jpg", title: "Tuyệt Tình Cốc" },
     { img: "https://eholiday.vn/wp-content/uploads/2024/07/khach-san-hoa-lu-ninh-binh-14.jpg", title: "Khách sạn Hoa Lư" },
   ];
