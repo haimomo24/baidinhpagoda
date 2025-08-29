@@ -2,7 +2,7 @@ import React from 'react'
 
 const FooterPage = () => {
   return (
-    <footer className="w-full bg-gray-900 text-gray-400">
+    <footer className="w-full bg-[#356D3D] ">
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           {/* Logo + tên */}
@@ -16,18 +16,18 @@ const FooterPage = () => {
               alt="Flowbite Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-              Chùa Bái Đính
+               Bái Đính complex
             </span>
           </a>
 
           {/* Thông tin liên hệ */}
           <div className="text-sm space-y-1 text-gray-300">
-            <p><strong>Địa chỉ:</strong> Gia Sinh, Gia Viễn, Ninh Bình</p>
-            <p><strong>Điện thoại:</strong> 0229 123 456</p>
+            <p><strong>Địa chỉ:</strong> Phường Tây Hoa Lư, Ninh Bình</p>
+            <p><strong>Điện thoại:</strong> 02293868789</p>
             <p>
               <strong>Email:</strong>{" "}
               <a href="mailto:info@chua-baidinh.vn" className="hover:underline">
-                info@chua-baidinh.vn
+                info@ctrangangroup.com
               </a>
             </p>
           </div>
@@ -35,7 +35,7 @@ const FooterPage = () => {
 
         <hr className="my-6 border-gray-700 sm:mx-auto lg:my-8" />
 
-        <span className="block text-sm text-gray-500 sm:text-center">
+        <span className="block text-sm text-gray-300 sm:text-center">
           ©{" "}
           <a href="https://trangangroup.com/" className="hover:underline">
             trangangroup.com

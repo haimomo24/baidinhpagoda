@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // URL backend
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://p6m6sf-4000.csb.app";
 
 const VisiteDashboard = () => {
   const [formData, setFormData] = useState({

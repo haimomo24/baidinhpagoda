@@ -2,11 +2,11 @@ import React from 'react'
 
 const HeaderBookingvi = () => {
   return (
-     <div className="w-full  py-4">
+     <div className="w-full mt-[-15px]  py-4">
       <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-2 px-4">
         {/* Tiêu đề */}
         <div className="flex flex-col mr-4">
-          <span className="font-bold text-gray-800">ĐẶT PHÒNG</span>
+          <span className="font-bold text-gray-800">Đặt Phòng</span>
           
         </div>
 

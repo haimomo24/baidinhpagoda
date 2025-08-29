@@ -166,7 +166,7 @@ const ContactVi = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-[#D3F8E2] h-[530px] p-8 rounded-xl shadow-lg">
+            <div className="bg-gray-100 h-[530px] p-8 rounded-xl shadow-lg">
               <h3 className="text-2xl font-bold  mb-6">Thông điệp </h3>
               
               {/* Status Messages */}
@@ -290,7 +290,7 @@ const ContactVi = () => {
                   </div>
                   <div className="p-6">
                     <h4 className="text-lg font-semibold text-gray-800 mb-2">Khách xá Bái Đính</h4>
-                    <p className="text-gray-600 mb-4">Gia Sinh, Gia Viễn, Ninh Bình</p>
+                    <p className="text-gray-600 mb-4">Phường tây Hoa Lư Ninh Bình</p>
                     <div className="flex flex-wrap gap-4">
                       <a
                         href="https://www.google.com/maps/place/Bai+Dinh+Hotel/@20.2736257,105.8637726,1066m/data=!3m1!1e3!4m9!3m8!1s0x31367ea560375713:0xab30ab2390bc9816!5m2!4m1!1i2!8m2!3d20.2736257!4d105.8663475!16s%2Fg%2F11b6c__yy7"
@@ -324,8 +324,8 @@ const ContactVi = () => {
                   <h4 className="text-xl font-semibold text-gray-800 mb-4">Thông tin thêm</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
-                      <span className="font-medium text-gray-700">Khoảng cách từ chùa Bái Đính:</span>
-                      <p className="text-gray-600">Chỉ 2km</p>
+                      <span className="font-medium text-gray-700">Nằm trong khuôn viên chùa Bái Đính</span>
+                      
                     </div>
                     <div>
                       <span className="font-medium text-gray-700">Từ sân bay Nội Bài:</span>

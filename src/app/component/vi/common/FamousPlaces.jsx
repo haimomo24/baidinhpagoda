@@ -41,7 +41,7 @@ const FamousPlaces = () => {
                 alt={place.title}
                 className="w-full h-full object-cover transition-transform duration-500 ease-in-out hover:scale-105"
               />
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold text-hover:scale-105 ">
                 {place.title}
               </div>
             </div>

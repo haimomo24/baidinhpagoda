@@ -66,7 +66,7 @@ export default function HeaderPageVi() {
         </div>
 
         {/* Menu */}
-        <nav className="hidden md:flex gap-6 text-base font-semibold text-gray-900 relative">
+        <nav className="hidden md:flex gap-10 text-base font-semibold text-gray-900 relative">
           {menuItems.map((item, idx) => (
             <div key={idx} className="relative group">
               {/* Menu item */}

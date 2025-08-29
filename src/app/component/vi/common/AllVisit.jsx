@@ -53,13 +53,13 @@ const BlogPage = () => {
         </button>
 
         {/* Danh sách ảnh */}
-        <div className="flex space-x-6 transition-transform duration-500">
+        <div className="flex space-x-6 transition-transform duration-500 group-hover:scale-110">
           {visibleBlogs.map((blog, index) => {
             const isCenter = index >= 1 && index <= 4; 
             return (
               <div
                 key={index}
-                className={`relative rounded-xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 ${
+                className={`relative rounded-xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 hover:scale-80 ${
                   isCenter
                     ? "w-72 h-96 opacity-100 scale-100"
                     : "w-60 h-80 opacity-50 scale-90"
@@ -68,12 +68,12 @@ const BlogPage = () => {
                 <img
                   src={blog.img}
                   alt={blog.title || `Blog ${index}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110"
                 />
                 {/* Chữ minh họa */}
                 {isCenter && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                    <p className="text-white text-xl font-bold">{blog.title}</p>
+                    <p className="text-white text-xl font-bold hover:scale-110 ">{blog.title}</p>
                   </div>
                 )}
               </div>

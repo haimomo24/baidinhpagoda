@@ -1,4 +1,3 @@
-// SliderImage.jsx
 'use client'
 
 import React, { useState, useEffect } from "react";
@@ -7,6 +6,8 @@ const slidesData = [
   { id: 1, image: "/images/123.jpg", text: "" },
   { id: 2, image: "/images/DJI_0162.JPG", text: "" },
   { id: 3, image: "/images/DSC03101.JPG", text: "" },
+  { id: 4, image: "/images/4df967292648ad16f459.jpg", text: "" },
+  { id: 5, image: "/images/DSC05501.JPG", text: "" }
 ];
 
 const SliderImage = () => {
@@ -17,6 +18,9 @@ const SliderImage = () => {
     else if (index < 0) setCurrentIndex(slidesData.length - 1);
     else setCurrentIndex(index);
   };
+
+  const nextSlide = () => showSlide(currentIndex + 1);
+  const prevSlide = () => showSlide(currentIndex - 1);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -47,7 +51,7 @@ const SliderImage = () => {
         </div>
       ))}
 
-      {/* Dots nằm đè lên ảnh */}
+      {/* Dots */}
       <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-3">
         {slidesData.map((_, index) => (
           <span
@@ -59,6 +63,20 @@ const SliderImage = () => {
           ></span>
         ))}
       </div>
+
+      {/* Nút điều hướng */}
+     <button
+  onClick={prevSlide}
+  className="absolute top-1/2 left-5 transform -translate-y-1/2  text-white text-4xl p-5 rounded-full  transition"
+>
+  ❮
+</button>
+<button
+  onClick={nextSlide}
+  className="absolute top-1/2 right-5 transform -translate-y-1/2  text-white text-4xl p-5 rounded-full  transition"
+>
+  ❯
+</button>
     </div>
   );
 };

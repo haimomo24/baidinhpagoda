@@ -73,7 +73,7 @@ const ImageMapen = () => {
         
         {/* === Cột bên trái: Slider === */}
         <div className="w-full lg:w-1/3">
-          <h1 className="text-4xl font-bold text-gray-800 mb-6">Địa Điểm checkin </h1>
+          <h1 className="text-4xl font-bold text-gray-800 mb-6">Các Điểm checkin </h1>
           
           <div className="bg-white rounded-lg shadow-xl p-4 relative">
             {/* Nút điều hướng */}
