@@ -88,7 +88,7 @@ const ShowBlogvi = () => {
         <ul className="space-y-4">
           {relatedBlogs.map(item => (
             <li key={item.id}>
-              <Link href={`/blog/${item.id}`} className="flex gap-3 items-stretch">
+              <Link href={`/vi/blog/${item.id}`} className="flex gap-3 items-stretch">
                 {item.images_1 && (
                   <img
                     src={`/uploads/${item.images_1}`}

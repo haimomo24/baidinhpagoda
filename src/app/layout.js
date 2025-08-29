@@ -6,7 +6,7 @@ const libreBaskerville = Libre_Baskerville({
   weight: ["400", "700"],
 });
 
-export const metadata = { title: "Bái Đính" };
+export const metadata = { title: "Bái Đính complex " };
 
 export default function RootLayout({ children }) {
   return (

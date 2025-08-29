@@ -43,11 +43,49 @@ const VisiteDashboard = () => {
     });
   };
 
-  // Submit form
-  const handleSubmit = (e) => {
+  // Submit form -> Gửi dữ liệu lên API
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Dữ liệu review:", formData);
-    alert("✅ Bài review đã được tạo!");
+
+    try {
+      const data = new FormData();
+      data.append("name", formData.mainTitle);
+      data.append("title_1", formData.title1);
+      data.append("title_2", formData.title2);
+      data.append("title_3", formData.title3);
+
+      if (formData.image1) data.append("images_1", formData.image1);
+      if (formData.image2) data.append("images_2", formData.image2);
+      if (formData.image3) data.append("images_3", formData.image3); 
+
+      const res = await fetch("/api/visit", {
+        method: "POST",
+        body: data,
+      });
+
+      const result = await res.json();
+      if (res.ok) {
+        alert("✅ Bài review đã được tạo!");
+        console.log("Kết quả:", result);
+        setFormData({
+          mainTitle: "",
+          title1: "",
+          image1: null,
+          image1Preview: null,
+          title2: "",
+          image2: null,
+          image2Preview: null,
+          title3: "",
+          image3: null,
+          image3Preview: null,
+        });
+      } else {
+        alert("❌ Lỗi: " + result.error);
+      }
+    } catch (err) {
+      console.error("Lỗi submit:", err);
+      alert("❌ Có lỗi khi gửi dữ liệu!");
+    }
   };
 
   return (
@@ -197,7 +235,7 @@ const VisiteDashboard = () => {
             type="submit"
             className="bg-red-500 text-white px-10 py-4 text-xl rounded-2xl hover:bg-green-700 transition-all shadow-lg"
           >
-             Đăng bài
+            Đăng bài
           </button>
         </div>
       </form>

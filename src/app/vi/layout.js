@@ -4,7 +4,7 @@ import HeaderPageVi from "../component/common/HeaderPage.vi";
 import FooterPage from "../component/common/FooterPage";
 
 export const metadata = {
-  title: "Bái Đính",
+  title: "Bái Đính complex",
   icons: {
     icon: [
       { url: "/images/logo-bai-dinh.png", type: "image/png" }, 
