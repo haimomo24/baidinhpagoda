@@ -5,15 +5,17 @@ import Link from "next/link";
 const BlogTable = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [expanded, setExpanded] = useState({}); // Lưu trạng thái mở/đóng theo blogId + fieldName
+  const [expanded, setExpanded] = useState({});
+  const [selectedBlog, setSelectedBlog] = useState(null);
 
+  // Fetch blog từ backend Node.js
   const fetchBlogs = async () => {
     try {
-      const res = await fetch("/api/blog");
+      const res = await fetch("http://localhost:4000/api/blog");
       const data = await res.json();
-      setBlogs(data);
+      setBlogs(data); // lưu dữ liệu vào state
     } catch (error) {
-      console.error("Lỗi khi lấy blog:", error);
+      console.error("Lỗi khi fetch blog:", error);
     } finally {
       setLoading(false);
     }
@@ -23,13 +25,16 @@ const BlogTable = () => {
     fetchBlogs();
   }, []);
 
+  // Xoá blog
   const handleDelete = async (id) => {
     if (!confirm("Bạn có chắc chắn muốn xoá blog này?")) return;
     try {
-      const res = await fetch(`/api/blog/${id}`, { method: "DELETE" });
+      const res = await fetch(`http://localhost:4000/api/blog/${id}`, {
+        method: "DELETE",
+      });
       if (res.ok) {
         alert("Xoá thành công!");
-        fetchBlogs();
+        setBlogs((prev) => prev.filter((b) => b.id !== id));
       } else {
         alert("Xoá thất bại!");
       }
@@ -38,11 +43,10 @@ const BlogTable = () => {
     }
   };
 
-  // Hàm hiển thị rút gọn nội dung
+  // Hiển thị title rút gọn với nút xem thêm/thu gọn
   const renderTitle = (blogId, field, text) => {
     const key = `${blogId}-${field}`;
     const isExpanded = expanded[key];
-
     if (!text) return "Không có dữ liệu";
 
     return (
@@ -73,8 +77,8 @@ const BlogTable = () => {
         </Link>
       </div>
 
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <table className="w-full text-sm text-left text-gray-500">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
             <th className="px-6 py-3">ID</th>
             <th className="px-6 py-3">Name</th>
@@ -89,7 +93,7 @@ const BlogTable = () => {
         <tbody>
           {blogs.length > 0 ? (
             blogs.map((blog) => (
-              <tr key={blog.id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <tr key={blog.id} className="bg-white border-b">
                 <td className="px-6 py-4">{blog.id}</td>
                 <td className="px-6 py-4">{blog.name}</td>
                 <td className="px-6 py-4">{renderTitle(blog.id, "title_1", blog.title_1)}</td>
@@ -97,14 +101,24 @@ const BlogTable = () => {
                 <td className="px-6 py-4">{renderTitle(blog.id, "title_3", blog.title_3)}</td>
                 <td className="px-6 py-4">
                   {blog.images_1 ? (
-                    <img src={`/uploads/${blog.images_1}`} alt="image1" className="w-16 h-16 object-cover rounded" />
+                    <img
+                      src={blog.images_1}
+                      alt="image1"
+                      className="w-16 h-16 object-cover rounded cursor-pointer hover:scale-105 transition"
+                      onClick={() => setSelectedBlog(blog)}
+                    />
                   ) : (
                     "Không có ảnh"
                   )}
                 </td>
                 <td className="px-6 py-4">
                   {blog.images_2 ? (
-                    <img src={`/uploads/${blog.images_2}`} alt="image2" className="w-16 h-16 object-cover rounded" />
+                    <img
+                      src={blog.images_2}
+                      alt="image2"
+                      className="w-16 h-16 object-cover rounded cursor-pointer hover:scale-105 transition"
+                      onClick={() => setSelectedBlog(blog)}
+                    />
                   ) : (
                     "Không có ảnh"
                   )}
@@ -134,6 +148,29 @@ const BlogTable = () => {
           )}
         </tbody>
       </table>
+
+      {/* Modal xem ảnh */}
+      {selectedBlog && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg max-w-3xl w-full relative">
+            <button
+              className="absolute top-2 right-2 text-gray-600 hover:text-red-600 text-xl"
+              onClick={() => setSelectedBlog(null)}
+            >
+              ✕
+            </button>
+            <h2 className="text-lg font-bold mb-4">{selectedBlog.name}</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {selectedBlog.images_1 && (
+                <img src={selectedBlog.images_1} alt="Ảnh 1" className="w-full h-60 object-cover rounded" />
+              )}
+              {selectedBlog.images_2 && (
+                <img src={selectedBlog.images_2} alt="Ảnh 2" className="w-full h-60 object-cover rounded" />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

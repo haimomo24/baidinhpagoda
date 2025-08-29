@@ -12,7 +12,8 @@ const BlogPage = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch("/api/blog");
+        // Fetch từ backend Node.js mới
+        const res = await fetch("http://localhost:4000/api/blog");
         const data = await res.json();
         setBlogs(data);
       } catch (error) {
@@ -46,12 +47,11 @@ const BlogPage = () => {
             <Link key={item.id} href={`/vi/blog/${item.id}`}>
               <div className="rounded-lg overflow-hidden group cursor-pointer shadow-md">
                 <img
-                  src={item.images_1 ? `/uploads/${item.images_1}` : "/default.jpg"} 
-                  alt={item.title_1}
+                  src={item.images_1 ? item.images_1 : "/default.jpg"} 
+                  alt={item.title_1 || item.name}
                   className="w-full h-52 object-cover transform transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="p-4 bg-white">
-                  {/* Title ngắn gọn */}
                   <h3 className="text-lg font-bold mb-2 truncate">{item.title_1}</h3>
                   <p className="text-gray-600 text-sm line-clamp-2">{item.name}</p>
                 </div>

@@ -14,7 +14,7 @@ const ShowBlogvi = () => {
     if (!id) return
     const fetchBlog = async () => {
       try {
-        const res = await fetch(`/api/blog/${id}`)
+        const res = await fetch(`http://localhost:4000/api/blog/${id}`)
         const data = await res.json()
         setBlog(data)
       } catch (error) {
@@ -30,7 +30,7 @@ const ShowBlogvi = () => {
   useEffect(() => {
     const fetchRelated = async () => {
       try {
-        const res = await fetch('/api/blog')
+        const res = await fetch('http://localhost:4000/api/blog')
         const data = await res.json()
         if (Array.isArray(data)) {
           const filtered = data
@@ -52,35 +52,34 @@ const ShowBlogvi = () => {
     <div className="max-w-6xl mt-12 mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
       {/* Bài viết chính */}
       <article className="lg:col-span-2 grid gap-4">
-  <h1 className="text-4xl font-bold leading-tight">{blog.name}</h1>
+        <h1 className="text-4xl font-bold leading-tight">{blog.name}</h1>
 
-  {blog.title_1 && (
-    <p className="text-lg leading-7 text-justify">{blog.title_1}</p>
-  )}
-  {blog.images_1 && (
-    <img
-      src={`/uploads/${blog.images_1}`}
-      alt="Ảnh 1"
-      className="w-full h-auto rounded-lg"
-    />
-  )}
+        {blog.title_1 && (
+          <p className="text-lg leading-7 text-justify">{blog.title_1}</p>
+        )}
+        {blog.images_1 && (
+          <img
+            src={blog.images_1}
+            alt="Ảnh 1"
+            className="w-full h-auto rounded-lg"
+          />
+        )}
 
-  {blog.title_2 && (
-    <p className="text-lg leading-7 text-justify">{blog.title_2}</p>
-  )}
-  {blog.images_2 && (
-    <img
-      src={`/uploads/${blog.images_2}`}
-      alt="Ảnh 2"
-      className="w-full h-auto rounded-lg"
-    />
-  )}
+        {blog.title_2 && (
+          <p className="text-lg leading-7 text-justify">{blog.title_2}</p>
+        )}
+        {blog.images_2 && (
+          <img
+            src={blog.images_2}
+            alt="Ảnh 2"
+            className="w-full h-auto rounded-lg"
+          />
+        )}
 
-  {blog.title_3 && (
-    <p className="text-lg leading-7 text-justify">{blog.title_3}</p>
-  )}
-</article>
-
+        {blog.title_3 && (
+          <p className="text-lg leading-7 text-justify">{blog.title_3}</p>
+        )}
+      </article>
 
       {/* Bài viết liên quan */}
       <aside className="bg-gray-50 p-4 rounded-xl shadow-sm">
@@ -91,7 +90,7 @@ const ShowBlogvi = () => {
               <Link href={`/vi/blog/${item.id}`} className="flex gap-3 items-stretch">
                 {item.images_1 && (
                   <img
-                    src={`/uploads/${item.images_1}`}
+                    src={item.images_1}
                     alt={item.name}
                     className="w-20 h-20 object-cover rounded-md flex-shrink-0"
                   />

@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
 
+// URL backend
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+
 const VisiteDashboard = () => {
   const [formData, setFormData] = useState({
     mainTitle: "",
@@ -46,7 +49,6 @@ const VisiteDashboard = () => {
   // Submit form -> Gửi dữ liệu lên API
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const data = new FormData();
       data.append("name", formData.mainTitle);
@@ -56,9 +58,9 @@ const VisiteDashboard = () => {
 
       if (formData.image1) data.append("images_1", formData.image1);
       if (formData.image2) data.append("images_2", formData.image2);
-      if (formData.image3) data.append("images_3", formData.image3); 
+      if (formData.image3) data.append("image_3", formData.image3); // chú ý trùng backend
 
-      const res = await fetch("/api/visit", {
+      const res = await fetch(`${API_URL}/api/visit/`, {
         method: "POST",
         body: data,
       });
@@ -66,7 +68,6 @@ const VisiteDashboard = () => {
       const result = await res.json();
       if (res.ok) {
         alert("✅ Bài review đã được tạo!");
-        console.log("Kết quả:", result);
         setFormData({
           mainTitle: "",
           title1: "",
@@ -93,9 +94,7 @@ const VisiteDashboard = () => {
       <form onSubmit={handleSubmit} className="space-y-10">
         {/* Tiêu đề chính */}
         <div>
-          <label className="block font-semibold mb-2 text-lg">
-            Tiêu đề chính:
-          </label>
+          <label className="block font-semibold mb-2 text-lg">Tiêu đề chính:</label>
           <input
             type="text"
             name="mainTitle"
@@ -121,21 +120,11 @@ const VisiteDashboard = () => {
           {!formData.image1Preview ? (
             <label className="inline-block bg-red-500 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-blue-700 shadow-md">
               Chọn ảnh
-              <input
-                type="file"
-                name="image1"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="hidden"
-              />
+              <input type="file" name="image1" accept="image/*" onChange={handleFileChange} className="hidden" />
             </label>
           ) : (
             <div className="relative inline-block mt-4">
-              <img
-                src={formData.image1Preview}
-                alt="Preview 1"
-                className="max-h-60 rounded-xl shadow-md border"
-              />
+              <img src={formData.image1Preview} alt="Preview 1" className="max-h-60 rounded-xl shadow-md border" />
               <button
                 type="button"
                 onClick={() => handleRemoveImage("image1")}
@@ -162,21 +151,11 @@ const VisiteDashboard = () => {
           {!formData.image2Preview ? (
             <label className="inline-block bg-red-500 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-blue-700 shadow-md">
               Chọn ảnh
-              <input
-                type="file"
-                name="image2"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="hidden"
-              />
+              <input type="file" name="image2" accept="image/*" onChange={handleFileChange} className="hidden" />
             </label>
           ) : (
             <div className="relative inline-block mt-4">
-              <img
-                src={formData.image2Preview}
-                alt="Preview 2"
-                className="max-h-60 rounded-xl shadow-md border"
-              />
+              <img src={formData.image2Preview} alt="Preview 2" className="max-h-60 rounded-xl shadow-md border" />
               <button
                 type="button"
                 onClick={() => handleRemoveImage("image2")}
@@ -203,21 +182,11 @@ const VisiteDashboard = () => {
           {!formData.image3Preview ? (
             <label className="inline-block bg-red-500 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-blue-700 shadow-md">
               Chọn ảnh
-              <input
-                type="file"
-                name="image3"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="hidden"
-              />
+              <input type="file" name="image3" accept="image/*" onChange={handleFileChange} className="hidden" />
             </label>
           ) : (
             <div className="relative inline-block mt-4">
-              <img
-                src={formData.image3Preview}
-                alt="Preview 3"
-                className="max-h-60 rounded-xl shadow-md border"
-              />
+              <img src={formData.image3Preview} alt="Preview 3" className="max-h-60 rounded-xl shadow-md border" />
               <button
                 type="button"
                 onClick={() => handleRemoveImage("image3")}
