@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // URL backend
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://p6m6sf-4000.csb.app";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
 
 const VisiteDashboard = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +16,12 @@ const VisiteDashboard = () => {
     title3: "",
     image3: null,
     image3Preview: null,
+    title4: "",
+    image4: null,
+    image4Preview: null,
+    title5: "",
+    image5: null,
+    image5Preview: null,
   });
 
   // Thay đổi input text
@@ -55,10 +61,14 @@ const VisiteDashboard = () => {
       data.append("title_1", formData.title1);
       data.append("title_2", formData.title2);
       data.append("title_3", formData.title3);
+      data.append("title_4", formData.title4);
+      data.append("title_5", formData.title5);
 
       if (formData.image1) data.append("images_1", formData.image1);
       if (formData.image2) data.append("images_2", formData.image2);
-      if (formData.image3) data.append("image_3", formData.image3); // chú ý trùng backend
+      if (formData.image3) data.append("image_3", formData.image3);
+      if (formData.image4) data.append("images_4", formData.image4);
+      if (formData.image5) data.append("images_5", formData.image5);
 
       const res = await fetch(`${API_URL}/api/visit/`, {
         method: "POST",
@@ -79,6 +89,12 @@ const VisiteDashboard = () => {
           title3: "",
           image3: null,
           image3Preview: null,
+          title4: "",
+          image4: null,
+          image4Preview: null,
+          title5: "",
+          image5: null,
+          image5Preview: null,
         });
       } else {
         alert("❌ Lỗi: " + result.error);
@@ -89,12 +105,57 @@ const VisiteDashboard = () => {
     }
   };
 
+  // Render khối nhập text + ảnh
+  const renderSection = (titleLabel, titleName, imageName, previewKey) => (
+    <div>
+      <label className="block font-semibold mb-2 text-lg">{titleLabel}</label>
+      <textarea
+        name={titleName}
+        value={formData[titleName]}
+        onChange={handleChange}
+        rows="3"
+        className="w-full bg-transparent border-b-2 border-gray-500 p-3 text-lg focus:outline-none focus:border-blue-400 resize-none"
+        placeholder={`Nhập nội dung ${titleLabel.toLowerCase()}...`}
+      />
+      <label className="block font-semibold mt-4 mb-2 text-lg">Ảnh:</label>
+      {!formData[previewKey] ? (
+        <label className="inline-block bg-red-500 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-blue-700 shadow-md">
+          Chọn ảnh
+          <input
+            type="file"
+            name={imageName}
+            accept="image/*"
+            onChange={handleFileChange}
+            className="hidden"
+          />
+        </label>
+      ) : (
+        <div className="relative inline-block mt-4">
+          <img
+            src={formData[previewKey]}
+            alt={`Preview ${titleLabel}`}
+            className="max-h-60 rounded-xl shadow-md border"
+          />
+          <button
+            type="button"
+            onClick={() => handleRemoveImage(imageName)}
+            className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600"
+          >
+            ❌
+          </button>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="p-10 min-h-screen text-black">
       <form onSubmit={handleSubmit} className="space-y-10">
         {/* Tiêu đề chính */}
         <div>
-          <label className="block font-semibold mb-2 text-lg">Tiêu đề chính:</label>
+          <label className="block font-semibold mb-2 text-lg">
+            Tiêu đề chính:
+          </label>
           <input
             type="text"
             name="mainTitle"
@@ -105,98 +166,12 @@ const VisiteDashboard = () => {
           />
         </div>
 
-        {/* Mở bài */}
-        <div>
-          <label className="block font-semibold mb-2 text-lg">Mở bài:</label>
-          <textarea
-            name="title1"
-            value={formData.title1}
-            onChange={handleChange}
-            rows="4"
-            className="w-full bg-transparent border-b-2 border-gray-500 p-3 text-lg focus:outline-none focus:border-blue-400 resize-none"
-            placeholder="Nhập nội dung mở bài..."
-          />
-          <label className="block font-semibold mt-4 mb-2 text-lg">Ảnh 1:</label>
-          {!formData.image1Preview ? (
-            <label className="inline-block bg-red-500 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-blue-700 shadow-md">
-              Chọn ảnh
-              <input type="file" name="image1" accept="image/*" onChange={handleFileChange} className="hidden" />
-            </label>
-          ) : (
-            <div className="relative inline-block mt-4">
-              <img src={formData.image1Preview} alt="Preview 1" className="max-h-60 rounded-xl shadow-md border" />
-              <button
-                type="button"
-                onClick={() => handleRemoveImage("image1")}
-                className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600"
-              >
-                ❌
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Thân bài */}
-        <div>
-          <label className="block font-semibold mb-2 text-lg">Thân bài:</label>
-          <textarea
-            name="title2"
-            value={formData.title2}
-            onChange={handleChange}
-            rows="4"
-            className="w-full bg-transparent border-b-2 border-gray-500 p-3 text-lg focus:outline-none focus:border-blue-400 resize-none"
-            placeholder="Nhập nội dung thân bài..."
-          />
-          <label className="block font-semibold mt-4 mb-2 text-lg">Ảnh 2:</label>
-          {!formData.image2Preview ? (
-            <label className="inline-block bg-red-500 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-blue-700 shadow-md">
-              Chọn ảnh
-              <input type="file" name="image2" accept="image/*" onChange={handleFileChange} className="hidden" />
-            </label>
-          ) : (
-            <div className="relative inline-block mt-4">
-              <img src={formData.image2Preview} alt="Preview 2" className="max-h-60 rounded-xl shadow-md border" />
-              <button
-                type="button"
-                onClick={() => handleRemoveImage("image2")}
-                className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600"
-              >
-                ❌
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Kết bài */}
-        <div>
-          <label className="block font-semibold mb-2 text-lg">Kết bài:</label>
-          <textarea
-            name="title3"
-            value={formData.title3}
-            onChange={handleChange}
-            rows="4"
-            className="w-full bg-transparent border-b-2 border-gray-500 p-3 text-lg focus:outline-none focus:border-blue-400 resize-none"
-            placeholder="Nhập nội dung kết bài..."
-          />
-          <label className="block font-semibold mt-4 mb-2 text-lg">Ảnh 3:</label>
-          {!formData.image3Preview ? (
-            <label className="inline-block bg-red-500 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-blue-700 shadow-md">
-              Chọn ảnh
-              <input type="file" name="image3" accept="image/*" onChange={handleFileChange} className="hidden" />
-            </label>
-          ) : (
-            <div className="relative inline-block mt-4">
-              <img src={formData.image3Preview} alt="Preview 3" className="max-h-60 rounded-xl shadow-md border" />
-              <button
-                type="button"
-                onClick={() => handleRemoveImage("image3")}
-                className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600"
-              >
-                ❌
-              </button>
-            </div>
-          )}
-        </div>
+        {/* Các đoạn + ảnh */}
+        {renderSection("Nội dung 1", "title1", "image1", "image1Preview")}
+        {renderSection("Nội dung 2", "title2", "image2", "image2Preview")}
+        {renderSection("Nội dung 3", "title3", "image3", "image3Preview")}
+        {renderSection("Nội dung 4", "title4", "image4", "image4Preview")}
+        {renderSection("Nội dung 5", "title5", "image5", "image5Preview")}
 
         {/* Submit */}
         <div className="flex justify-center">
