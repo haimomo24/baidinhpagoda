@@ -10,35 +10,48 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
+const handleLogin = async (e) => {
+  e.preventDefault();
+  setError("");
+  setLoading(true);
 
-    try {
-      const res = await fetch("http://localhost:4000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+  try {
+    const res = await fetch("http://localhost:4000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (!res.ok || !data.success) {
-        setError(data.error || "Đăng nhập thất bại");
-      } else {
-        // ✅ Lưu thông tin đăng nhập vào localStorage
-        localStorage.setItem("user", JSON.stringify(data.user));
-
-        // ✅ Chuyển sang trang dashboard
-        router.push("/dashboard");
-      }
-    } catch (err) {
-      setError("Lỗi kết nối server");
-    } finally {
-      setLoading(false);
+    if (!res.ok) {
+      setError(data.error || "Đăng nhập thất bại");
+      return;
     }
-  };
+
+    // ✅ Chỉ lưu user + token vào localStorage
+    localStorage.setItem(
+      "auth",
+      JSON.stringify({
+        user: data.user,
+        token: data.token,
+        loginTime: data.loginTime,
+      })
+    );
+
+    // ✅ Đảm bảo redirect chạy sau khi lưu xong
+    setTimeout(() => {
+      router.push("/dashboard");
+    }, 100);
+  } catch (err) {
+    setError("Lỗi kết nối server");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
 
   return (
     <div className="min-h-screen bg-[#356D3D] py-6 flex flex-col justify-center sm:py-12">

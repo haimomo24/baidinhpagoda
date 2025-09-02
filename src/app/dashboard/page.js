@@ -8,11 +8,12 @@ const DashboardPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const savedUser = localStorage.getItem("user");
-    if (!savedUser) {
+    const savedAuth = localStorage.getItem("auth");
+    if (!savedAuth) {
       router.push("/login"); // ❌ chưa login thì về trang login
     } else {
-      setUser(JSON.parse(savedUser));
+      const parsed = JSON.parse(savedAuth);
+      setUser(parsed.user); // ✅ lấy user từ auth
     }
   }, [router]);
 
@@ -26,7 +27,7 @@ const DashboardPage = () => {
       <button
         className="mt-4 bg-red-600 text-white px-4 py-2 rounded"
         onClick={() => {
-          localStorage.removeItem("user");
+          localStorage.removeItem("auth"); // ❌ xóa auth chứ không phải user
           router.push("/login");
         }}
       >

@@ -1,5 +1,6 @@
 import HeaderBookingvi from "../component/common/HeaderBookingvi";
 import SliderImage from "../component/common/SliderImage";
+import VideoPage from "../component/common/VideoPage";
 import AllVisit from "../component/vi/common/AllVisit";
 import BlogPage from "../component/vi/common/BlogPage";
 import FamousPlaces from "../component/vi/common/FamousPlaces";
@@ -18,6 +19,7 @@ export default function ViHome() {
   <AllVisit/>
  
    <BlogPage/>
+   <VideoPage/>
   </>
   );
 }
