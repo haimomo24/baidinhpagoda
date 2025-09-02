@@ -10,7 +10,7 @@ const VideoPage = () => {
       <div className="w-full max-w-4xl aspect-video mb-4">
         <iframe
           className="w-full h-full rounded-lg shadow-lg"
-          src="https://www.youtube.com/embed/VIDEO_ID" // thay VIDEO_ID bằng ID video
+          src="https://www.youtube.com/embed/vmiRrM145TI" 
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
