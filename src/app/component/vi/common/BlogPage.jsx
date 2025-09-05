@@ -13,7 +13,7 @@ const BlogPage = () => {
     const fetchBlogs = async () => {
       try {
         // Fetch từ backend Node.js mới
-        const res = await fetch("http://localhost:4000/api/blog");
+        const res = await fetch("http://113.160.202.187:1989/api/blog");
         const data = await res.json();
         setBlogs(data);
       } catch (error) {

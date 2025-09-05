@@ -54,7 +54,7 @@ const BlogDashboard = () => {
       if (formData.images_1) formToSend.append("images_1", formData.images_1);
       if (formData.images_2) formToSend.append("images_2", formData.images_2);
 
-      const res = await fetch("http://localhost:4000/api/blog", {
+      const res = await fetch("http://113.160.202.187:1989/api/blog", {
         method: "POST",
         body: formToSend,
       });

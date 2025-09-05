@@ -38,7 +38,7 @@ const BlogPage = () => {
       {/* TIÊU ĐỀ TRANG */}
       <div className="max-w-6xl mx-auto flex justify-start mb-10">
         <h2 className="text-3xl font-bold text-gray-800">
-          Điểm du lịch nổi bật
+          Điểm du lịch hấp dẫn
         </h2>
       </div>
 

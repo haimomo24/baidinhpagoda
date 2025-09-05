@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1989";
 
 const ArrowLeftIcon = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
@@ -73,7 +73,7 @@ const displayImages = images.slice(0, 4);
   
   {/* === Cột bên trái: Slider === */}
   <div className="w-full lg:w-1/3 flex flex-col">
-    <h1 className="text-4xl font-bold text-gray-800 mb-6">Các Điểm checkin</h1>
+    <h1 className="text-4xl font-bold text-gray-800 mb-6">Các điểm checkin</h1>
     
     <div className="bg-white rounded-lg shadow-xl p-4 relative flex-1 flex flex-col">
       {/* Nút điều hướng */}

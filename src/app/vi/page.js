@@ -15,10 +15,15 @@ export default function ViHome() {
   <SliderImage/>
   <ImageMapen/>
   <FamousPlaces/>
-  <PromotionVi/>
+  <div id='sk'>
+    <PromotionVi/>
+  </div>
+  
   <AllVisit/>
  
-   <BlogPage/>
+   <div id="blog">
+        <BlogPage />
+      </div>
    <VideoPage/>
   </>
   );

@@ -16,7 +16,7 @@ const AuthTable = () => {
   // Lấy danh sách user
   const fetchUsers = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/users");
+      const res = await fetch("http://113.160.202.187:1989/api/auth/users");
       const data = await res.json();
       setUsers(data);
     } catch (err) {
@@ -31,7 +31,7 @@ const AuthTable = () => {
     if (!confirm("Bạn có chắc chắn muốn xoá user này?")) return;
 
     try {
-      await fetch(`http://localhost:4000/api/auth/users/${id}`, {
+      await fetch(`http://113.160.202.187:1989/api/auth/users/${id}`, {
         method: "DELETE",
       });
       setUsers(users.filter((u) => u.id !== id));
@@ -43,7 +43,7 @@ const AuthTable = () => {
   // Thêm user
   const handleAddUser = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/auth/users", {
+      const res = await fetch("http://113.160.202.187:1989/api/auth/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser),

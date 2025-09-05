@@ -7,13 +7,19 @@ const BlogTable = () => {
   const [loading, setLoading] = useState(true);
   const [expanded, setExpanded] = useState({});
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [editBlog, setEditBlog] = useState(null);
+  const [formData, setFormData] = useState({});
+  const [uploadFiles, setUploadFiles] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch blog từ backend Node.js
+  const API_URL = "http://113.160.202.187:1989/api/blog";
+
+  // Fetch blog
   const fetchBlogs = async () => {
     try {
-      const res = await fetch("http://localhost:4000/api/blog");
+      const res = await fetch(API_URL);
       const data = await res.json();
-      setBlogs(data); // lưu dữ liệu vào state
+      setBlogs(data);
     } catch (error) {
       console.error("Lỗi khi fetch blog:", error);
     } finally {
@@ -29,21 +35,17 @@ const BlogTable = () => {
   const handleDelete = async (id) => {
     if (!confirm("Bạn có chắc chắn muốn xoá blog này?")) return;
     try {
-      const res = await fetch(`http://localhost:4000/api/blog/${id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
       if (res.ok) {
         alert("Xoá thành công!");
         setBlogs((prev) => prev.filter((b) => b.id !== id));
-      } else {
-        alert("Xoá thất bại!");
-      }
+      } else alert("Xoá thất bại!");
     } catch (error) {
       console.error("Lỗi khi xoá:", error);
     }
   };
 
-  // Hiển thị title rút gọn với nút xem thêm/thu gọn
+  // Hiển thị title rút gọn
   const renderTitle = (blogId, field, text) => {
     const key = `${blogId}-${field}`;
     const isExpanded = expanded[key];
@@ -64,11 +66,78 @@ const BlogTable = () => {
     );
   };
 
+  // Mở modal edit
+  const openEditModal = (blog) => {
+    setEditBlog(blog);
+    setFormData({
+      name: blog.name || "",
+      title_1: blog.title_1 || "",
+      title_2: blog.title_2 || "",
+      title_3: blog.title_3 || "",
+    });
+    setUploadFiles({});
+  };
+
+  // Thay đổi form
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    if (files.length > 0) {
+      setUploadFiles((prev) => ({ ...prev, [name]: files[0] }));
+    }
+  };
+
+  // Submit edit
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    if (!editBlog) return;
+
+    try {
+      const fd = new FormData();
+      Object.keys(formData).forEach((key) => fd.append(key, formData[key]));
+      Object.keys(uploadFiles).forEach((key) => fd.append(key, uploadFiles[key]));
+
+      const res = await fetch(`${API_URL}/${editBlog.id}`, {
+        method: "PUT",
+        body: fd,
+      });
+
+      if (res.ok) {
+        alert("Cập nhật thành công!");
+        fetchBlogs(); // reload danh sách
+        setEditBlog(null);
+      } else {
+        alert("Cập nhật thất bại!");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   if (loading) return <p className="text-center text-gray-600">Đang tải dữ liệu...</p>;
+
+  // Lọc danh sách theo name
+  const filteredBlogs = blogs.filter((blog) =>
+    blog.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="relative overflow-x-auto">
-      <div className="flex justify-end mb-4">
+      <div className="flex justify-between mb-4">
+        {/* Ô tìm kiếm */}
+        <input
+          type="text"
+          placeholder="Tìm kiếm..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="px-4 py-2 border rounded w-1/3"
+        />
+
+        {/* Nút thêm blog */}
         <Link
           href="/dashboard/blog/addblog"
           className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
@@ -77,6 +146,7 @@ const BlogTable = () => {
         </Link>
       </div>
 
+      {/* Table */}
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
@@ -91,8 +161,8 @@ const BlogTable = () => {
           </tr>
         </thead>
         <tbody>
-          {blogs.length > 0 ? (
-            blogs.map((blog) => (
+          {filteredBlogs.length > 0 ? (
+            filteredBlogs.map((blog) => (
               <tr key={blog.id} className="bg-white border-b">
                 <td className="px-6 py-4">{blog.id}</td>
                 <td className="px-6 py-4">{blog.name}</td>
@@ -124,12 +194,12 @@ const BlogTable = () => {
                   )}
                 </td>
                 <td className="px-6 py-4 flex gap-2">
-                  <Link
-                    href={`/blog/edit/${blog.id}`}
+                  <button
+                    onClick={() => openEditModal(blog)}
                     className="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
                   >
                     Sửa
-                  </Link>
+                  </button>
                   <button
                     onClick={() => handleDelete(blog.id)}
                     className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
@@ -149,25 +219,119 @@ const BlogTable = () => {
         </tbody>
       </table>
 
-      {/* Modal xem ảnh */}
-      {selectedBlog && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg max-w-3xl w-full relative">
+      {/* Modal edit blog (full screen) */}
+      {editBlog && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white p-8 rounded-lg w-[90%] h-[90%] overflow-y-auto relative">
             <button
-              className="absolute top-2 right-2 text-gray-600 hover:text-red-600 text-xl"
-              onClick={() => setSelectedBlog(null)}
+              className="absolute top-4 right-4 text-gray-600 hover:text-red-600 text-2xl"
+              onClick={() => setEditBlog(null)}
             >
               ✕
             </button>
-            <h2 className="text-lg font-bold mb-4">{selectedBlog.name}</h2>
-            <div className="grid grid-cols-2 gap-4">
-              {selectedBlog.images_1 && (
-                <img src={selectedBlog.images_1} alt="Ảnh 1" className="w-full h-60 object-cover rounded" />
-              )}
-              {selectedBlog.images_2 && (
-                <img src={selectedBlog.images_2} alt="Ảnh 2" className="w-full h-60 object-cover rounded" />
-              )}
-            </div>
+            <h2 className="text-xl font-bold mb-6">Sửa Blog: {editBlog.name}</h2>
+           <form onSubmit={handleEditSubmit} className="grid grid-cols-1 gap-4">
+  {/* Name */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-1">
+      Tên Blog
+    </label>
+    <input
+      type="text"
+      name="name"
+      value={formData.name || ""}
+      onChange={handleInputChange}
+      className="border rounded px-3 py-2 w-full"
+      required
+    />
+  </div>
+
+  {/* Title 1 */}
+  {/* Title 1 */}
+<div>
+  <label className="block text-lg font-bold text-gray-800 mb-1">
+    Title 1
+  </label>
+  <textarea
+    name="title_1"
+    value={formData.title_1 || ""}
+    onChange={handleInputChange}
+    rows={4} // số dòng mặc định
+    className="border rounded px-3 py-2 w-full resize-y"
+  />
+</div>
+  {/* Title 2 */}
+ <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Title 2
+  </label>
+  <textarea
+    name="title_2"
+    value={formData.title_2 || ""}
+    onChange={handleInputChange}
+    rows={4}
+    className="border rounded px-3 py-2 w-full resize-y"
+  />
+</div>
+
+  {/* Title 3 */}
+ <div>
+  <label className="block text-sm font-medium text-gray-700 mb-1">
+    Title 3
+  </label>
+  <textarea
+    name="title_3"
+    value={formData.title_3 || ""}
+    onChange={handleInputChange}
+    rows={4}
+    className="border rounded px-3 py-2 w-full resize-y"
+  />
+</div>
+
+  {/* Ảnh */}
+  <div className="grid grid-cols-2 gap-4">
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Ảnh 1
+      </label>
+      <input
+        type="file"
+        name="images_1"
+        onChange={handleFileChange}
+        className="w-full"
+      />
+    </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">
+        Ảnh 2
+      </label>
+      <input
+        type="file"
+        name="images_2"
+        onChange={handleFileChange}
+        className="w-full"
+      />
+    </div>
+  </div>
+
+  {/* Nút hành động */}
+  <div className="flex justify-end gap-3 mt-6">
+    <button
+      type="button"
+      className="px-5 py-2 bg-gray-300 rounded hover:bg-gray-400"
+      onClick={() => setEditBlog(null)}
+    >
+      Huỷ
+    </button>
+    <button
+      type="submit"
+      className="px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    >
+      Lưu
+    </button>
+  </div>
+</form>
+
           </div>
         </div>
       )}

@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 const HeaderBookingvi = () => {
@@ -46,9 +47,12 @@ const HeaderBookingvi = () => {
         />
 
         {/* Nút tìm phòng */}
+        <Link href="/vi/hotel">
         <button className="bg-teal-800 text-white px-4 py-2 rounded">
-          Tìm phòng
+          Tìm Kiếm
         </button>
+        </Link>
+        
       </div>
     </div>
   )
