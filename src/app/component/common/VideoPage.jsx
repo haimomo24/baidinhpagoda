@@ -2,7 +2,7 @@ import React from 'react';
 
 const VideoPage = () => {
   return (
-    <div className="min-h-screen  bg-gray-100 flex flex-col mb-[-200px] items-center p-6">
+    <div className="min-h-screen  bg-[#F1EBE5]/70 flex flex-col mb-[-200px] items-center p-6">
       
       
 

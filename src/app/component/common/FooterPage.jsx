@@ -11,19 +11,19 @@ const FooterPage = () => {
             className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse"
           >
             <img
-              src="/images/logo-bai-dinh.png"
+              src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
               className="h-8"
               alt="Flowbite Logo"
             />
             <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-               Bái Đính complex
+               Bai Dinh Cultural and Spiritual Tourism Complex
             </span>
           </a>
 
           {/* Thông tin liên hệ */}
           <div className="text-sm space-y-1 text-gray-300">
             <p><strong>Địa chỉ:</strong> Phường Tây Hoa Lư, Ninh Bình</p>
-            <p><strong>Điện thoại:</strong> 02293868789</p>
+            <p><strong>Điện thoại:</strong> 1900.966.909</p>
             <p>
               <strong>Email:</strong>{" "}
               <a href="mailto:info@chua-baidinh.vn" className="hover:underline">

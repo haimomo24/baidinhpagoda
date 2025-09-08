@@ -31,7 +31,7 @@ const SliderImage = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[700px] overflow-hidden">
+    <div className="relative w-full z-10 mb-[-150px] h-[700px] overflow-hidden">
       {slidesData.map((slide, index) => (
         <div
           key={slide.id}

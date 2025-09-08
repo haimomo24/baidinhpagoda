@@ -1,17 +1,18 @@
 // src/BlogPage.jsx
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const BlogPage = () => {
   const blogs = [
-    { img: "https://vissaihotel.vn/photo/khu-du-lich-trang-an-ninh-binh-co-gi-2.jpg", title: "Tràng An" },
-    { img: "https://bizweb.dktcdn.net/100/366/377/files/tam-coc-ninh-binh-31a3e3c7-0fa2-446a-b1b1-3a1e4f1bbe7e.jpg?v=1698027951505", title: "Tam Cốc" },
-    { img: "https://disantrangan.vn/wp-content/uploads/2021/09/san_golf_trang_an_09.jpg", title: "Sân golf Tràng An" },
-    { img: "https://bizweb.dktcdn.net/100/366/377/files/anh-chup-o-pho-co-hoa-lu.jpg?v=1669954575118", title: "Phố cổ Hoa Lư" },
-    { img: "https://dulichninhbinh.com.vn/mypicture/images/2025/thang4/4819630545197582578089964363516723848938798n.jpg", title: "Chùa Bái Đính" },
-    { img: "https://mia.vn/media/uploads/blog-du-lich/tuyet-tinh-coc-ninh-binh-1-1690702331.jpg", title: "Tuyệt Tình Cốc" },
-    { img: "https://eholiday.vn/wp-content/uploads/2024/07/khach-san-hoa-lu-ninh-binh-14.jpg", title: "Khách sạn Hoa Lư" },
+    { img: "https://vissaihotel.vn/photo/khu-du-lich-trang-an-ninh-binh-co-gi-2.jpg", title: "Tràng An", link: "https://trangandanhthang.vn/" },
+    { img: "https://bizweb.dktcdn.net/100/366/377/files/tam-coc-ninh-binh-31a3e3c7-0fa2-446a-b1b1-3a1e4f1bbe7e.jpg?v=1698027951505", title: "Tam Cốc", link: "https://tamcocbichdong.vn/" },
+    { img: "https://disantrangan.vn/wp-content/uploads/2021/09/san_golf_trang_an_09.jpg", title: "Sân golf Tràng An", link: "https://trangangolfandresort.com/" },
+    { img: "https://bizweb.dktcdn.net/100/366/377/files/anh-chup-o-pho-co-hoa-lu.jpg?v=1669954575118", title: "Phố cổ Hoa Lư", link: "https://www.phocohoalu.com/" },
+    { img: "/images/DSC00002.JPG", title: "Bái Đính" },
+    { img: "https://mia.vn/media/uploads/blog-du-lich/tuyet-tinh-coc-ninh-binh-1-1690702331.jpg", title: "Tuyệt Tình Cốc", link: "https://chuabaidinhnbinh.com/" },
+    { img: "/images/tamchuc.jpg", title: "Chùa Tam Chúc", link: "https://tamchuc.com.vn/" },
   ];
 
   const [current, setCurrent] = useState(0);
@@ -34,11 +35,11 @@ const BlogPage = () => {
   ];
 
   return (
-    <div className="w-full bg-gray-100 py-12">
+    <div className="w-full bg-[#F1EBE5]/70 py-12">
       {/* TIÊU ĐỀ TRANG */}
       <div className="max-w-6xl mx-auto flex justify-start mb-10">
         <h2 className="text-3xl font-bold text-gray-800">
-          Điểm du lịch hấp dẫn
+          Điểm Du Lịch Hấp Dẫn 
         </h2>
       </div>
 
@@ -55,10 +56,10 @@ const BlogPage = () => {
         {/* Danh sách ảnh */}
         <div className="flex space-x-6 transition-transform duration-500 group-hover:scale-110">
           {visibleBlogs.map((blog, index) => {
-            const isCenter = index >= 1 && index <= 4; 
-            return (
+            const isCenter = index >= 1 && index <= 4;
+
+            const content = (
               <div
-                key={index}
                 className={`relative rounded-xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 hover:scale-80 ${
                   isCenter
                     ? "w-72 h-96 opacity-100 scale-100"
@@ -73,10 +74,26 @@ const BlogPage = () => {
                 {/* Chữ minh họa */}
                 {isCenter && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40">
-                    <p className="text-white text-xl font-bold hover:scale-110 ">{blog.title}</p>
+                    <p className="text-white text-xl font-bold hover:scale-110 ">
+                      {blog.title}
+                    </p>
                   </div>
                 )}
               </div>
+            );
+
+            
+            return blog.link ? (
+              <Link
+                key={index}
+                href={blog.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {content}
+              </Link>
+            ) : (
+              <div key={index}>{content}</div>
             );
           })}
         </div>

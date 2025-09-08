@@ -138,7 +138,7 @@ const ContactVi = () => {
                     <h3 className="text-lg font-semibold text-gray-800">Điện thoại</h3>
                     <p className="text-gray-600">
                       <a href="tel:+842293781999" className="hover:text-blue-600">
-                      02293868789
+                      1900.966.909
 
                       </a>
                     </p>

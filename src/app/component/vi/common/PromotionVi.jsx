@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useRouter } from "next/navigation";
@@ -40,7 +40,7 @@ const PromotionVi = () => {
   };
 
   return (
-    <div className="bg-[#FFFFFF] py-10">
+    <div className="bg-[#F1EBE5]/70 py-10">
       <div className="relative max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold mb-6">Sự Kiện Nổi Bật</h2>
 
@@ -68,21 +68,23 @@ const PromotionVi = () => {
                 className="w-1/4 px-2 shrink-0"
                 onClick={() => handleClick(item.id)}
               >
-                <div className="relative rounded-lg overflow-hidden group cursor-pointer">
+                <div className="relative rounded-lg overflow-hidden group cursor-pointer shadow-md">
                   {/* Ảnh */}
                   <img
                     src={item.image}
                     alt={item.title}
                     className="w-full h-48 object-cover rounded-md transform transition-transform duration-500 group-hover:scale-110"
                   />
-                  {/* Overlay chỉ giữ description */}
-                  <div className="absolute inset-0  bg-opacity-30 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <p className="text-gray-200 text-sm line-clamp-2">
+
+                  {/* Overlay mờ */}
+                  <div className="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-white text-sm line-clamp-2">
                       {item.description}
                     </p>
                   </div>
                 </div>
-                {/* Title dưới ảnh, chỉ hiển thị 1 dòng */}
+
+                {/* Title dưới ảnh */}
                 <h3 className="text-black text-base font-bold mt-2 line-clamp-1">
                   {item.title}
                 </h3>

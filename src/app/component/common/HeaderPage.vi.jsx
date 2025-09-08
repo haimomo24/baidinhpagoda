@@ -1,7 +1,7 @@
 "use client";
 
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
-import { Heart, ChevronDown, Check } from "lucide-react";
+import { Heart, ChevronDown, Check, Target } from "lucide-react";
 import { Inter, Merriweather } from "next/font/google";
 import { useState } from "react";
 
@@ -34,7 +34,17 @@ export default function HeaderPageVi() {
         { name: "Hội nghị", link: "/vi/hotel" },
       ],
     },
-    { name: "Sự kiện", link: "#sk" },
+    { name: "Sự kiện",
+      //  link: "#sk" 
+      subMenu: [
+        { name: "Khóa tu", link: "https://chuabaidinhninhbinh.com" },
+        { name: "Sự kiện khác", link: "#sk" },
+        
+      ],
+    
+
+      
+    },
     {
       name: "Điểm đến",
       link: "#",
@@ -44,6 +54,8 @@ export default function HeaderPageVi() {
         { name: "Phố cổ", link: "https://www.phocohoalu.com/" },
         { name: "Sân Golf", link: "https://trangangolfandresort.com/" },
         { name: "Tam Cốc", link: "https://tamcocbichdong.vn/" },
+        { name: "Thung Ui", link: "https://chuabaidinhninhbinh.com/" },
+        { name: "Tuyệt Tịnh Cốc", link: "https://chuabaidinhninhbinh.com/" },
       ],
     },
     {
@@ -73,7 +85,7 @@ export default function HeaderPageVi() {
         {/* Logo */}
         <div className="flex items-center gap-2 font-bold text-lg text-gray-900">
           <img
-            src="/images/logo-bai-dinh.png"
+            src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
             alt="Trang An Group"
             className="h-[70px] w-[70px]"
           />
