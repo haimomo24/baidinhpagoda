@@ -1,8 +1,8 @@
 "use client";
-
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
-import { Heart, ChevronDown, Check, Target } from "lucide-react";
+import { ChevronDown, Check, Menu, X } from "lucide-react";
 import { Inter, Merriweather } from "next/font/google";
+import { SiZalo } from "react-icons/si";
 import { useState } from "react";
 
 // Font Inter: body
@@ -11,7 +11,7 @@ const inter = Inter({
   weight: ["400", "600", "700"],
 });
 
-// Font Merriweather: menu & heading (đều, cân, sang)
+// Font Merriweather: menu & heading
 const merriweather = Merriweather({
   subsets: ["latin"],
   weight: ["400", "700"],
@@ -20,6 +20,7 @@ const merriweather = Merriweather({
 export default function HeaderPageVi() {
   const [lang, setLang] = useState("vi");
   const [openLang, setOpenLang] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const menuItems = [
     { name: "Trang Chủ", link: "/vi" },
@@ -34,16 +35,13 @@ export default function HeaderPageVi() {
         { name: "Hội nghị", link: "/vi/hotel" },
       ],
     },
-    { name: "Sự kiện",
-      //  link: "#sk" 
+    { isLogo: true }, // logo ở giữa
+    {
+      name: "Sự kiện",
       subMenu: [
         { name: "Khóa tu", link: "https://chuabaidinhninhbinh.com" },
         { name: "Sự kiện khác", link: "#sk" },
-        
       ],
-    
-
-      
     },
     {
       name: "Điểm đến",
@@ -80,93 +78,124 @@ export default function HeaderPageVi() {
   };
 
   return (
-    <header className={`w-full bg-white ${inter.className}`}>
-      <div className="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
-        {/* Logo */}
-        <div className="flex items-center gap-2 font-bold text-lg text-gray-900">
-          <img
-            src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
-            alt="Trang An Group"
-            className="h-[70px] w-[70px]"
-          />
-        </div>
-
-        {/* Menu */}
+    <header className={`w-full bg-white bg-[#F1EBE5]/60 ${inter.className}`}>
+      <div className="flex flex-col px-6 py-3 max-w-7xl mx-auto">
+        {/* Menu desktop */}
         <nav
-          className={`hidden md:flex gap-12 text-[18px] font-semibold text-gray-900 relative ${merriweather.className}`}
+          className={`hidden md:flex justify-center gap-12 text-[18px] font-semibold text-gray-900 relative ${merriweather.className}`}
         >
           {menuItems.map((item, idx) => (
-            <div key={idx} className="relative group">
-              <a
-                href={item.link}
-                className="inline-block cursor-pointer transition-all duration-300 transform hover:text-red-600 hover:scale-110"
-              >
-                {item.name}
-              </a>
-
-              {/* Submenu */}
-              {item.subMenu && (
-                <div
-                  className="absolute left-0 top-full hidden group-hover:block
-                             bg-white rounded-xl shadow-lg min-w-[200px] z-50 animate-fadeIn"
-                >
-                  {item.subMenu.map((sub, i) => (
-                    <a
-                      key={i}
-                      href={sub.link}
-                      className="block px-4 py-2 text-sm text-gray-700 rounded-md
-                                 hover:bg-red-50 hover:text-red-600 transition-colors"
-                    >
-                      {sub.name}
-                    </a>
-                  ))}
+            <div key={idx} className="relative group flex items-center">
+              {item.isLogo ? (
+                <div className="flex items-center justify-center gap-6 px-6">
+                  <img
+                    src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
+                    alt="Logo 1"
+                    className="h-[70px] w-auto object-contain drop-shadow-lg hover:scale-110 transition-transform duration-300"
+                  />
+                  <img
+                    src="/images/log di san the gioi-01.svg"
+                    alt="Logo 2"
+                    className="h-[70px] w-auto object-contain drop-shadow-lg hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
+              ) : (
+                <>
+                  <a
+                    href={item.link}
+                    className="inline-block cursor-pointer transition-all duration-300 transform hover:text-red-600 hover:scale-110"
+                  >
+                    {item.name}
+                  </a>
+                  {item.subMenu && (
+                    <div className="absolute left-0 top-full hidden group-hover:block bg-white rounded-xl shadow-lg min-w-[200px] z-50 animate-fadeIn">
+                      {item.subMenu.map((sub, i) => (
+                        <a
+                          key={i}
+                          href={sub.link}
+                          className="block px-4 py-2 text-sm text-gray-700 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors"
+                        >
+                          {sub.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </>
               )}
             </div>
           ))}
         </nav>
 
-        {/* Icon + Ngôn ngữ */}
-        <div className="flex items-center gap-3">
-          {/* Mạng xã hội */}
+        {/* Mobile: nút mở menu */}
+        <div className="flex md:hidden justify-between items-center">
+          <button onClick={() => setOpenMenu(!openMenu)} className="p-2">
+            {openMenu ? <X size={28} /> : <Menu size={28} />}
+          </button>
+          {/* Logo giữa */}
+          <img
+            src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
+            alt="Logo"
+            className="h-[50px] ml-[150px] w-auto object-contain"
+          />
+          <img
+            src="/images/log di san the gioi-01.svg"
+            alt="Logo"
+            className="h-[50px] w-auto object-contain"
+          />
+        </div>
+
+        {/* Menu mobile */}
+        {openMenu && (
+          <div className="md:hidden mt-4 space-y-2 text-gray-800 font-medium">
+            {menuItems.map((item, idx) =>
+              item.isLogo ? null : (
+                <div key={idx}>
+                  <a
+                    href={item.link}
+                    className="block px-3 py-2 rounded hover:bg-red-50 hover:text-red-600"
+                  >
+                    {item.name}
+                  </a>
+                  {item.subMenu && (
+                    <div className="ml-4 space-y-1">
+                      {item.subMenu.map((sub, i) => (
+                        <a
+                          key={i}
+                          href={sub.link}
+                          className="block px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-50 hover:text-red-600"
+                        >
+                          {sub.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            )}
+          </div>
+        )}
+
+        {/* Icon + ngôn ngữ (desktop và mobile đều hiển thị) */}
+        <div className="flex justify-end items-center gap-4 mt-3">
           <div className="flex items-center gap-2">
-            <a
-              href="#"
-              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 
-                 hover:scale-110 transition-all duration-300"
-            >
-              <FaFacebookF className="w-4 h-4 text-gray-700 hover:text-blue-600" />
+            <a href="#" className="p-2 rounded-full border border-gray-200">
+              <FaFacebookF className="w-4 h-4 text-blue-600" />
             </a>
-            <a
-              href="#"
-              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 
-                 hover:scale-110 transition-all duration-300"
-            >
-              <FaInstagram className="w-4 h-4 text-gray-700 hover:text-pink-600" />
+            <a href="#" className="p-2 rounded-full border border-gray-200">
+              <FaInstagram className="w-4 h-4 text-pink-600" />
             </a>
-            <a
-              href="#"
-              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 
-                 hover:scale-110 transition-all duration-300"
-            >
-              <FaYoutube className="w-4 h-4 text-gray-700 hover:text-red-600" />
-            </a>
-            <button
-              className="p-2 rounded-full border border-gray-200 hover:bg-gray-100 
-                 hover:scale-110 transition-all duration-300"
-            >
-              <Heart className="w-5 h-5 text-gray-700 hover:text-red-600" />
+            <button className="p-2 rounded-full border border-gray-200">
+              <SiZalo className="w-5 h-5 text-blue-600" />
             </button>
+            <a href="#" className="p-2 rounded-full border border-gray-200">
+              <FaYoutube className="w-4 h-4 text-red-600" />
+            </a>
           </div>
 
-          {/* Ngôn ngữ dropdown */}
           <div className="relative">
             <button
               onClick={() => setOpenLang(!openLang)}
-              className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded-full bg-white 
-               text-sm font-medium text-gray-700 cursor-pointer
-               hover:border-red-400 focus:outline-none focus:ring-2 
-               focus:ring-red-300 transition-all duration-300"
+              className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded-full bg-white text-sm font-medium text-gray-700"
             >
               {languages.find((l) => l.code === lang)?.label}
               <ChevronDown
@@ -175,20 +204,20 @@ export default function HeaderPageVi() {
                 }`}
               />
             </button>
-
             {openLang && (
               <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
                 {languages.map((l) => (
                   <div
                     key={l.code}
                     onClick={() => changeLang(l.code)}
-                    className={`px-3 py-2 text-sm cursor-pointer flex items-center justify-between rounded-md 
-                      hover:bg-red-50 hover:text-red-600 transition-colors ${
-                        lang === l.code ? "text-red-600 font-semibold" : "text-gray-700"
-                      }`}
+                    className={`px-3 py-2 text-sm cursor-pointer flex items-center justify-between rounded-md hover:bg-red-50 hover:text-red-600 ${
+                      lang === l.code
+                        ? "text-red-600 font-semibold"
+                        : "text-gray-700"
+                    }`}
                   >
                     {l.label}
-                    {lang === l.code && <Check className="w-4 h-4 text-red-600" />}
+                    {lang === l.code && <Check className="w-4 h-4" />}
                   </div>
                 ))}
               </div>

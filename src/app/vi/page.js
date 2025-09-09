@@ -11,7 +11,7 @@ import ImageMapen from "../component/vi/ImageMapvi";
 export default function ViHome() {
   return (
   <>
-  <HeaderBookingvi/>
+  {/* <HeaderBookingvi/> */}
   <SliderImage/>
   <ImageMapen/>
   <FamousPlaces/>

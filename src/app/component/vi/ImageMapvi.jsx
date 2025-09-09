@@ -13,11 +13,7 @@ const ArrowLeftIcon = (props) => (
     stroke="currentColor"
     {...props}
   >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M15.75 19.5L8.25 12l7.5-7.5"
-    />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
   </svg>
 );
 
@@ -30,20 +26,13 @@ const ArrowRightIcon = (props) => (
     stroke="currentColor"
     {...props}
   >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M8.25 4.5l7.5 7.5-7.5 7.5"
-    />
+    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
   </svg>
 );
 
-// Hàm rút gọn text
 const truncateText = (text, maxLength = 100) => {
   if (!text) return "";
-  return text.length > maxLength
-    ? text.substring(0, maxLength) + "..."
-    : text;
+  return text.length > maxLength ? text.substring(0, maxLength) + "..." : text;
 };
 
 const ImageMapvi = () => {
@@ -64,77 +53,51 @@ const ImageMapvi = () => {
       });
   }, []);
 
-  const goToPrevious = () => {
-    const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? regions.length - 1 : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  const goToPrevious = () => setCurrentIndex(currentIndex === 0 ? regions.length - 1 : currentIndex - 1);
+  const goToNext = () => setCurrentIndex(currentIndex === regions.length - 1 ? 0 : currentIndex + 1);
 
-  const goToNext = () => {
-    const isLastSlide = currentIndex === regions.length - 1;
-    const newIndex = isLastSlide ? 0 : currentIndex + 1;
-    setCurrentIndex(newIndex);
-  };
-
-  if (loading) return <p className="text-center">Đang tải dữ liệu...</p>;
-  if (!regions || regions.length === 0)
-    return <p className="text-center">Chưa có điểm checkin nào</p>;
+  if (loading) return <p className="text-center mt-10">Đang tải dữ liệu...</p>;
+  if (!regions || regions.length === 0) return <p className="text-center mt-10">Chưa có điểm checkin nào</p>;
 
   const currentRegion = regions[currentIndex];
-
-  // chuẩn bị mảng ảnh
-  const images = [];
-  if (currentRegion.images_1)
-    images.push(`${API_URL}${currentRegion.images_1}`);
-  if (currentRegion.images_2)
-    images.push(`${API_URL}${currentRegion.images_2}`);
-  if (currentRegion.image_3)
-    images.push(`${API_URL}${currentRegion.image_3}`);
-  if (currentRegion.images_4)
-    images.push(`${API_URL}${currentRegion.images_4}`);
-  if (currentRegion.images_5)
-    images.push(`${API_URL}${currentRegion.images_5}`);
+  const images = [
+    currentRegion.images_1 && `${API_URL}${currentRegion.images_1}`,
+    currentRegion.images_2 && `${API_URL}${currentRegion.images_2}`,
+    currentRegion.image_3 && `${API_URL}${currentRegion.image_3}`,
+    currentRegion.images_4 && `${API_URL}${currentRegion.images_4}`,
+    currentRegion.images_5 && `${API_URL}${currentRegion.images_5}`,
+  ].filter(Boolean);
   const displayImages = images.slice(0, 4);
 
   return (
-    <div
-      className="w-full min-h-screen mb-[-150px]  bg-center bg-no-repeat relative"
-      style={{
-        backgroundImage: `url("")`,
-        backgroundSize: "100% 100%",
-      }}
-    >
-      {/* lớp phủ mờ */}
+    <div className="w-full min-h-screen lg:mt-[-150px] relative">
       <div className="bg-[#F1EBE5]/60 min-h-screen w-full flex justify-center items-center font-sans">
-        <main className="container mx-auto flex flex-col lg:flex-row items-stretch gap-12 p-8">
+        <main className="container mx-auto flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-start gap-6 md:gap-8 lg:gap-12 p-4 sm:p-6 lg:p-8">
           {/* === Cột bên trái: Slider === */}
-          <div className="w-full lg:w-1/3 flex flex-col">
-            <h1 className="text-4xl font-bold text-gray-800 mb-6">
+          <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col">
+            <h1 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
               Các Điểm Check-in
             </h1>
 
-            <div className="bg-white rounded-lg shadow-xl p-4 relative flex-1 flex flex-col">
+            <div className="bg-white rounded-lg shadow-xl p-3 sm:p-4 relative flex-1 flex flex-col">
               {/* Nút điều hướng */}
               <button
                 onClick={goToPrevious}
-                className="absolute top-1/3 -translate-y-1/2 -left-5 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-300"
+                className="absolute top-1/2 -translate-y-1/2 -left-3 sm:-left-5 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-300"
               >
-                <ArrowLeftIcon className="w-6 h-6 text-gray-700" />
+                <ArrowLeftIcon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
               </button>
               <button
                 onClick={goToNext}
-                className="absolute top-1/3 -translate-y-1/2 -right-5 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-300"
+                className="absolute top-1/2 -translate-y-1/2 -right-3 sm:-right-5 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-300"
               >
-                <ArrowRightIcon className="w-6 h-6 text-gray-700" />
+                <ArrowRightIcon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
               </button>
 
               {/* Lưới hình ảnh */}
-              <div className="grid grid-cols-2 gap-2 mb-4 flex-1">
+              <div className="grid grid-cols-2 gap-1 sm:gap-2 mb-3 sm:mb-4 flex-1">
                 {displayImages.map((img, index) => (
-                  <div
-                    key={index}
-                    className="overflow-hidden rounded-md h-32"
-                  >
+                  <div key={index} className="overflow-hidden rounded-md h-24 sm:h-28 md:h-32">
                     <img
                       src={img}
                       alt={`${currentRegion.name} - ${index + 1}`}
@@ -145,16 +108,13 @@ const ImageMapvi = () => {
               </div>
 
               {/* Nội dung text */}
-              <div className="px-2">
-                <h2 className="text-2xl font-semibold text-gray-900">
+              <div className="px-1 sm:px-2 mt-auto">
+                <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 text-center md:text-left">
                   {currentRegion.name}
                 </h2>
-                <p className="text-gray-700 text-base leading-relaxed mt-2">
+                <p className="text-gray-700 text-sm sm:text-base leading-relaxed mt-1 sm:mt-2 text-center md:text-left">
                   {truncateText(
-                    currentRegion.title_1 ||
-                      currentRegion.title_2 ||
-                      currentRegion.title_3 ||
-                      "Chưa có mô tả",
+                    currentRegion.title_1 || currentRegion.title_2 || currentRegion.title_3 || "Chưa có mô tả",
                     100
                   )}
                 </p>
@@ -163,11 +123,11 @@ const ImageMapvi = () => {
           </div>
 
           {/* === Cột bên phải: Bản đồ === */}
-          <div className="w-full lg:w-2/3 flex justify-center">
+          <div className="w-full md:w-1/2 lg:w-2/3 flex justify-center mt-6 md:mt-0">
             <img
               src="https://viettourist.vn/upload/u23569/5/2017-01-09/so-do-bd-chuan_b-n-xe-trung-tam.jpg"
               alt="Bản đồ các điểm checkin"
-              className="w-full h-[550px] object-cover border-0 rounded-none shadow-none"
+              className="w-full h-64 sm:h-80 md:h-[500px] lg:h-[550px] object-cover border-0 rounded-none shadow-none"
             />
           </div>
         </main>
