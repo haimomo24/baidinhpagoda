@@ -20,17 +20,13 @@ const FamousPlaces = () => {
   return (
     <div
       className="w-full relative lg:mt-[-100px]"
-      style={{
-        backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20210827/pngtree-color-block-texture-watercolor-smudge-beige-background-image_770429.jpg")`,
-        backgroundSize: "100% 100%",
-        backgroundPosition: "center",
-      }}
+      
     >
-      <div className="bg-[#F1EBE5]/40 min-h-screen w-full">
+      <div className="bg-[#F1EBE5]/40  w-full">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
 
           {/* Tiêu đề */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-6 text-center lg:text-left">
+          <h1 className="hover-shake text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
             Lộ Trình Tham Quan
           </h1>
 

@@ -35,7 +35,7 @@ export default function HeaderPageVi() {
         { name: "Hội nghị", link: "/vi/hotel" },
       ],
     },
-    { isLogo: true }, // logo ở giữa
+    { isLogo: true },
     {
       name: "Sự kiện",
       subMenu: [
@@ -78,8 +78,14 @@ export default function HeaderPageVi() {
   };
 
   return (
-    <header className={`w-full bg-white bg-[#F1EBE5]/60 ${inter.className}`}>
-      <div className="flex flex-col px-6 py-3 max-w-7xl mx-auto">
+    <header style={{
+        backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20210827/pngtree-color-block-texture-watercolor-smudge-beige-background-image_770429.jpg")`,
+        backgroundSize: "100% 100%",
+        backgroundPosition: "center",
+      }}
+       className={`w-full bg-white bg-[#F1EBE5]/60 ${inter.className} md:sticky md:top-0 md:z-50`}>
+      <div className="flex
+       flex-col px-6 py-3 max-w-7xl mx-auto">
         {/* Menu desktop */}
         <nav
           className={`hidden md:flex justify-center gap-12 text-[18px] font-semibold text-gray-900 relative ${merriweather.className}`}
@@ -87,17 +93,19 @@ export default function HeaderPageVi() {
           {menuItems.map((item, idx) => (
             <div key={idx} className="relative group flex items-center">
               {item.isLogo ? (
-                <div className="flex items-center justify-center gap-6 px-6">
-                  <img
-                    src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
-                    alt="Logo 1"
-                    className="h-[70px] w-auto object-contain drop-shadow-lg hover:scale-110 transition-transform duration-300"
-                  />
-                  <img
-                    src="/images/log di san the gioi-01.svg"
-                    alt="Logo 2"
-                    className="h-[70px] w-auto object-contain drop-shadow-lg hover:scale-110 transition-transform duration-300"
-                  />
+                <div className="relative w-[80px] h-[80px] perspective-1000 mx-auto">
+                  <div className="absolute inset-0 animate-flipLogo preserve-3d">
+                    <img
+                      src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
+                      alt="Logo Front"
+                      className="absolute inset-0 h-full w-full object-contain backface-hidden"
+                    />
+                    <img
+                      src="/images/log di san the gioi-01.svg"
+                      alt="Logo Back"
+                      className="absolute inset-0 h-full w-full object-contain backface-hidden rotate-y-180"
+                    />
+                  </div>
                 </div>
               ) : (
                 <>
@@ -126,29 +134,71 @@ export default function HeaderPageVi() {
           ))}
         </nav>
 
-        {/* Mobile: nút mở menu */}
+        {/* Mobile top bar: [Menu] [Logo] [Lang] */}
         <div className="flex md:hidden justify-between items-center">
-          <button onClick={() => setOpenMenu(!openMenu)} className="p-2">
+          <button
+            onClick={() => setOpenMenu(!openMenu)}
+            className="p-2 z-20"
+          >
             {openMenu ? <X size={28} /> : <Menu size={28} />}
           </button>
-          {/* Logo giữa */}
-          <img
-            src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
-            alt="Logo"
-            className="h-[50px] ml-[150px] w-auto object-contain"
-          />
-          <img
-            src="/images/log di san the gioi-01.svg"
-            alt="Logo"
-            className="h-[50px] w-auto object-contain"
-          />
+
+          {/* Logo */}
+          <div className="relative w-[50px] h-[50px] perspective-1000 mx-auto">
+            <div className="absolute inset-0 animate-flipLogo preserve-3d">
+              <img
+                src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
+                alt="Logo Front"
+                className="absolute inset-0 h-full w-full object-contain backface-hidden"
+              />
+              <img
+                src="/images/log di san the gioi-01.svg"
+                alt="Logo Back"
+                className="absolute inset-0 h-full w-full object-contain backface-hidden rotate-y-180"
+              />
+            </div>
+          </div>
+
+          {/* Language mobile */}
+          <div className="relative z-20">
+            <button
+              onClick={() => setOpenLang(!openLang)}
+              className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded-full bg-white text-sm font-medium text-gray-700"
+            >
+              {languages.find((l) => l.code === lang)?.label}
+              <ChevronDown
+                className={`w-4 h-4 text-gray-500 transition-transform ${
+                  openLang ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openLang && (
+              <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                {languages.map((l) => (
+                  <div
+                    key={l.code}
+                    onClick={() => changeLang(l.code)}
+                    className={`px-3 py-2 text-sm cursor-pointer flex items-center justify-between rounded-md hover:bg-red-50 hover:text-red-600 ${
+                      lang === l.code
+                        ? "text-red-600 font-semibold"
+                        : "text-gray-700"
+                    }`}
+                  >
+                    {l.label}
+                    {lang === l.code && <Check className="w-4 h-4" />}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
-        {/* Menu mobile */}
+        {/* Mobile menu + icon dưới cùng */}
         {openMenu && (
-          <div className="md:hidden mt-4 space-y-2 text-gray-800 font-medium">
-            {menuItems.map((item, idx) =>
-              item.isLogo ? null : (
+          <div className="md:hidden space-y-2 text-gray-800 font-medium z-10">
+            {menuItems.map((item, idx) => {
+              if (item.isLogo) return null;
+              return (
                 <div key={idx}>
                   <a
                     href={item.link}
@@ -170,13 +220,31 @@ export default function HeaderPageVi() {
                     </div>
                   )}
                 </div>
-              )
-            )}
+              );
+            })}
+
+            {/* Icon dưới cùng mobile */}
+            <div className="flex items-center gap-2  justify-center">
+              <a href="#" className="p-2 rounded-full border border-gray-200">
+                <FaFacebookF className="w-4 h-4 text-blue-600" />
+              </a>
+              <a href="#" className="p-2 rounded-full border border-gray-200">
+                <FaInstagram className="w-4 h-4 text-pink-600" />
+              </a>
+              <button className="p-2 rounded-full border border-gray-200">
+                <SiZalo className="w-5 h-5 text-blue-600" />
+              </button>
+              <a href="#" className="p-2 rounded-full border border-gray-200">
+                <FaYoutube className="w-4 h-4 text-red-600" />
+              </a>
+            </div>
           </div>
         )}
 
-        {/* Icon + ngôn ngữ (desktop và mobile đều hiển thị) */}
-        <div className="flex justify-end items-center gap-4 mt-3">
+       
+      </div>
+       {/* Desktop icon + ngôn ngữ giữ nguyên */}
+        <div className="hidden mt-[-30px] mr-[2%]  md:flex justify-end  gap-4 ">
           <div className="flex items-center gap-2">
             <a href="#" className="p-2 rounded-full border border-gray-200">
               <FaFacebookF className="w-4 h-4 text-blue-600" />
@@ -224,7 +292,6 @@ export default function HeaderPageVi() {
             )}
           </div>
         </div>
-      </div>
     </header>
   );
 }

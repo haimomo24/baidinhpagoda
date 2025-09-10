@@ -46,7 +46,7 @@ const BlogPage = () => {
       {/* lớp phủ mờ */}
       <div className="bg-[#F1EBE5]/60 min-h-screen">
         <div className="max-w-6xl mx-auto py-10 px-4">
-          <h2 className="text-3xl font-bold mb-6">Tin Tức Tổng Hợp</h2>
+          <h2 className="hover-shake text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">Tin Tức Tổng Hợp</h2>
 
           {/* Grid 3 cột */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -59,8 +59,8 @@ const BlogPage = () => {
                     className="w-full h-52 object-cover transform transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="p-4 bg-white">
-                    <h3 className="text-lg font-bold mb-2 truncate">{item.title_1}</h3>
-                    <p className="text-gray-600 text-sm line-clamp-2">{item.name}</p>
+                    <h3 className="text-lg hover-shake font-bold mb-2 truncate">{item.title_1}</h3>
+                    <p className="text-gray-600 hover-shake text-sm line-clamp-2">{item.name}</p>
                   </div>
                 </div>
               </Link>

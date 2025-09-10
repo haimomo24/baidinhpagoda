@@ -59,7 +59,7 @@ const PromotionVi = () => {
   return (
     <div className="bg-[#F1EBE5]/70 py-10">
       <div className="relative max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-6">Sự Kiện Nổi Bật</h2>
+        <h2 className="hover-shake text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left ">Sự Kiện Nổi Bật</h2>
 
         {/* Nút trái */}
         {currentIndex > 0 && (

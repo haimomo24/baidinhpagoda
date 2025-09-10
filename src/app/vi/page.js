@@ -11,7 +11,14 @@ import ImageMapen from "../component/vi/ImageMapvi";
 export default function ViHome() {
   return (
   <>
-  {/* <HeaderBookingvi/> */}
+  <div 
+  className=" mt-0"
+  style={{
+        backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20210827/pngtree-color-block-texture-watercolor-smudge-beige-background-image_770429.jpg")`,
+        backgroundSize: "100% 100%",
+        backgroundPosition: "center",
+      }}>
+    {/* <HeaderBookingvi/> */}
   <SliderImage/>
   <ImageMapen/>
   <FamousPlaces/>
@@ -25,6 +32,8 @@ export default function ViHome() {
         <BlogPage />
       </div>
    <VideoPage/>
+  </div>
+  
   </>
   );
 }
