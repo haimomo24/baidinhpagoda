@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1989";
@@ -40,6 +41,8 @@ const ImageMapvi = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  const router = useRouter();
+
   useEffect(() => {
     fetch(`${API_URL}/api/visit`)
       .then((res) => res.json())
@@ -53,11 +56,14 @@ const ImageMapvi = () => {
       });
   }, []);
 
-  const goToPrevious = () => setCurrentIndex(currentIndex === 0 ? regions.length - 1 : currentIndex - 1);
-  const goToNext = () => setCurrentIndex(currentIndex === regions.length - 1 ? 0 : currentIndex + 1);
+  const goToPrevious = () =>
+    setCurrentIndex(currentIndex === 0 ? regions.length - 1 : currentIndex - 1);
+  const goToNext = () =>
+    setCurrentIndex(currentIndex === regions.length - 1 ? 0 : currentIndex + 1);
 
   if (loading) return <p className="text-center mt-10">Đang tải dữ liệu...</p>;
-  if (!regions || regions.length === 0) return <p className="text-center mt-10">Chưa có điểm checkin nào</p>;
+  if (!regions || regions.length === 0)
+    return <p className="text-center mt-10">Chưa có điểm checkin nào</p>;
 
   const currentRegion = regions[currentIndex];
   const images = [
@@ -70,27 +76,34 @@ const ImageMapvi = () => {
   const displayImages = images.slice(0, 4);
 
   return (
-    <div className="w-full  lg:mt-[-150px] relative">
+    <div className="w-full lg:mt-[-150px] relative">
       <div className="bg-[#F1EBE5]/60 min-h-screen w-full flex justify-center items-center font-sans">
         <main className="container mx-auto flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-start gap-6 md:gap-8 lg:gap-12 p-4 sm:p-6 lg:p-8">
           {/* === Cột bên trái: Slider === */}
           <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col">
-            <h1
-  className="hover-shake text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left"
->
-  Các Điểm Check-in
-</h1>
+            <h1 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
+              Các Điểm Check-in
+            </h1>
 
-            <div className="bg-white rounded-lg shadow-xl p-3 sm:p-4 relative flex-1 flex flex-col">
+            <div
+              onClick={() => router.push(`/vi/visit/${currentRegion.id}`)} 
+              className="bg-white rounded-lg shadow-xl p-3 sm:p-4 relative flex-1 flex flex-col cursor-pointer hover:shadow-2xl transition"
+            >
               {/* Nút điều hướng */}
               <button
-                onClick={goToPrevious}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToPrevious();
+                }}
                 className="absolute top-1/2 -translate-y-1/2 -left-3 sm:-left-5 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-300"
               >
                 <ArrowLeftIcon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
               </button>
               <button
-                onClick={goToNext}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  goToNext();
+                }}
                 className="absolute top-1/2 -translate-y-1/2 -right-3 sm:-right-5 z-10 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors duration-300"
               >
                 <ArrowRightIcon className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" />
@@ -99,7 +112,10 @@ const ImageMapvi = () => {
               {/* Lưới hình ảnh */}
               <div className="grid grid-cols-2 gap-1 sm:gap-2 mb-3 sm:mb-4 flex-1">
                 {displayImages.map((img, index) => (
-                  <div key={index} className="overflow-hidden rounded-md h-24 sm:h-28 md:h-32">
+                  <div
+                    key={index}
+                    className="overflow-hidden rounded-md h-24 sm:h-28 md:h-32"
+                  >
                     <img
                       src={img}
                       alt={`${currentRegion.name} - ${index + 1}`}
@@ -116,7 +132,10 @@ const ImageMapvi = () => {
                 </h2>
                 <p className="text-gray-700 text-sm sm:text-base leading-relaxed mt-1 sm:mt-2 text-center md:text-left">
                   {truncateText(
-                    currentRegion.title_1 || currentRegion.title_2 || currentRegion.title_3 || "Chưa có mô tả",
+                    currentRegion.title_1 ||
+                      currentRegion.title_2 ||
+                      currentRegion.title_3 ||
+                      "Chưa có mô tả",
                     100
                   )}
                 </p>

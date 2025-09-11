@@ -137,4 +137,5 @@ body {
 
 .hover-shake:hover {
   animation: shake 0.6s ease-in-out 1;
+  
 }

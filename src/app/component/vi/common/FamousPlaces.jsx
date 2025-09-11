@@ -4,7 +4,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import Link from "next/link";
 
 const places = [
-  { name: "Chùa Bái Đính", link: "http://qr.chuabaidinh.com.vn/locations/99", image: '/images/DJI_0033.jpg' },
+  { name: "Chùa Bái Đính", link: "/vi/visit/45", image: '/images/DJI_0033.jpg' },
   { name: "Cổng Tam Quan", link: "http://qr.chuabaidinh.com.vn/locations/3", image: '/images/tamquan.jpg' },
   { name: "Hành lang La Hán", link: "http://qr.chuabaidinh.com.vn/locations/4", image: '/images/hanhlanglahan.png' },
   { name: "Điện Quán Âm", link: "http://qr.chuabaidinh.com.vn/locations/11", image: '/images/dienquanam1.jpg' },
@@ -26,7 +26,7 @@ const FamousPlaces = () => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
 
           {/* Tiêu đề */}
-          <h1 className="hover-shake text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
+          <h1 className="hover-shake text-3xl hover:text-red-600 sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
             Lộ Trình Tham Quan
           </h1>
 
@@ -93,7 +93,7 @@ const FamousPlaces = () => {
 
           {/* Sơ đồ tham quan (bỏ địa điểm đầu tiên) */}
           <div className="py-6">
-            <h2 className="text-xl sm:text-2xl font-bold mb-4 text-center lg:text-left">
+            <h2 className="text-xl hover:text-red-600 sm:text-2xl font-bold mb-4 text-center lg:text-left">
               Sơ Đồ Lộ Trình Tham Quan
             </h2>
             <div className="relative">

@@ -31,7 +31,7 @@ export default function HeaderPageVi() {
       subMenu: [
         { name: "Xe Điện", link: "/vi/car" },
         { name: "Lưu trú", link: "/vi/hotel" },
-        { name: "Nhà hàng", link: "/vi/hotel" },
+        { name: "Nhà hàng", link: "/vi/visit/50" },
         { name: "Hội nghị", link: "/vi/hotel" },
       ],
     },

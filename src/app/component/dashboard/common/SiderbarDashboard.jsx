@@ -27,8 +27,8 @@ const SiderbarDashboard = () => {
   }
 
   const menuItems = [
-    { name: "Blog", path: "/dashboard/blog" },
-    { name: "Khuyến mại", path: "/dashboard/khuyenmai" },
+    { name: "Tin tức tổng hợp", path: "/dashboard/blog" },
+    { name: "sự kiện nổi bật", path: "/dashboard/khuyenmai" },
     { name: "Điểm đến", path: "/dashboard/diemden" },
     { name: "Quản lí tài khoản", path: "/dashboard/auth" },
     { name: "Đơn hàng", path: "/dashboard/products" }
