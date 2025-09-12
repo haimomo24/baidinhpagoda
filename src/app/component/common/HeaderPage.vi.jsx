@@ -32,7 +32,7 @@ export default function HeaderPageVi() {
         { name: "Xe Điện", link: "/vi/car" },
         { name: "Lưu trú", link: "/vi/hotel" },
         { name: "Nhà hàng", link: "/vi/visit/50" },
-        { name: "Hội nghị", link: "/vi/hotel" },
+        { name: "Hội nghị", link: "/vi/visit/55" },
       ],
     },
     { isLogo: true },

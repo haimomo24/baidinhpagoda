@@ -4,16 +4,16 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import Link from "next/link";
 
 const places = [
-  { name: "Chùa Bái Đính", link: "/vi/visit/45", image: '/images/DJI_0033.jpg' },
-  { name: "Cổng Tam Quan", link: "http://qr.chuabaidinh.com.vn/locations/3", image: '/images/tamquan.jpg' },
-  { name: "Hành lang La Hán", link: "http://qr.chuabaidinh.com.vn/locations/4", image: '/images/hanhlanglahan.png' },
-  { name: "Điện Quán Âm", link: "http://qr.chuabaidinh.com.vn/locations/11", image: '/images/dienquanam1.jpg' },
-  { name: "Điện Giáo Chủ", link: "http://qr.chuabaidinh.com.vn/locations/10", image: '/images/diengiaochu.jpg' },
-  { name: "Chuông gió", link: "http://qr.chuabaidinh.com.vn/locations/26", image: '/images/gac-chuong.jpg' },
-  { name: "Điện Tam Thế", link: "http://qr.chuabaidinh.com.vn/locations/12", image: '/images/tamthe1.JPG' },
-  { name: "Chùa cổ", link: "http://qr.chuabaidinh.com.vn/locations/17", image: '/images/chuaco.png' },
-  { name: "Bảo Tháp", link: "http://qr.chuabaidinh.com.vn/locations/6", image: '/images/baothap2.JPG' },
-  { name: "Bát chính đạo", link: "http://qr.chuabaidinh.com.vn/locations/16", image: '/images/batchinhdao.jpg'},
+  { name: "# Giới Thiệu Về Chùa Bái Đính #", link: "/vi/visit/45", image: '/images/DJI_0033.jpg' },
+  { name: "1. Cổng Tam Quan", link: "http://qr.chuabaidinh.com.vn/locations/3", image: '/images/tamquan.jpg' },
+  { name: "2. Hành lang La Hán", link: "http://qr.chuabaidinh.com.vn/locations/4", image: '/images/hanhlanglahan.png' },
+  { name: "3. Điện Quán Âm", link: "http://qr.chuabaidinh.com.vn/locations/11", image: '/images/dienquanam1.jpg' },
+  { name: "4. Điện Giáo Chủ", link: "http://qr.chuabaidinh.com.vn/locations/10", image: '/images/diengiaochu.jpg' },
+  { name: "5. Chuông gió", link: "http://qr.chuabaidinh.com.vn/locations/26", image: '/images/gac-chuong.jpg' },
+  { name: "6. Điện Tam Thế", link: "http://qr.chuabaidinh.com.vn/locations/12", image: '/images/tamthe1.JPG' },
+  { name: "7. Chùa cổ", link: "http://qr.chuabaidinh.com.vn/locations/17", image: '/images/chuaco.png' },
+  { name: "8. Bảo Tháp", link: "http://qr.chuabaidinh.com.vn/locations/6", image: '/images/baothap2.JPG' },
+  { name: "9. Bát chính đạo", link: "http://qr.chuabaidinh.com.vn/locations/16", image: '/images/batchinhdao.jpg'},
 ];
 
 const FamousPlaces = () => {
@@ -27,7 +27,7 @@ const FamousPlaces = () => {
 
           {/* Tiêu đề */}
           <h1 className="hover-shake text-3xl hover:text-red-600 sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
-            Lộ Trình Tham Quan
+            LỘ TRÌNH THAM QUAN
           </h1>
 
           {/* Hình ảnh các địa điểm (full 10) */}

@@ -146,7 +146,7 @@ const ImageMapvi = () => {
           {/* === Cột bên phải: Bản đồ === */}
           <div className="w-full md:w-1/2 lg:w-2/3 flex justify-center mt-6 md:mt-0">
             <img
-              src="https://viettourist.vn/upload/u23569/5/2017-01-09/so-do-bd-chuan_b-n-xe-trung-tam.jpg"
+              src="/images/sodo1.jpg"
               alt="Bản đồ các điểm checkin"
               className="w-full h-64 sm:h-80 md:h-[500px] lg:h-[550px] object-cover border-0 rounded-none shadow-none"
             />

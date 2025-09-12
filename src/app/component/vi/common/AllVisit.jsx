@@ -126,12 +126,12 @@ const DesktopSlider = () => {
           const content = (
             <div
               key={index}
-              className={`relative rounded-xl overflow-hidden shadow-lg cursor-pointer transition-all duration-500 ${classNames}`}
+              className={`relative rounded-xl hover:scale-110 overflow-hidden shadow-lg cursor-pointer transition-all duration-500 ${classNames}`}
             >
               <img
                 src={blog.img}
                 alt={blog.title || `Blog ${index}`}
-                className="w-full h-full object-cover transform transition-transform duration-500 hover:scale-110"
+                className="w-full h-full object-cover group-hover:scale-110 hover:scale-110 transform transition-transform duration-500 "
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/40">
                 <p className="text-white text-xl font-bold">{blog.title}</p>
@@ -166,7 +166,7 @@ const BlogPage = () => {
   return (
     <div className="w-full bg-[#F1EBE5]/70 py-12">
       <div className="max-w-6xl mx-auto flex justify-start mb-10 px-4">
-        <h2 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">Điểm Du Lịch Hấp Dẫn</h2>
+        <h2 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">ĐIỂM DU LỊCH HẤP DẪN</h2>
       </div>
 
       <MobileSlider />
