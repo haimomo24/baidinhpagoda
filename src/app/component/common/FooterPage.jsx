@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from "react"
-import { Eye } from "lucide-react"   // 👈 icon con mắt
+import { Eye } from "lucide-react"
 
 const FooterPage = () => {
   const [views, setViews] = useState(0)
@@ -23,12 +23,13 @@ const FooterPage = () => {
 
   return (
     <footer
-    style={{
+      style={{
         backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20210827/pngtree-color-block-texture-watercolor-smudge-beige-background-image_770429.jpg")`,
         backgroundSize: "100% 100%",
         backgroundPosition: "center",
       }}
-     className="w-full  ">
+      className="w-full"
+    >
       <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           {/* Logo + tên + lượt truy cập */}
@@ -42,22 +43,33 @@ const FooterPage = () => {
                 className="h-8"
                 alt="Logo"
               />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap ">
-                Bai Dinh Cultural and Spiritual Tourism Complex
-              </span>
+             <span
+  className="text-xl md:text-2xl font-semibold 
+             transition duration-300 hover:text-blue-600 hover:scale-105 
+             inline-block leading-relaxed text-center md:text-left"
+>
+  Bai Dinh Cultural and Spiritual Tourism Complex
+</span>
             </a>
             {/* Lượt truy cập */}
-            <div className="flex items-center  text-sm">
+            <div className="flex items-center text-sm">
               <Eye className="w-4 h-4 mr-1" /> 
-              <span>{views} </span>
+              <span>{views}</span>
             </div>
           </div>
 
           {/* Thông tin liên hệ */}
-          <div className="text-sm space-y-1  sm:mt-0">
-            <p><strong>Địa chỉ:</strong> Phường Tây Hoa Lư, Ninh Bình</p>
-            <p><strong>Điện thoại:</strong> 1900.966.909</p>
-            <p>
+          <div className="text-sm space-y-1 sm:mt-0">
+            <p className="transition duration-300 hover:text-blue-600 hover:scale-105 inline-block">
+              <strong>Địa chỉ:</strong> Phường Tây Hoa Lư, Ninh Bình
+            </p>
+
+            <br></br>
+            <p className="transition duration-300 hover:text-blue-600 hover:scale-105 inline-block">
+              <strong>Điện thoại:</strong> 1900.966.909
+            </p>
+            <br></br>
+            <p className="transition duration-300 hover:text-blue-600 hover:scale-105 inline-block">
               <strong>Email:</strong>{" "}
               <a href="mailto:info@chua-baidinh.vn" className="hover:underline">
                 info@ctrangangroup.com
@@ -68,7 +80,8 @@ const FooterPage = () => {
 
         <hr className="my-6 border-gray-700 sm:mx-auto lg:my-8" />
 
-        <span className="block text-sm  sm:text-center">
+        <span className="block text-sm sm:text-center 
+          transition duration-300 hover:text-blue-600 hover:scale-105 inline-block">
           ©{" "}
           <a href="https://trangangroup.com/" className="hover:underline">
             trangangroup.com

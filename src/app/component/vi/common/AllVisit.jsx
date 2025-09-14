@@ -4,7 +4,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const blogs = [
-  {
+   {
+    img: "https://mia.vn/media/uploads/blog-du-lich/tuyet-tinh-coc-ninh-binh-1-1690702331.jpg",
+    title: "Tuyệt Tình Cốc",
+    link: "https://chuabaidinhnbinh.com/",
+  },
+  
+  
+   { img: "/images/DSC00002.JPG", title: "Bái Đính",link: "/" },
+   {
     img: "https://vissaihotel.vn/photo/khu-du-lich-trang-an-ninh-binh-co-gi-2.jpg",
     title: "Tràng An",
     link: "https://trangandanhthang.vn/",
@@ -14,22 +22,19 @@ const blogs = [
     title: "Tam Cốc",
     link: "https://tamcocbichdong.vn/",
   },
+   {
+    img: "https://bizweb.dktcdn.net/100/366/377/files/anh-chup-o-pho-co-hoa-lu.jpg?v=1669954575118",
+    title: "Phố cổ Hoa Lư",
+    link: "https://www.phocohoalu.com/",
+  },
   {
     img: "https://disantrangan.vn/wp-content/uploads/2021/09/san_golf_trang_an_09.jpg",
     title: "Sân golf Tràng An",
     link: "https://trangangolfandresort.com/",
   },
-  {
-    img: "https://bizweb.dktcdn.net/100/366/377/files/anh-chup-o-pho-co-hoa-lu.jpg?v=1669954575118",
-    title: "Phố cổ Hoa Lư",
-    link: "https://www.phocohoalu.com/",
-  },
-  { img: "/images/DSC00002.JPG", title: "Bái Đính" },
-  {
-    img: "https://mia.vn/media/uploads/blog-du-lich/tuyet-tinh-coc-ninh-binh-1-1690702331.jpg",
-    title: "Tuyệt Tình Cốc",
-    link: "https://chuabaidinhnbinh.com/",
-  },
+ 
+ 
+ 
   {
     img: "/images/tamchuc.jpg",
     title: "Chùa Tam Chúc",
