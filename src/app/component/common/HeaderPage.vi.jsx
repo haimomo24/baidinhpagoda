@@ -124,7 +124,7 @@ export default function HeaderPageVi() {
                         <a
                           key={i}
                           href={sub.link}
-                          className="block px-4 py-2 text-sm text-gray-700 rounded-md hover:bg-red-50 hover:text-red-600 transition-colors"
+                          className="block px-4 py-2 text-sm text-[#0F7F3E] rounded-md hover:bg-red-50 hover:text-red-600 transition-colors"
                         >
                           {sub.name}
                         </a>

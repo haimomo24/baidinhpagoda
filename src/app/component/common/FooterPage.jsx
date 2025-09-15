@@ -44,7 +44,7 @@ const FooterPage = () => {
                 alt="Logo"
               />
              <span
-  className="text-xl md:text-2xl font-semibold 
+  className="text-xl md:text-2xl font-semibold text-[#0F7F3E] 
              transition duration-300 hover:text-red-600 hover:scale-105 
              inline-block leading-relaxed text-center md:text-left"
 >
@@ -52,26 +52,26 @@ const FooterPage = () => {
 </span>
             </a>
             {/* Lượt truy cập */}
-            <div className="flex items-center  text-sm">
+            <div className="flex items-center text-[#0F7F3E]  text-sm">
               <Eye className="w-4 h-4 mr-1 text-red-600" /> 
-              <span classname=''>{views}</span>
+              <span >{views}</span>
             </div>
           </div>
 
           {/* Thông tin liên hệ */}
           <div className="text-sm space-y-1 sm:mt-0">
-            <p className="transition duration-300 hover:text-red-600 hover:scale-105 inline-block">
+            <p className="transition duration-300 text-[#0F7F3E] hover:text-red-600 hover:scale-105 inline-block">
               <strong>Địa chỉ:</strong> Phường Tây Hoa Lư, Ninh Bình
             </p>
 
             <br></br>
-            <p className="transition duration-300 hover:text-red-600 hover:scale-105 inline-block">
+            <p className="transition duration-300 text-[#0F7F3E] hover:text-red-600 hover:scale-105 inline-block">
               <strong>Điện thoại:</strong> 1900.966.909
             </p>
             <br></br>
-            <p className="transition duration-300 hover:text-red-600 hover:scale-105 inline-block">
+            <p className="transition duration-300 text-[#0F7F3E] hover:text-red-600 hover:scale-105 inline-block">
               <strong>Email:</strong>{" "}
-              <a href="mailto:info@chua-baidinh.vn" className="hover:underline">
+              <a href="mailto:info@chua-baidinh.vn" className="hover:underline text-[#0F7F3E]">
                 info@ctrangangroup.com
               </a>
             </p>
@@ -81,7 +81,7 @@ const FooterPage = () => {
         <hr className="my-6 border-gray-700 sm:mx-auto lg:my-8" />
 
         <span className="block text-sm sm:text-center 
-          transition duration-300 hover:text-red-600 hover:scale-105 inline-block">
+          transition duration-300 text-[#0F7F3E] hover:text-red-600 hover:scale-105 inline-block">
           ©{" "}
           <a href="https://trangangroup.com/" className="hover:underline">
             trangangroup.com

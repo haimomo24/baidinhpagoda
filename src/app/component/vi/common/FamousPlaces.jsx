@@ -30,6 +30,7 @@ const FamousPlaces = () => {
   className="
     inline-block px-6 py-3
     text-3xl sm:text-4xl lg:text-4xl font-bold
+    w-[45%]
     text-[#0F7F3E]
     bg-gradient-to-r from-amber-200 to-stone-300
     rounded-xl shadow-md
@@ -105,8 +106,16 @@ const FamousPlaces = () => {
 
           {/* Sơ đồ tham quan (bỏ địa điểm đầu tiên) */}
           <div className="py-6">
-            <h2 className="text-xl hover:text-red-600 sm:text-2xl font-bold mb-4 text-center lg:text-left">
-              Sơ Đồ Lộ Trình Tham Quan
+            <h2 className="inline-block px-6 py-3
+    text-1xl sm:text-3xl lg:text-3xl 
+    w-[45%]
+    text-[#0F7F3E]
+    bg-gradient-to-r from-amber-200 to-stone-300
+    rounded-xl shadow-md
+    transition-all duration-300 ease-out
+    mb-[3%]
+    hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-lg hover-shake">
+              SƠ ĐỒ LỘ TRÌNH THAM QUAN
             </h2>
             <div className="relative">
               {/* Line ngang desktop */}
