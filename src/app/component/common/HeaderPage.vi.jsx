@@ -24,28 +24,30 @@ export default function HeaderPageVi() {
   const [openMenu, setOpenMenu] = useState(false);
 
   const menuItems = [
-    { name: "Trang Chủ", link: "/vi" },
-    { name: "Tin Tức", link: "#blog" },
+    { name: "TRANG CHỦ", link: "/vi" },
+    { name: "TIN TỨC", link: "#blog" },
     {
-      name: "Dịch vụ",
+      name: "DỊCH VỤ",
       link: "#",
       subMenu: [
+        { name: "Hành trình di sản", link: "/vi/car" },
         { name: "Xe Điện", link: "/vi/car" },
+        { name: "Tour Bái Đính về đêm", link: "/vi/car" },
         { name: "Lưu trú", link: "/vi/hotel" },
-        { name: "Nhà hàng", link: "/vi/visit/50" },
+        { name: "Ẩm thực", link: "/vi/visit/50" },
         { name: "Hội nghị", link: "/vi/visit/55" },
       ],
     },
     { isLogo: true },
     {
-      name: "Sự kiện",
+      name: "SỰ KIỆN",
       subMenu: [
         { name: "Khóa tu", link: "https://chuabaidinhninhbinh.com" },
         { name: "Sự kiện khác", link: "#sk" },
       ],
     },
     {
-      name: "Điểm đến",
+      name: "ĐIỂM ĐẾN",
       link: "#",
       subMenu: [
         { name: "Tràng An", link: "https://trangandanhthang.vn/" },
@@ -58,7 +60,7 @@ export default function HeaderPageVi() {
       ],
     },
     {
-      name: "Liên hệ",
+      name: "LIÊN HỆ",
       link: "#",
       subMenu: [
         { name: "Tuyển Dụng", link: "/vi/recruitment" },

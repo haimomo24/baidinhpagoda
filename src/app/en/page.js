@@ -9,6 +9,7 @@ export default function EnHome() {
     <SliderImage/>
     <ImageMapen/>
     <FamousPlacesen/>
+    <h1>hello</h1>
     </>
   );
 }
