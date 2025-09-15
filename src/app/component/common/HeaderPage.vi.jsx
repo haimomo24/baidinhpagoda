@@ -55,8 +55,8 @@ export default function HeaderPageVi() {
         { name: "Phố cổ", link: "https://www.phocohoalu.com/" },
         { name: "Sân Golf", link: "https://trangangolfandresort.com/" },
         { name: "Tam Cốc", link: "https://tamcocbichdong.vn/" },
-        { name: "Thung Ui", link: "https://chuabaidinhninhbinh.com/" },
-        { name: "Tuyệt Tịnh Cốc", link: "https://chuabaidinhninhbinh.com/" },
+        // { name: "Thung Ui", link: "https://chuabaidinhninhbinh.com/" },
+        // { name: "Tuyệt Tịnh Cốc", link: "https://chuabaidinhninhbinh.com/" },
       ],
     },
     {
@@ -91,7 +91,7 @@ export default function HeaderPageVi() {
        flex-col px-6 py-3 max-w-7xl mx-auto">
         {/* Menu desktop */}
         <nav
-          className={`hidden md:flex justify-center gap-12 text-[18px] font-semibold text-gray-900 relative ${merriweather.className}`}
+          className={`hidden md:flex justify-center gap-12 text-[18px] font-semibold text-[#176734] relative ${merriweather.className}`}
         >
           {menuItems.map((item, idx) => (
             <div key={idx} className="relative group flex items-center">

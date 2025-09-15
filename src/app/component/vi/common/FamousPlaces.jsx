@@ -19,16 +19,28 @@ const places = [
 const FamousPlaces = () => {
   return (
     <div
-      className="w-full relative lg:mt-[-100px]"
+      className="w-full relative lg:mt-[-150px]"
       
     >
       <div className="bg-[#F1EBE5]/40  w-full">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
 
           {/* Tiêu đề */}
-          <h1 className="hover-shake text-3xl hover:text-red-600 sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
-            LỘ TRÌNH THAM QUAN
-          </h1>
+          <h1
+  className="
+    inline-block px-6 py-3
+    text-3xl sm:text-4xl lg:text-4xl font-bold
+    text-[#0F7F3E]
+    bg-gradient-to-r from-amber-200 to-stone-300
+    rounded-xl shadow-md
+    transition-all duration-300 ease-out
+    hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-lg hover-shake
+  "
+>
+  LỘ TRÌNH THAM QUAN
+</h1>
+
+
 
           {/* Hình ảnh các địa điểm (full 10) */}
           <div className="flex flex-col lg:flex-row gap-4">

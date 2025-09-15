@@ -59,7 +59,22 @@ const PromotionVi = () => {
   return (
     <div className="bg-[#F1EBE5]/70 py-10">
       <div className="relative max-w-6xl mx-auto px-4">
-        <h2 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left ">SỰ KIỆN NỔI BẬT</h2>
+      <h2
+  className="
+    relative inline-block px-10 py-3 mb-6
+    text-3xl sm:text-4xl lg:text-4xl font-bold
+    text-[#0F7F3E] text-center md:text-left
+    bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
+    rounded-xl shadow-2xl
+    transition-all duration-300 ease-out
+
+    hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-xl hover-shake
+  "
+>
+  SỰ KIỆN NỔI BẬT
+</h2>
+
+
 
         {/* Nút trái */}
         {currentIndex > 0 && (
