@@ -27,11 +27,17 @@ const SiderbarDashboard = () => {
   }
 
   const menuItems = [
+    { name: "Dashboard", path: "/dashboard" },
     { name: "Tin tức tổng hợp", path: "/dashboard/blog" },
     { name: "sự kiện nổi bật", path: "/dashboard/khuyenmai" },
-    { name: "Điểm đến", path: "/dashboard/diemden" },
-    { name: "Quản lí tài khoản", path: "/dashboard/auth" },
-    { name: "Đơn hàng", path: "/dashboard/products" }
+    { name: "Điểm đến", path: "/dashboard/diemden" },   
+    { name: "Quản lý dịch vụ lưu trú", path: "/dashboard/products" },
+    { name: "Quản lý dịch vụ xe điện", path: "/dashboard/products" },    
+    { name: "Phản hồi khác hàng", path: "/dashboard/auth" },
+    { name: "Quản lý tuyển dụng", path: "/dashboard/auth" },
+     { name: "Báo cáo", path: "/dashboard/auth" },
+     { name: "Báo cáo lượt truy cập", path: "/dashboard/auth" },
+    { name: "Quản lý tài khoản", path: "/dashboard/auth" },
   ]
 
   return (

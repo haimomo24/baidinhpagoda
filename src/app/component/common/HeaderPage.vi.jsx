@@ -4,6 +4,7 @@ import { ChevronDown, Check, Menu, X } from "lucide-react";
 import { Inter, Merriweather } from "next/font/google";
 import { SiZalo } from "react-icons/si";
 import { useState } from "react";
+import Link from "next/link";
 
 // Font Inter: body
 const inter = Inter({
@@ -225,18 +226,18 @@ export default function HeaderPageVi() {
 
             {/* Icon dưới cùng mobile */}
             <div className="flex items-center gap-2  justify-center">
-              <a href="#" className="p-2 rounded-full border border-gray-200">
+              <Link href="https://www.facebook.com/chuabaidinh35" className="p-2 rounded-full border border-gray-200">
                 <FaFacebookF className="w-4 h-4 text-blue-600" />
-              </a>
-              <a href="#" className="p-2 rounded-full border border-gray-200">
+              </Link>
+              <Link href="https://www.instagram.com/baidinhpagoda/" className="p-2 rounded-full border border-gray-200">
                 <FaInstagram className="w-4 h-4 text-pink-600" />
-              </a>
+              </Link>
               <button className="p-2 rounded-full border border-gray-200">
                 <SiZalo className="w-5 h-5 text-blue-600" />
               </button>
-              <a href="#" className="p-2 rounded-full border border-gray-200">
+              <Link href="https://youtube.com/@baidinhpagoda?si=KOZ7yP9cqIXn-5Ao" className="p-2 rounded-full border border-gray-200">
                 <FaYoutube className="w-4 h-4 text-red-600" />
-              </a>
+              </Link>
             </div>
           </div>
         )}
@@ -246,18 +247,21 @@ export default function HeaderPageVi() {
        {/* Desktop icon + ngôn ngữ giữ nguyên */}
         <div className="hidden mt-[-30px] mr-[2%]  md:flex justify-end  gap-4 ">
           <div className="flex items-center gap-2">
-            <a href="#" className="p-2 rounded-full border border-gray-200">
+            <Link href="https://www.facebook.com/chuabaidinh35" className="p-2 rounded-full border border-gray-200">
               <FaFacebookF className="w-4 h-4 text-blue-600" />
-            </a>
-            <a href="#" className="p-2 rounded-full border border-gray-200">
+            </Link>
+            <Link href="https://www.instagram.com/baidinhpagoda/" className="p-2 rounded-full border border-gray-200">
               <FaInstagram className="w-4 h-4 text-pink-600" />
-            </a>
+            </Link>
+            <Link  href="https://zalo.me/0913899135" className="p-2 rounded-full border border-gray-200">
             <button className="p-2 rounded-full border border-gray-200">
               <SiZalo className="w-5 h-5 text-blue-600" />
             </button>
-            <a href="#" className="p-2 rounded-full border border-gray-200">
+            </Link>
+            
+            <Link href="https://youtube.com/@baidinhpagoda?si=KOZ7yP9cqIXn-5Ao" className="p-2 rounded-full border border-gray-200">
               <FaYoutube className="w-4 h-4 text-red-600" />
-            </a>
+            </Link>
           </div>
 
           <div className="relative">

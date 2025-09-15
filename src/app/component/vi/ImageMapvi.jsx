@@ -1,34 +1,23 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";   // 👈 dùng Next.js Image
 import MapPage from "../MapPage";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1989";
 
 const ArrowLeftIcon = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    {...props}
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/>
   </svg>
 );
 
 const ArrowRightIcon = (props) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    {...props}
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+    viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
   </svg>
 );
 
@@ -80,6 +69,7 @@ const ImageMapvi = () => {
     <div className="w-full lg:mt-[-150px] relative">
       <div className="bg-[#F1EBE5]/60 min-h-screen w-full flex justify-center items-center font-sans">
         <main className="container mx-auto flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-start gap-6 md:gap-8 lg:gap-12 p-4 sm:p-6 lg:p-8">
+          
           {/* === Cột bên trái: Slider === */}
           <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col">
             <h1 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
@@ -115,12 +105,15 @@ const ImageMapvi = () => {
                 {displayImages.map((img, index) => (
                   <div
                     key={index}
-                    className="overflow-hidden rounded-md h-24 sm:h-28 md:h-32"
+                    className="overflow-hidden rounded-md h-24 sm:h-28 md:h-32 relative"
                   >
-                    <img
+                    <Image
                       src={img}
                       alt={`${currentRegion.name} - ${index + 1}`}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      fill   // 👈 để auto fit vào container
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-500 hover:scale-110"
+                      loading="lazy"
                     />
                   </div>
                 ))}
@@ -145,7 +138,7 @@ const ImageMapvi = () => {
           </div>
 
           {/* === Cột bên phải: Bản đồ === */}
-         <MapPage/>
+          <MapPage/>
         </main>
       </div>
     </div>

@@ -3,9 +3,19 @@
 const nextConfig = {
   experimental: {
     serverActions: {
-      bodySizeLimit: '10mb', // bạn có thể chỉnh thành 20mb, 50mb...
+      bodySizeLimit: "10mb", // bạn có thể chỉnh thành 20mb, 50mb...
     },
   },
-}
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "113.160.202.187",
+        port: "1989",
+        pathname: "/uploads/**", // Cho phép tất cả ảnh trong thư mục uploads
+      },
+    ],
+  },
+};
 
-export default nextConfig
+export default nextConfig;

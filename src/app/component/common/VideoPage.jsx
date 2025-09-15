@@ -22,6 +22,7 @@ const VideoPage = () => {
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+           style={{ boxShadow: "30px 20px 20px rgba(0, 0, 0, 0.5)" }}
         ></iframe>
       </div>
 

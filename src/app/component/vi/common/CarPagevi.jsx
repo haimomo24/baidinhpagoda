@@ -76,7 +76,7 @@ const CarPagevi = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Cột trái: Thông tin mô tả */}
         <div>
-          <h2 className="text-xl font-Philosopher text-gray-700 mb-4">
+          <h2 className="text-xl font-Philosopher font-bold text-gray-700 mb-4">
             Xe Điện - Vé Thăm Quan
           </h2>
           <p className="text-sm text-gray-700 font-Philosopher leading-relaxed">
@@ -104,7 +104,7 @@ const CarPagevi = () => {
 
         {/* Cột phải: Đặt vé */}
         <div className="border rounded-lg p-4 space-y-4 shadow">
-          <h3 className="text-xl font-medium text-gray-800 mb-2">Đặt dịch vụ</h3>
+          <h3 className="text-xl font-medium font-bold text-gray-800 mb-2">Đặt dịch vụ</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
