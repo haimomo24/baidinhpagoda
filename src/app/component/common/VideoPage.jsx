@@ -6,9 +6,17 @@ const VideoPage = () => {
       
       {/* Tiêu đề với đường kẻ ngang */}
       <div className="w-full max-w-6xl flex items-center mb-6">
-        <h2 className="hover-shake hover:text-red-600 text-2xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
-          GIỚI THIỆU VỀ CHÙA BÁI ĐÍNH
-        </h2>
+      <h2 className="relative inline-block mb-6 select-none 
+               text-2xl sm:text-2xl lg:text-3xl font-bold 
+               text-[#176734] text-center md:text-left 
+               px-8 py-2 
+               bg-gradient-to-r from-stone-200 via-amber-200 to-stone-400
+               rounded-lg 
+               shadow-[0_6px_16px_rgba(0,0,0,0.25)]
+               transition-all duration-300 ease-out
+               hover:scale-105 hover:text-red-600 hover:shadow-[0_10px_20px_rgba(0,0,0,0.45)]">
+  GIỚI THIỆU VỀ CHÙA BÁI ĐÍNH
+</h2>
         
         <hr className="flex-1 border-t-4 border-[#356D3D]" />
       </div>
