@@ -46,7 +46,17 @@ const BlogPage = () => {
       {/* lớp phủ mờ */}
       <div className="bg-[#F1EBE5]/60 min-h-screen">
         <div className="max-w-6xl mx-auto py-10 px-4">
-          <h2 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">TIN TỨC TỔNG HỢP</h2>
+          <h2  className="
+    relative inline-block px-10 py-3 mb-6
+    text-3xl sm:text-4xl lg:text-4xl font-bold
+    text-[#0F7F3E] text-center md:text-left
+    bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
+    rounded-xl shadow-2xl
+    transition-all duration-300 ease-out
+
+    hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-xl hover-shake
+  "
+>TIN TỨC TỔNG HỢP</h2>
 
           {/* Grid 3 cột */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -72,9 +72,31 @@ const ImageMapvi = () => {
           
           {/* === Cột bên trái: Slider === */}
           <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col">
-            <h1 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
-              CÁC ĐIỂM CHECK-IN
-            </h1>
+          <h1 className="relative inline-block mb-6 select-none transition-transform duration-300 ease-out hover:scale-105">
+  <span
+    className="relative z-10 block px-10 py-3 
+               text-3xl sm:text-4xl lg:text-4xl font-extrabold 
+               text-[#176734] text-center
+               bg-gradient-to-r from-stone-200 via-amber-300 to-stone-500
+               rounded-xl 
+               shadow-[0_8px_20px_rgba(0,0,0,0.25)]
+               transition-all duration-300 ease-out
+               hover:text-red-500 hover:shadow-[0_12px_25px_rgba(0,0,0,0.45)]
+               hover:from-gray-300 hover:to-gray-500"
+  >
+    CÁC ĐIỂM CHECK-IN
+  </span>
+
+  {/* viền sáng nhẹ phía sau để tạo hiệu ứng glow */}
+  <span
+    aria-hidden="true"
+    className="absolute inset-0 rounded-xl blur-md 
+               bg-gradient-to-r from-gray-300 to-gray-500
+               opacity-40 transition-all duration-300 ease-out
+               group-hover:opacity-70"
+  />
+</h1>
+
 
             <div
               onClick={() => router.push(`/vi/visit/${currentRegion.id}`)} 

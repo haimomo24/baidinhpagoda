@@ -171,7 +171,16 @@ const BlogPage = () => {
   return (
     <div className="w-full bg-[#F1EBE5]/70 py-12">
       <div className="max-w-6xl mx-auto flex justify-start mb-10 px-4">
-        <h2 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">ĐIỂM DU LỊCH HẤP DẪN</h2>
+        <h2 className="
+    inline-block px-6 py-3
+    text-3xl sm:text-4xl lg:text-4xl font-bold
+    text-[#0F7F3E]
+    bg-gradient-to-r from-amber-200 to-stone-300
+    rounded-xl shadow-md
+    transition-all duration-300 ease-out
+    hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-lg hover-shake
+  "
+>ĐIỂM DU LỊCH HẤP DẪN</h2>
       </div>
 
       <MobileSlider />
