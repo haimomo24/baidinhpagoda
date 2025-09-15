@@ -73,7 +73,7 @@ const ImageMapvi = () => {
           {/* === Cột bên trái: Slider === */}
           <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col">
             <h1 className="hover-shake hover:text-red-600 text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
-              CÁC ĐIỂM CHECK-IN
+              Các Điểm Check-in
             </h1>
 
             <div
