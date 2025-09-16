@@ -1,5 +1,7 @@
 "use client";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
+import { SiTiktok } from "react-icons/si";
+
 import { ChevronDown, Check, Menu, X } from "lucide-react";
 import { Inter, Merriweather } from "next/font/google";
 import { SiZalo } from "react-icons/si";
@@ -55,8 +57,7 @@ export default function HeaderPageVi() {
         { name: "Phố cổ", link: "https://www.phocohoalu.com/" },
         { name: "Sân Golf", link: "https://trangangolfandresort.com/" },
         { name: "Tam Cốc", link: "https://tamcocbichdong.vn/" },
-        // { name: "Thung Ui", link: "https://chuabaidinhninhbinh.com/" },
-        // { name: "Tuyệt Tịnh Cốc", link: "https://chuabaidinhninhbinh.com/" },
+        
       ],
     },
     {
@@ -247,11 +248,15 @@ export default function HeaderPageVi() {
        
       </div>
        {/* Desktop icon + ngôn ngữ giữ nguyên */}
-        <div className="hidden mt-[-30px] mr-[2%]  md:flex justify-end  gap-4 ">
+        <div className="hidden mt-[-40px] mr-[2%]  md:flex justify-end  gap-4 ">
           <div className="flex items-center gap-2">
             <Link href="https://www.facebook.com/chuabaidinh35" className="p-2 rounded-full border border-gray-200">
              
               <FaFacebookF className="w-4 h-4 text-blue-600" />
+            </Link>
+              <Link href="https://www.facebook.com/chuabaidinh35" className="p-2 rounded-full border border-gray-200">
+             
+              <SiTiktok className="cursor-pointer hover:text-black" />
             </Link>
             <Link href="https://www.instagram.com/baidinhpagoda/" className="p-2 rounded-full border border-gray-200">
               <FaInstagram className="w-4 h-4 text-pink-600" />
@@ -269,6 +274,7 @@ export default function HeaderPageVi() {
             <Link href="https://youtube.com/@baidinhpagoda?si=KOZ7yP9cqIXn-5Ao" className="p-2 rounded-full border border-gray-200">
               <FaYoutube className="w-4 h-4 text-red-600" />
             </Link>
+          
           </div>
 
           <div className="relative">

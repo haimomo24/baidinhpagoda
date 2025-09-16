@@ -67,7 +67,7 @@ const ConfPage = () => {
       id: 1,
       name: 'Phòng họp A',
       capacity: 200,
-      images: ['/images/phongA.png', '/images/vsack.png', '/images/phongA.png'],
+      images: ['/images/phonga.jpg', '/images/vsack.png', '/images/phongA.png'],
       details:
         'Diện tích: 460m2 .Với sức chứa 200 người, phòng họp A là không gian lý tưởng để tổ chức các hội nghị, sự kiện quy mô lớn. Phòng được trang bị wifi tốc độ cao, máy chiếu hiện đại, hệ thống âm thanh – ánh sáng đạt chuẩn quốc tế cùng đội ngũ nhân viên phục vụ chuyên nghiệp.'
     },
@@ -75,7 +75,7 @@ const ConfPage = () => {
       id: 2,
       name: 'Phòng họp B',
       capacity: 50,
-      images: ['/images/phongA.png', '/images/vsack.png', '/images/phongA.png'],
+      images: ['/images/phonga.jpg', '/images/vsack.png', '/images/phongA.png'],
       details:
         'Phòng họp B có sức chứa 50 người, phù hợp cho các buổi hội nghị vừa và nhỏ. Không gian được bố trí tiện nghi, wifi miễn phí, máy chiếu, hệ thống âm thanh – ánh sáng chất lượng cao.'
     },
@@ -83,7 +83,7 @@ const ConfPage = () => {
       id: 3,
       name: 'Phòng họp Vesak',
       capacity: 2000,
-      images: ['/images/phongA.png', '/images/vsack.png', '/images/phongA.png'],
+      images: ['/images/vsack.jpg', '/images/phonga.jpg', '/images/phonga.jpg'],
       details:
         'Diện tích: 5.000m2. Phòng họp Vesak là hội trường lớn với sức chứa 2.000 người, thích hợp tổ chức các sự kiện quốc tế, lễ hội và hội nghị cấp cao. Trang thiết bị tối tân, phục vụ chuyên nghiệp.'
     }
