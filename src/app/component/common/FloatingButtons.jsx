@@ -34,18 +34,16 @@ export default function FloatingButtons() {
           <a
             href="tel:1900966909"
             className="relative flex items-center justify-center w-10 h-10 
-                     bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg 
+                      text-white rounded-full shadow-lg 
                      transition-all duration-300 hover:scale-110"
           >
             {/* Sóng lan tỏa */}
             <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
-            <svg
-              className="w-6 h-6 relative z-10"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-            </svg>
+           <img
+                src="/images/phone-call.png"
+                alt="Logo Front"
+                className=" w-8 h-8 object-contain backface-hidden"
+              />
           </a>
           <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-500 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             Hotline: 1900966909
@@ -60,10 +58,14 @@ export default function FloatingButtons() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center w-10 h-10 
-                       bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg 
+                         rounded-full shadow-lg 
                        transition-all duration-300 hover:scale-110"
           >
-            <span className="text-white text-lg font-bold">Z</span>
+              <img
+                src="/images/7044033_zalo_icon.png"
+                alt="Logo Front"
+                className=" w-6 h-6 object-contain backface-hidden"
+              />
           </a>
           <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-500 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             Chat Zalo
@@ -78,16 +80,14 @@ export default function FloatingButtons() {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center w-10 h-10
-                       bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg 
+                        text-white rounded-full shadow-lg 
                        transition-all duration-300 hover:scale-110"
           >
-            <svg
-              className="w-6 h-6 relative z-10"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M12 2C6.477 2 2 6.145 2 11.25c0 2.9 1.309 5.49 3.375 7.31V22l3.31-1.82c.88.24 1.82.37 2.815.37 5.523 0 10-4.145 10-9.25S17.523 2 12 2zm1.09 12.44l-2.54-2.71L6.77 14.44l4.95-5.25 2.54 2.71 3.78-2.71-4.95 5.25z" />
-            </svg>
+           <img
+                src="/images/messenger.png"
+                alt="Logo Front"
+                className=" w-6 h-6 object-contain backface-hidden"
+              />
           </a>
           <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-500 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             Facebook Messenger

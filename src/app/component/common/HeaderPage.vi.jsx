@@ -250,6 +250,7 @@ export default function HeaderPageVi() {
         <div className="hidden mt-[-30px] mr-[2%]  md:flex justify-end  gap-4 ">
           <div className="flex items-center gap-2">
             <Link href="https://www.facebook.com/chuabaidinh35" className="p-2 rounded-full border border-gray-200">
+             
               <FaFacebookF className="w-4 h-4 text-blue-600" />
             </Link>
             <Link href="https://www.instagram.com/baidinhpagoda/" className="p-2 rounded-full border border-gray-200">
@@ -257,7 +258,11 @@ export default function HeaderPageVi() {
             </Link>
             <Link  href="https://zalo.me/0913899135" className="p-2 rounded-full border border-gray-200">
             <button className="p-2 rounded-full border border-gray-200">
-              <SiZalo className="w-5 h-5 text-blue-600" />
+              <img
+                src="/images/7044033_zalo_icon.png"
+                alt="Logo Front"
+                className=" w-4 h-4 object-contain backface-hidden"
+              />
             </button>
             </Link>
             
