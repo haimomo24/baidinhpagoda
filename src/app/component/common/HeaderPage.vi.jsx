@@ -35,7 +35,7 @@ export default function HeaderPageVi() {
         { name: "Tour Bái Đính về đêm", link: "/vi/car" },
         { name: "Lưu trú", link: "/vi/hotel" },
         { name: "Ẩm thực", link: "/vi/visit/50" },
-        { name: "Hội nghị", link: "/vi/visit/55" },
+        { name: "Hội nghị", link: "/vi/hoi-nghi" },
       ],
     },
     { isLogo: true },
