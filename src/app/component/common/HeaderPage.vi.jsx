@@ -32,7 +32,7 @@ export default function HeaderPageVi() {
       name: "DỊCH VỤ",
       link: "#",
       subMenu: [
-        { name: "Hành trình di sản", link: "/vi/car" },
+        { name: "Hành trình di sản", link: "/vi/hanh-trinh-di-san" },
         { name: "Xe Điện", link: "/vi/car" },
         { name: "Tour Bái Đính về đêm", link: "/vi/car" },
         { name: "Lưu trú", link: "/vi/hotel" },
@@ -87,12 +87,12 @@ export default function HeaderPageVi() {
         backgroundSize: "100% 100%",
         backgroundPosition: "center",
       }}
-       className={`w-full bg-white bg-[#F1EBE5]/60 ${inter.className} md:sticky md:top-0 md:z-50`}>
+       className={`w-full  bg-white  bg-[#F1EBE5]/60 ${inter.className} md:sticky md:top-0 md:z-50`}>
       <div className="flex
        flex-col px-6 py-3 max-w-7xl mx-auto">
         {/* Menu desktop */}
         <nav
-          className={`hidden md:flex justify-center gap-12 text-[18px] font-semibold text-[#176734] relative ${merriweather.className}`}
+          className={`hidden mt-[7px] md:flex justify-center gap-12 text-[18px] font-semibold text-[#176734] relative ${merriweather.className}`}
         >
           {menuItems.map((item, idx) => (
             <div key={idx} className="relative group flex items-center">
