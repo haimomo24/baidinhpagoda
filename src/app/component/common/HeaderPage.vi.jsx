@@ -36,7 +36,7 @@ export default function HeaderPageVi() {
         { name: "Xe Điện", link: "/vi/car" },
         { name: "Tour Bái Đính về đêm", link: "/vi/car" },
         { name: "Lưu trú", link: "/vi/hotel" },
-        { name: "Ẩm thực", link: "/vi/visit/50" },
+        { name: "Ẩm thực", link: "/vi/restaurant" },
         { name: "Hội nghị", link: "/vi/hoi-nghi" },
       ],
     },
@@ -87,17 +87,17 @@ export default function HeaderPageVi() {
         backgroundSize: "100% 100%",
         backgroundPosition: "center",
       }}
-       className={`w-full  bg-white  bg-[#F1EBE5]/60 ${inter.className} md:sticky md:top-0 md:z-50`}>
+       className={`w-full h-[100px]   ${inter.className} md:sticky md:top-0 md:z-50`}>
       <div className="flex
-       flex-col px-6 py-3 max-w-7xl mx-auto">
+       flex-col px-4 py-2 max-w-7xl mx-auto">
         {/* Menu desktop */}
         <nav
-          className={`hidden mt-[7px] md:flex justify-center gap-12 text-[18px] font-semibold text-[#176734] relative ${merriweather.className}`}
+          className={`hidden mt-[10px] md:flex justify-center gap-15 text-[17px] font-semibold text-[#176734] relative ${merriweather.className}`}
         >
           {menuItems.map((item, idx) => (
             <div key={idx} className="relative group flex items-center">
               {item.isLogo ? (
-                <div className="relative w-[80px] h-[80px] perspective-1000 mx-auto">
+                <div className="relative w-[60px] h-[60px] perspective-1000 mx-auto">
                   <div className="absolute inset-0 animate-flipLogo preserve-3d">
                     <img
                       src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
@@ -249,35 +249,77 @@ export default function HeaderPageVi() {
       </div>
        {/* Desktop icon + ngôn ngữ giữ nguyên */}
         <div className="hidden mt-[-40px] mr-[2%]  md:flex justify-end  gap-4 ">
-          <div className="flex items-center gap-2">
-            <Link href="https://www.facebook.com/chuabaidinh35" className="p-2 rounded-full border border-gray-200">
-             
-              <FaFacebookF className="w-4 h-4 text-blue-600" />
-            </Link>
-              <Link href="https://www.facebook.com/chuabaidinh35" className="p-2 rounded-full border border-gray-200">
-             
-              <SiTiktok className="cursor-pointer hover:text-black" />
-            </Link>
-            <Link href="https://www.instagram.com/baidinhpagoda/" className="p-2 rounded-full border border-gray-200">
-              <FaInstagram className="w-4 h-4 text-pink-600" />
-            </Link>
-            <Link  href="https://zalo.me/0913899135" className="p-2 rounded-full border border-gray-200">
-            <button className="p-2 rounded-full border border-gray-200">
-              <img
-                src="/images/7044033_zalo_icon.png"
-                alt="Logo Front"
-                className=" w-4 h-4 object-contain backface-hidden"
-              />
-            </button>
-            </Link>
-            
-            <Link href="https://youtube.com/@baidinhpagoda?si=KOZ7yP9cqIXn-5Ao" className="p-2 rounded-full border border-gray-200">
-              <FaYoutube className="w-4 h-4 text-red-600" />
-            </Link>
-          
-          </div>
+         <div className="flex items-center gap-3">
+  {/* FACEBOOK */}
+  <div className="relative group">
+    <Link href="https://www.facebook.com/chuabaidinh35" className="p-2 rounded-full">
+      <FaFacebookF className="w-3 h-3 text-blue-600" />
+    </Link>
+    
+    {/* Dropdown */}
+    <div className="absolute hidden group-hover:flex flex-col gap-2 top-full left-0 mt-[-5px] bg-white p-2 rounded-xl shadow-lg border border-gray-200 w-48">
+      
+      <Link href="https://www.facebook.com/share/1CteQUwNM6/?mibextid=wwXIfr" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-blue-50">
+        <FaFacebookF className="w-3 h-3 text-blue-600" />
+        <span className="text-sm text-[10px] text-gray-700">Danh lam Bái Đính </span>
+      </Link><Link href="https://www.facebook.com/ninhbinhmiendisan/
+" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-blue-50">
+        <FaFacebookF className="w-3 h-3 text-blue-600" />
+        <span className="text-sm text-[10px] text-gray-700">Ninh Bình - Miền Di Sản</span>
+      </Link>
+      <Link href="https://www.facebook.com/profile.php?id=61551231657424" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-blue-50">
+        <FaFacebookF className="w-3 h-3 text-blue-600" />
+        <span className="text-sm text-[10px] text-gray-700">Dược Liệu Bái Đính </span>
+      </Link>
+      
+      
+    </div>
+  </div>
 
-          <div className="relative">
+  {/* TIKTOK */}
+  <div className="relative group ml-[10px]">
+    <Link href="https://www.tiktok.com/@chuabaidinh35?lang=vi-VN" className="p-2 rounded-full">
+      <SiTiktok className="w-3 h-3 hover:text-black" />
+    </Link>
+    {/* Dropdown */}
+    <div className="absolute hidden group-hover:flex flex-col gap-2 top-full left-0 mt-[-5px]  bg-white p-2 rounded-xl shadow-lg border border-gray-200 w-48">
+       <Link href="https://www.tiktok.com/@baidinhpagodaofficial" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-gray-100">
+        <SiTiktok className="w-4 h-4" />
+        <span className="text-sm text-[10px] text-gray-700">Check-in Bái Đính</span>
+      </Link>
+      <Link href="https://www.tiktok.com/@visitbaidinh?lang=vi-VN" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-gray-100">
+        <SiTiktok className="w-4 h-4" />
+        <span className="text-sm text-[10px] text-gray-700">Thăm Bái Đính</span>
+      </Link>
+      
+      <Link href="https://www.tiktok.com/@ninhbinhmiendisan" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-gray-100">
+        <SiTiktok className="w-4 h-4" />
+        <span className="text-sm text-[10px] text-gray-700">Ninh Bình - Miền Di Sản</span>
+      </Link>
+     
+      
+    </div>
+  </div>
+
+  {/* INSTAGRAM */}
+  <Link href="https://www.instagram.com/baidinhpagoda/" className="p-2 rounded-full border border-gray-200">
+    <FaInstagram className="w-3 h-3 text-pink-600" />
+  </Link>
+
+  {/* ZALO */}
+  <Link href="https://zalo.me/0913899135" className="p-2 rounded-full border border-gray-200">
+    <img src="/images/7044033_zalo_icon.png" alt="Logo Front" className="w-3 h-3 object-contain" />
+  </Link>
+
+  {/* YOUTUBE */}
+  <Link href="https://youtube.com/@baidinhpagoda" className="p-2 rounded-full border border-gray-200">
+    <FaYoutube className="w-3 h-3 text-red-600" />
+  </Link>
+</div>
+
+
+
+          <div className="relative mt-[10px]">
             <button
               onClick={() => setOpenLang(!openLang)}
               className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded-full bg-white text-sm font-medium text-gray-700"

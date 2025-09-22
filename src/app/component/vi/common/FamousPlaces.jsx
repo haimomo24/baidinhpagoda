@@ -26,11 +26,11 @@ const FamousPlaces = () => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
 
           {/* Tiêu đề */}
-          <h1
+<h1
   className="
     inline-block px-6 py-3
-    text-3xl sm:text-4xl lg:text-4xl font-bold
-    w-[45%]
+    text-2xl sm:text-2xl lg:text-2xl font-bold
+    w-full sm:w-[30%]
     text-[#0F7F3E]
     bg-gradient-to-r from-amber-200 to-stone-300
     rounded-xl shadow-md
@@ -106,17 +106,20 @@ const FamousPlaces = () => {
 
           {/* Sơ đồ tham quan (bỏ địa điểm đầu tiên) */}
           <div className="py-6">
-            <h2 className="inline-block px-6 py-3
-    text-1xl sm:text-3xl lg:text-3xl 
-    w-[45%]
+            <h2
+  className="inline-block px-6 py-3
+    text-1xl sm:text-2xl lg:text-2xl font-bold 
+    w-full sm:w-[38%]
     text-[#0F7F3E]
     bg-gradient-to-r from-amber-200 to-stone-300
     rounded-xl shadow-md
     transition-all duration-300 ease-out
     mb-[3%]
-    hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-lg hover-shake">
-              SƠ ĐỒ LỘ TRÌNH THAM QUAN
-            </h2>
+    hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-lg hover-shake"
+>
+  SƠ ĐỒ LỘ TRÌNH THAM QUAN
+</h2>
+
             <div className="relative">
               {/* Line ngang desktop */}
               <div className="hidden sm:block absolute top-5 left-0 w-full h-1 bg-[#356D3D]"></div>

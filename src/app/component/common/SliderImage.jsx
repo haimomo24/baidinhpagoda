@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const slidesData = [
   { id: 1, image: "/images/123.jpg", text: "" },
@@ -31,7 +32,7 @@ const SliderImage = () => {
   }, []);
 
   return (
-    <div className="relative w-full z-10  h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
+    <div className="relative w-full z-10 h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] overflow-hidden">
       {slidesData.map((slide, index) => (
         <div
           key={slide.id}
@@ -43,13 +44,18 @@ const SliderImage = () => {
             alt=""
             className="w-full h-full object-cover"
           />
-          <div className="absolute bottom-10 sm:bottom-15 md:bottom-20 left-5 sm:left-7 md:left-10 text-white text-2xl sm:text-3xl md:text-5xl leading-snug drop-shadow-lg">
-            {slide.text.split("\n").map((line, i) => (
-              <p key={i}>{line}</p>
-            ))}
-          </div>
         </div>
       ))}
+
+      {/* Text cố định góc trái trên cùng với hiệu ứng fade-in */}
+      <motion.div
+        className="absolute top-5 left-5 sm:top-8 sm:left-10 text-white text-lg sm:text-2xl md:text-3xl font-bold drop-shadow-xl"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
+        Bái Đính - Vãng Cảnh Vô Ưu - Gieo Mầm An Lạc
+      </motion.div>
 
       {/* Dots */}
       <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3">

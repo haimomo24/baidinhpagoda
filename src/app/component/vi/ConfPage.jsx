@@ -1,314 +1,228 @@
-'use client'
+"use client"
 
-import React, { useState, useEffect } from 'react'
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { X } from "lucide-react";
+
 const ConfPage = () => {
-     const [activeDetail, setActiveDetail] = useState(null)
-  const [zoomImage, setZoomImage] = useState(null) // ✅ state zoom ảnh
-  const [currentImageIndex, setCurrentImageIndex] = useState({})
+  const [lightbox, setLightbox] = useState({ open: false, images: [], index: 0 });
 
-  // ----- Booking form state & helpers -----
-  const [booking, setBooking] = useState({
-    fullName: "",
-    phone: "",
-    date: "",
-    people: "",
-    note: "",
-    rooms: [],     // lưu id phòng đã chọn
-  })
+  const openLightbox = (images, index) => {
+    setLightbox({ open: true, images, index });
+  };
 
-  // Bật/tắt chọn phòng theo id
-  const toggleRoom = (id) => {
-    setBooking((b) => ({
-      ...b,
-      rooms: b.rooms.includes(id)
-        ? b.rooms.filter((r) => r !== id)
-        : [...b.rooms, id],
-    }))
-  }
+  const closeLightbox = () => {
+    setLightbox({ ...lightbox, open: false });
+  };
 
-  // Gửi form (demo)
-  const handleSubmitBooking = (e) => {
-    e.preventDefault()
+  const nextSlide = () => {
+    setLightbox({
+      ...lightbox,
+      index: (lightbox.index + 1) % lightbox.images.length,
+    });
+  };
 
-    if (!booking.fullName || !booking.phone || !booking.date || !booking.people) {
-      alert("Vui lòng nhập đầy đủ Họ tên, SĐT, Ngày và Số người.")
-      return
-    }
-    if (booking.rooms.length === 0) {
-      alert("Vui lòng chọn ít nhất 1 phòng hội nghị.")
-      return
-    }
+  const prevSlide = () => {
+    setLightbox({
+      ...lightbox,
+      index: (lightbox.index - 1 + lightbox.images.length) % lightbox.images.length,
+    });
+  };
 
-    const selectedRoomNames = rooms
-      .filter((r) => booking.rooms.includes(r.id))
-      .map((r) => r.name)
+  // Ảnh riêng cho từng section
+  const imagesA = [
+    "/images/397cd5a83dd8b786eec9.jpg",
+    "/images/8ef54698a4e82eb677f9.jpg",
+    "/images/518ad8073f77b529ec66.jpg",
+  ];
 
-    const payload = {
-      ...booking,
-      selectedRoomNames,
-    }
+  const imagesB = [
+    "/images/phonga.jpg",
+    "/images/8ef54698a4e82eb677f9.jpg",
+    "/images/vsack.jpg",
+  ];
 
-    console.log("📦 Đăng ký dịch vụ:", payload)
-    alert("Đã gửi đăng ký. Chúng tôi sẽ liên hệ sớm!")
+  const imagesC = [
+    "/images/vsack.jpg",
+    "/images/397cd5a83dd8b786eec9.jpg",
+    "/images/phonga.jpg",
+  ];
 
-    // Reset form
-    setBooking({
-      fullName: "",
-      phone: "",
-      date: "",
-      people: "",
-      note: "",
-      rooms: [],
-    })
-  }
-
-  const rooms = [
-    {
-      id: 1,
-      name: 'Phòng họp A',
-      capacity: 200,
-      images: ['/images/phonga.jpg', '/images/vsack.png', '/images/phongA.png'],
-      details:
-        'Diện tích: 460m2 .Với sức chứa 200 người, phòng họp A là không gian lý tưởng để tổ chức các hội nghị, sự kiện quy mô lớn. Phòng được trang bị wifi tốc độ cao, máy chiếu hiện đại, hệ thống âm thanh – ánh sáng đạt chuẩn quốc tế cùng đội ngũ nhân viên phục vụ chuyên nghiệp.'
-    },
-    {
-      id: 2,
-      name: 'Phòng họp B',
-      capacity: 50,
-      images: ['/images/phonga.jpg', '/images/vsack.png', '/images/phongA.png'],
-      details:
-        'Phòng họp B có sức chứa 50 người, phù hợp cho các buổi hội nghị vừa và nhỏ. Không gian được bố trí tiện nghi, wifi miễn phí, máy chiếu, hệ thống âm thanh – ánh sáng chất lượng cao.'
-    },
-    {
-      id: 3,
-      name: 'Phòng họp Vesak',
-      capacity: 2000,
-      images: ['/images/vsack.jpg', '/images/phonga.jpg', '/images/phonga.jpg'],
-      details:
-        'Diện tích: 5.000m2. Phòng họp Vesak là hội trường lớn với sức chứa 2.000 người, thích hợp tổ chức các sự kiện quốc tế, lễ hội và hội nghị cấp cao. Trang thiết bị tối tân, phục vụ chuyên nghiệp.'
-    }
-  ]
-
-  const handlePrev = (id, total) => {
-    setCurrentImageIndex((prev) => ({
-      ...prev,
-      [id]: prev[id] > 0 ? prev[id] - 1 : total - 1
-    }))
-  }
-
-  const handleNext = (id, total) => {
-    setCurrentImageIndex((prev) => ({
-      ...prev,
-      [id]: prev[id] < total - 1 ? prev[id] + 1 : 0
-    }))
-  }
-
-  // ✅ Xử lý ESC để thoát modal
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') setZoomImage(null)
-    }
-    window.addEventListener('keydown', handleEsc)
-    return () => window.removeEventListener('keydown', handleEsc)
-  }, [])
   return (
-   <section className="max-w-5xl mx-auto px-4 py-8 font-sans space-y-5">
-      <h2 className="text-xl text-gray-700 font-semibold">Phòng Hội Nghị</h2>
-      <div className="bg-white border rounded-2xl divide-y divide-gray-100">
-        {rooms.map((room, idx) => (
-          <div
-            key={room.id}
-            className={`grid grid-cols-1 md:grid-cols-3 gap-4 p-6 ${
-              idx === 0 ? 'rounded-t-2xl' : ''
-            } ${idx === rooms.length - 1 ? 'rounded-b-2xl' : ''}`}
+    <div className="w-full">
+      {/* Hero */}
+      <section className="relative">
+        <img src="/images/vsack.jpg" alt="" className="w-full h-[90vh] object-cover" />
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-white bg-black/40">
+          <motion.h1
+            className="text-5xl font-bold"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
           >
-            {/* Cột ảnh */}
-            <div className="relative w-full h-40 flex items-center justify-center">
-              {room.images.length > 0 ? (
-                <img
-                  src={
-                    room.images[currentImageIndex[room.id] || 0] ||
-                    '/uploads/placeholder.jpg'
-                  }
-                  alt={room.name}
-                  className="w-full h-full object-cover rounded-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:brightness-110"
-                  onClick={() =>
-                    setZoomImage(
-                      room.images[currentImageIndex[room.id] || 0]
-                    )
-                  }
-                />
-              ) : (
-                <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center text-gray-400">
-                  Chưa có ảnh
-                </div>
-              )}
+            PHÒNG HỘI NGHỊ
+          </motion.h1>
+          <motion.p
+            className="text-xl mt-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 1 }}
+          >
+            CONFERENCE ROOM
+          </motion.p>
+        </div>
+      </section>
 
-              {/* Nút prev/next */}
-              <button
-                onClick={() => handlePrev(room.id, room.images.length)}
-                className="absolute left-2 bg-gray-700 text-white px-2 py-1 rounded-full text-sm"
-              >
-                ‹
-              </button>
-              <button
-                onClick={() => handleNext(room.id, room.images.length)}
-                className="absolute right-2 bg-gray-700 text-white px-2 py-1 rounded-full text-sm"
-              >
-                ›
-              </button>
-            </div>
-
-            {/* Cột thông tin */}
-            <div className="flex flex-col justify-center space-y-1">
-              <h3 className="text-lg font-medium text-gray-700">{room.name}</h3>
-              <p className="text-sm text-gray-500">
-                Sức chứa: {room.capacity} người
-              </p>
-              {activeDetail === room.id && (
-                <p className="text-gray-600 mt-2 text-justify leading-relaxed">
-                  {room.details}
-                </p>
-              )}
-            </div>
-
-            {/* Cột nút */}
-            <div className="flex justify-center items-center">
-              <button
-                onClick={() =>
-                  setActiveDetail(activeDetail === room.id ? null : room.id)
-                }
-                className="bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg px-6 py-2 text-sm"
-              >
-                {activeDetail === room.id ? 'Ẩn chi tiết' : 'Xem chi tiết'}
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* ---- FORM ĐĂNG KÝ DỊCH VỤ ---- */}
-      <div className="mt-10 max-w-2xl mx-auto bg-white p-6 rounded-2xl shadow-2xl ring-1 ring-gray-200">
-      <h3
-  className="text-lg font-semibold text-gray-700 mb-4 
-             cursor-pointer transition duration-300 
-             hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-lg hover-shake
-             active:text-red-700 text-center w-full"
->
-  Đăng Ký Phòng Hội Nghị
-</h3>
-
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmitBooking}>
-          {/* Họ tên */}
-          <div>
-            <label className="block text-sm text-gray-600">Họ và tên*</label>
-            <input
-              type="text"
-              className="w-full border rounded-lg p-2 mt-1"
-              value={booking.fullName}
-              onChange={(e) => setBooking({ ...booking, fullName: e.target.value })}
-              required
-            />
-          </div>
-
-          {/* SĐT */}
-          <div>
-            <label className="block text-sm text-gray-600">Số điện thoại*</label>
-            <input
-              type="tel"
-              className="w-full border rounded-lg p-2 mt-1"
-              value={booking.phone}
-              onChange={(e) => setBooking({ ...booking, phone: e.target.value })}
-              required
-            />
-          </div>
-
-          {/* Ngày */}
-          <div>
-            <label className="block text-sm text-gray-600">Ngày*</label>
-            <input
-              type="date"
-              className="w-full border rounded-lg p-2 mt-1"
-              value={booking.date}
-              onChange={(e) => setBooking({ ...booking, date: e.target.value })}
-              required
-            />
-          </div>
-
-          {/* Số người */}
-          <div>
-            <label className="block text-sm text-gray-600">Số người*</label>
-            <input
-              type="number"
-              min="1"
-              className="w-full border rounded-lg p-2 mt-1"
-              value={booking.people}
-              onChange={(e) => setBooking({ ...booking, people: e.target.value })}
-              required
-            />
-          </div>
-
-          {/* Chọn phòng */}
-          <div className="col-span-2">
-            <label className="block text-sm text-gray-600">Chọn phòng*</label>
-            <div className="mt-2 flex gap-4 flex-wrap">
-              {rooms.map(r => (
-                <label key={r.id} className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={booking.rooms.includes(r.id)}
-                    onChange={() => toggleRoom(r.id)}
-                  />
-                  {r.name}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Ghi chú */}
-          <div className="col-span-2">
-            <label className="block text-sm text-gray-600">Ghi chú</label>
-            <textarea
-              rows="3"
-              className="w-full border rounded-lg p-2 mt-1"
-              value={booking.note}
-              onChange={(e) => setBooking({ ...booking, note: e.target.value })}
-            />
-          </div>
-
-          {/* Nút submit */}
-          <div className="col-span-2 flex justify-center">
-            <button
-              type="submit"
-              className="bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg px-8 py-2 text-sm 
-                         transition duration-300 transform hover:scale-105 shadow-md"
-            >
-              ĐĂNG KÝ
-            </button>
-          </div>
-        </form>
-      </div>
-
-      {/* Modal phóng to ảnh */}
-      {zoomImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-          <div className="relative max-w-4xl max-h-[90vh]">
+      {/* Hội Trường A */}
+      <motion.section
+        className="bg-[#FAE6CC] py-16 text-center"
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        <h2 className="text-4xl font-bold">Hội Trường A</h2>
+        <p className="max-w-3xl mx-auto mt-4 text-lg leading-relaxed">Diện tích: ​​460m²</p>
+        <p className="mt-4 italic">Sức chứa lên đến 200 người</p>
+        <div className="mt-6 font-bold">
+          Hotline: <span className="">1900.966.909</span>
+        </div>
+        <div className="grid grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
+          {imagesA.map((src, i) => (
             <img
-              src={zoomImage}
-              alt="Zoom"
-              className="max-w-full max-h-[90vh] rounded-lg shadow-lg"
+              key={i}
+              src={src}
+              className="rounded-lg cursor-pointer hover:opacity-80 transition"
+              onClick={() => openLightbox(imagesA, i)}
             />
-            <button
-              onClick={() => setZoomImage(null)}
-              className="absolute top-2 right-2 bg-white text-black px-3 py-1 rounded-full shadow hover:bg-gray-200"
-            >
-              ✕
-            </button>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* Hội Trường B */}
+      <motion.section
+        className="text-emerald-900 py-16 flex flex-wrap items-center justify-center"
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        <div className="w-full md:w-1/2 px-10 flex justify-center">
+          <img
+            src="/images/phonga.jpg"
+            className="max-w-md w-full object-cover rounded-2xl cursor-pointer"
+            alt="Hội Trường B"
+            onClick={() => openLightbox(imagesB, 0)}
+          />
+        </div>
+        <div className="w-full md:w-1/2 px-10">
+          <h2 className="text-4xl font-bold mb-6">Hội Trường B</h2>
+          <p className="text-lg leading-relaxed">Diện tích: ​​120m²</p>
+          <p className="text-lg leading-relaxed">Sức chứa lên đến 50 người</p>
+        </div>
+      </motion.section>
+
+      {/* Trung tâm Hội nghị Quốc tế */}
+      <motion.section
+        className="bg-[#FAE6CC] py-16 flex justify-center"
+        initial={{ opacity: 0, x: -100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        <div className="flex items-center gap-8 max-w-6xl w-full px-6">
+          <div className="max-w-lg">
+            <h2 className="text-4xl font-bold mb-6">Trung tâm Hội nghị Quốc tế</h2>
+            <ul className="space-y-6 text-lg">
+              <li>
+                <span className="font-semibold">• Diện tích: 5.000m²</span> <br />
+                Sức chứa lên đến 3500 người
+              </li>
+              <li>
+                <span className="font-semibold">• Thích hợp tổ chức</span> <br />
+                các sự kiện quốc tế, lễ hội và hội nghị cấp cao
+              </li>
+              <li>
+                <span className="font-semibold">• Trang thiết bị</span> <br />
+                Tối tân, phục vụ chuyên nghiệp
+              </li>
+            </ul>
+          </div>
+          <div className="flex-shrink-0">
+            <img
+              src="/images/vsack.jpg"
+              className="rounded-l-[80px] max-w-md object-cover cursor-pointer"
+              alt="Trung tâm Hội nghị"
+              onClick={() => openLightbox(imagesC, 0)}
+            />
           </div>
         </div>
-      )}
-    </section>
-  )
-}
+      </motion.section>
 
-export default ConfPage
+      {/* Liên hệ */}
+      <motion.section
+        className="bg-gray-200 py-12 px-6 flex justify-center"
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        <div className="flex flex-wrap w-full max-w-5xl">
+          {/* Cột trái */}
+          <div className="w-full md:w-1/2 md:pr-6 flex flex-col justify-center">
+            <h2 className="text-3xl font-bold mb-4">LIÊN HỆ ĐẶT</h2>
+            <p className="mb-2">Hotline: 0916 138 692</p>
+            <p className="mb-2">Địa chỉ: Phường Tây hoa Lư, Ninh Bình</p>
+          </div>
+
+          {/* Cột phải */}
+          <div className="w-full md:w-1/2">
+            <form className="grid gap-3">
+              <input type="text" placeholder="Your name" className="p-3 border rounded-lg" />
+              <input type="text" placeholder="Your phone" className="p-3 border rounded-lg" />
+              <input type="email" placeholder="Your email" className="p-3 border rounded-lg" />
+
+              <div className="flex gap-6">
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" className="w-4 h-4" /> Hội nghị A
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" className="w-4 h-4" /> Hội nghị B
+                </label>
+                <label className="flex items-center gap-2">
+                  <input type="checkbox" className="w-4 h-4" /> Vesak
+                </label>
+              </div>
+
+              <textarea placeholder="Message" className="p-3 border rounded-lg h-28" />
+              <button className="border px-6 py-2 rounded-lg hover:bg-emerald-900 hover:text-white transition">
+                Đặt ngay
+              </button>
+            </form>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Lightbox */}
+      {lightbox.open && (
+        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50">
+          <button onClick={closeLightbox} className="absolute top-5 right-5 text-white text-3xl">
+            <X size={32} />
+          </button>
+          <button onClick={prevSlide} className="absolute left-5 text-white text-4xl">
+            ❮
+          </button>
+          <img
+            src={lightbox.images[lightbox.index]}
+            className="max-h-[80vh] max-w-[90vw] rounded-lg"
+          />
+          <button onClick={nextSlide} className="absolute right-5 text-white text-4xl">
+            ❯
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ConfPage;

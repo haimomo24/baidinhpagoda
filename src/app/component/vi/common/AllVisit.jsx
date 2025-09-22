@@ -173,7 +173,7 @@ const BlogPage = () => {
       <div className="max-w-6xl mx-auto flex justify-start mb-10 px-4">
         <h2 className="
     inline-block px-6 py-3
-    text-3xl sm:text-4xl lg:text-4xl font-bold
+    text-2xl sm:text-2xl lg:text-2xl font-bold
     text-[#0F7F3E]
     bg-gradient-to-r from-amber-200 to-stone-300
     rounded-xl shadow-md

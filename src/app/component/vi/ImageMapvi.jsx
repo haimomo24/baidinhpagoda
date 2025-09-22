@@ -75,7 +75,7 @@ const ImageMapvi = () => {
           <h1 className="relative inline-block mb-6 select-none transition-transform duration-300 ease-out hover:scale-105">
   <span
     className="relative z-10 block px-10 py-3 
-               text-3xl sm:text-4xl lg:text-4xl font-extrabold 
+               text-2xl sm:text-2xl lg:text-2xl font-bold
                text-[#176734] text-center
                bg-gradient-to-r from-stone-200 via-amber-300 to-stone-500
                rounded-xl 

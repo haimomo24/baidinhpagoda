@@ -62,7 +62,7 @@ const PromotionVi = () => {
       <h2
   className="
     relative inline-block px-10 py-3 mb-6
-    text-3xl sm:text-4xl lg:text-4xl font-bold
+    text-2xl sm:text-2xl lg:text-2xl font-bold
     text-[#0F7F3E] text-center md:text-left
     bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
     rounded-xl shadow-2xl
