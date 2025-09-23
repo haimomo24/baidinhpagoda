@@ -58,7 +58,7 @@ const PromotionVi = () => {
 
   return (
     <div className="bg-[#F1EBE5]/70 py-10">
-      <div className="relative max-w-6xl mx-auto px-4">
+      <div className="relative mt-[-40px] max-w-6xl mx-auto px-4">
       <h2
   className="
     relative inline-block px-10 py-3 mb-6

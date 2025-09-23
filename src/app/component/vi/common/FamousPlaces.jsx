@@ -19,7 +19,7 @@ const places = [
 const FamousPlaces = () => {
   return (
     <div
-      className="w-full relative lg:mt-[-150px]"
+      className="w-full relative mt-[-60px] lg:mt-[-150px]"
       
     >
       <div className="bg-[#F1EBE5]/40  w-full">

@@ -110,7 +110,7 @@ const DesktopSlider = () => {
   const offset = windowWidth < 1024 ? 20 : 40;
 
   return (
-    <div className="relative flex items-center justify-center overflow-hidden px-4 hidden sm:flex">
+    <div className="relative  flex items-center justify-center overflow-hidden px-4 hidden sm:flex">
       {/* left button */}
       <button
         onClick={prevSlide}
