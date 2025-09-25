@@ -169,7 +169,7 @@ const DesktopSlider = () => {
 // ========== MAIN ==========
 const BlogPage = () => {
   return (
-    <div className="w-full bg-[#F1EBE5]/70 py-12">
+    <div className="w-full mt-[-20px] bg-[#F1EBE5]/70 py-12">
       <div className="max-w-6xl mx-auto flex justify-start mb-10 px-4">
         <h2 className="
     inline-block px-6 py-3

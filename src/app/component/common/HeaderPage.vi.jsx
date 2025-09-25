@@ -91,11 +91,12 @@ export default function HeaderPageVi() {
       <div className="flex
        flex-col px-4 py-2 max-w-7xl mx-auto">
         {/* Menu desktop */}
-        <nav
-          className={`hidden mt-[10px] md:flex justify-center gap-15 text-[17px] font-semibold text-[#176734] relative ${merriweather.className}`}
+        <nav 
+        
+          className={`hidden mt-[10px]  md:flex justify-center gap-15 text-[17px] font-semibold text-[#176734] relative ${merriweather.className}`}
         >
           {menuItems.map((item, idx) => (
-            <div key={idx} className="relative group flex items-center">
+            <div key={idx} className="relative bg-[#FAE9D4] group  flex items-center">
               {item.isLogo ? (
                 <div className="relative w-[60px] h-[60px] perspective-1000 mx-auto">
                   <div className="absolute inset-0 animate-flipLogo preserve-3d">
@@ -139,7 +140,7 @@ export default function HeaderPageVi() {
         </nav>
 
         {/* Mobile top bar: [Menu] [Logo] [Lang] */}
-        <div className="flex md:hidden justify-between items-center">
+        <div className="flex md:hidden mt-[15px] justify-between items-center">
           <button
             onClick={() => setOpenMenu(!openMenu)}
             className="p-2 z-20"
@@ -199,7 +200,7 @@ export default function HeaderPageVi() {
 
         {/* Mobile menu + icon dưới cùng */}
         {openMenu && (
-          <div className="md:hidden space-y-2 text-gray-800 font-medium z-10">
+          <div className="md:hidden bg-[#FFFFFF]  space-y-2 text-gray-800 font-medium z-100">
             {menuItems.map((item, idx) => {
               if (item.isLogo) return null;
               return (

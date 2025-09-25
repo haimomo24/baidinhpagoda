@@ -37,7 +37,7 @@ const BlogPage = () => {
 
   return (
     <div
-      className="w-full min-h-screen bg-center bg-no-repeat relative"
+      className="w-full min-h-screen mt-[-40px] bg-center bg-no-repeat relative"
       style={{
         backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20210827/pngtree-color-block-texture-watercolor-smudge-beige-background-image_770429.jpg")`,
         backgroundSize: "100% 100%",

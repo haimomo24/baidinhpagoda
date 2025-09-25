@@ -2,7 +2,7 @@ import React from 'react';
 
 const VideoPage = () => {
   return (
-    <div className="bg-[#F1EBE5]/70 flex flex-col items-center p-6">
+    <div className="bg-[#F1EBE5]/70 flex mt-[-30px] flex-col items-center p-6">
       
       {/* Tiêu đề với đường kẻ ngang */}
       <div className="w-full max-w-6xl flex items-center mb-6">
