@@ -34,7 +34,7 @@ export default function HeaderPageVi() {
       subMenu: [
         { name: "Hành trình di sản", link: "/vi/hanh-trinh-di-san" },
         { name: "Xe Điện", link: "/vi/car" },
-        { name: "Tour Bái Đính về đêm", link: "/vi/car" },
+        { name: "Tour Bái Đính về đêm", link: "/vi/bai-dinh-ve-dem" },
         { name: "Lưu trú", link: "/vi/hotel" },
         { name: "Ẩm thực", link: "/vi/restaurant" },
         { name: "Hội nghị", link: "/vi/hoi-nghi" },
@@ -96,7 +96,7 @@ export default function HeaderPageVi() {
           className={`hidden mt-[10px]  md:flex justify-center gap-15 text-[17px] font-semibold text-[#176734] relative ${merriweather.className}`}
         >
           {menuItems.map((item, idx) => (
-            <div key={idx} className="relative bg-[#FAE9D4] group  flex items-center">
+            <div key={idx} className="relative  group  flex items-center">
               {item.isLogo ? (
                 <div className="relative w-[60px] h-[60px] perspective-1000 mx-auto">
                   <div className="absolute inset-0 animate-flipLogo preserve-3d">

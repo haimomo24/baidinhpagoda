@@ -3,10 +3,8 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function RestaurantPage() {
-  // lightbox: null hoặc { images: [...], index: number }
   const [lightbox, setLightbox] = useState(null);
 
- 
   const heroImages = ["/images/3fab96ee3296b8c8e187.jpg"];
   const buffetImages = [
     "/images/397cd5a83dd8b786eec9.jpg",
@@ -15,36 +13,28 @@ export default function RestaurantPage() {
   ];
   const dessertImages = [
     "/images/518ad8073f77b529ec66.jpg",
-    "/images/518ad8073f77b529ec66.jpg"
-    
+    "/images/518ad8073f77b529ec66.jpg",
   ];
   const lauImages = [
     "/images/e5810ef0ec8066de3f91.jpg",
-    "/images/e5810ef0ec8066de3f91.jpg"
-    
+    "/images/e5810ef0ec8066de3f91.jpg",
   ];
   const mamComImages = [
     "/images/5b9a212ec95e43001a4f.jpg",
-    "/images/e5810ef0ec8066de3f91.jpg"
-    
+    "/images/e5810ef0ec8066de3f91.jpg",
   ];
-
 
   const ZoomableImage = ({ src, alt, className, images = [src], idx = 0 }) => (
     <img
       src={src}
       alt={alt}
       className={`${className} cursor-pointer hover:scale-105 transition`}
-      onClick={() => {
-        // mở lightbox chứa đúng mảng images, bắt đầu từ idx
-        setLightbox({ images, index: idx });
-      }}
+      onClick={() => setLightbox({ images, index: idx })}
     />
   );
 
-  // ----- Điều khiển prev / next trong lightbox -----
   const showPrev = (e) => {
-    if (e && e.stopPropagation) e.stopPropagation();
+    if (e?.stopPropagation) e.stopPropagation();
     setLightbox((prev) => {
       if (!prev) return null;
       const len = prev.images.length || 1;
@@ -52,7 +42,7 @@ export default function RestaurantPage() {
     });
   };
   const showNext = (e) => {
-    if (e && e.stopPropagation) e.stopPropagation();
+    if (e?.stopPropagation) e.stopPropagation();
     setLightbox((prev) => {
       if (!prev) return null;
       const len = prev.images.length || 1;
@@ -60,7 +50,6 @@ export default function RestaurantPage() {
     });
   };
 
-  // ----- Hỗ trợ phím ← → Esc -----
   useEffect(() => {
     const handler = (ev) => {
       if (!lightbox) return;
@@ -70,10 +59,8 @@ export default function RestaurantPage() {
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightbox]);
 
-  // ------------------------- LAYOUT (GIỮ NGUYÊN) -------------------------
   return (
     <div className="w-full">
       {/* Hero */}
@@ -81,13 +68,13 @@ export default function RestaurantPage() {
         <ZoomableImage
           src={heroImages[0]}
           alt="Hero"
-          className="w-full h-[90vh] object-cover"
+          className="w-full h-[70vh] md:h-[90vh] object-cover"
           images={heroImages}
           idx={0}
         />
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-white bg-black/40">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-white bg-black/40 px-4 text-center">
           <motion.h1
-            className="text-5xl font-bold"
+            className="text-3xl md:text-5xl font-bold"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
@@ -95,7 +82,7 @@ export default function RestaurantPage() {
             NHÀ HÀNG CÁT TƯỜNG
           </motion.h1>
           <motion.p
-            className="text-xl mt-2"
+            className="text-lg md:text-xl mt-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
@@ -105,25 +92,25 @@ export default function RestaurantPage() {
         </div>
       </section>
 
-      {/* Buffet Chay */}
+      {/* Buffet */}
       <motion.section
-        className="bg-[#FAE6CC] py-16 text-center"
+        className="bg-[#FAE6CC] py-12 md:py-16 text-center px-4"
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl font-bold">BUFFET CHAY – NGÀY XANH LÁ</h2>
-        <p className="max-w-3xl mx-auto mt-4 text-lg leading-relaxed">
+        <h2 className="text-2xl md:text-4xl font-bold">BUFFET CHAY – NGÀY XANH LÁ</h2>
+        <p className="max-w-3xl mx-auto mt-4 text-base md:text-lg leading-relaxed">
           Nhà hàng Cát Tường với mong muốn lan tỏa văn hóa chay tới thực khách...
         </p>
-        <div className="grid grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 max-w-5xl mx-auto">
           {buffetImages.map((img, idx) => (
             <ZoomableImage
               key={idx}
               src={img}
               alt={`Buffet ${idx}`}
-              className="rounded-lg"
+              className="rounded-lg w-full object-cover"
               images={buffetImages}
               idx={idx}
             />
@@ -133,41 +120,43 @@ export default function RestaurantPage() {
 
       {/* Tráng miệng */}
       <motion.section
-        className="text-emerald-900 py-16 flex flex-wrap items-center justify-center"
+        className="text-emerald-900 py-12 md:py-16 flex flex-col md:flex-row items-center justify-center px-4"
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <div className="w-full md:w-1/2 px-10 flex justify-center">
+        <div className="w-full md:w-1/2 mb-6 md:mb-0 flex justify-center">
           <ZoomableImage
             src={dessertImages[0]}
             alt="Tráng miệng"
-            className="max-w-md w-full object-cover rounded-2xl"
+            className="w-full max-w-md object-cover rounded-2xl"
             images={dessertImages}
             idx={0}
           />
         </div>
-        <div className="w-full md:w-1/2 px-10">
-          <h2 className="text-4xl font-bold mb-6">TRÁNG MIỆNG & THỨC UỐNG</h2>
-          <p className="text-lg leading-relaxed">
+        <div className="w-full md:w-1/2 text-center md:text-left md:px-10">
+          <h2 className="text-2xl md:text-4xl font-bold mb-6">TRÁNG MIỆNG & THỨC UỐNG</h2>
+          <p className="text-base md:text-lg leading-relaxed">
             “Thức quả” gợi nhớ tuổi thơ, đong đầy “hương vị vượt thời gian”...
           </p>
         </div>
       </motion.section>
 
-      {/* Lẩu */}
+      {/* Lẩu (ĐÃ FIX) */}
       <motion.section
-        className="bg-[#FAE6CC] py-16 flex justify-center"
+        className="bg-[#FAE6CC] py-12 md:py-16 flex justify-center px-4"
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <div className="flex items-center gap-8 max-w-6xl w-full px-6">
-          <div className="max-w-lg">
-            <h2 className="text-4xl font-bold mb-6">LẨU</h2>
-            <ul className="space-y-6 text-lg">
+        {/* Bao bọc để giới hạn width và căn giữa */}
+        <div className="flex flex-col md:flex-row items-center gap-6 max-w-6xl w-full px-6">
+          {/* Text - giới hạn chiều rộng để không kéo xa ảnh */}
+          <div className="max-w-lg w-full md:w-1/2 text-center md:text-left">
+            <h2 className="text-2xl md:text-4xl font-bold mb-6">LẨU</h2>
+            <ul className="space-y-4 md:space-y-6 text-base md:text-lg">
               <li>
                 <span className="font-semibold">• Lẩu chay</span> <br />
                 Nấm các loại, rau củ các loại, đậu phụ, váng đậu, bún miến.
@@ -182,11 +171,13 @@ export default function RestaurantPage() {
               </li>
             </ul>
           </div>
-          <div className="flex-shrink-0">
+
+          {/* Image */}
+          <div className="w-full md:w-1/2 flex justify-center">
             <ZoomableImage
               src={lauImages[0]}
               alt="Lẩu"
-              className="rounded-l-[80px] max-w-md object-cover"
+              className="rounded-l-[40px] md:rounded-l-[80px] w-full max-w-md object-cover"
               images={lauImages}
               idx={0}
             />
@@ -196,24 +187,24 @@ export default function RestaurantPage() {
 
       {/* Mâm cơm */}
       <motion.section
-        className="py-16 flex flex-wrap items-center justify-center text-emerald-900"
+        className="py-12 md:py-16 flex flex-col md:flex-row items-center justify-center text-emerald-900 px-4"
         initial={{ opacity: 0, x: 100 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <div className="w-full md:w-1/2 px-10 flex justify-center">
+        <div className="w-full md:w-1/2 mb-6 md:mb-0 flex justify-center">
           <ZoomableImage
             src={mamComImages[0]}
-            alt="Mâm cơm đãi khách"
-            className="rounded-2xl max-w-md w-full object-cover"
+            alt="Mâm cơm"
+            className="rounded-2xl w-full max-w-md object-cover"
             images={mamComImages}
             idx={0}
           />
         </div>
-        <div className="w-full md:w-1/2 px-10">
-          <h2 className="text-4xl font-bold mb-6">MÂM CƠM ĐÃI KHÁCH</h2>
-          <p className="text-lg leading-relaxed">
+        <div className="w-full md:w-1/2 text-center md:text-left md:px-10">
+          <h2 className="text-2xl md:text-4xl font-bold mb-6">MÂM CƠM ĐÃI KHÁCH</h2>
+          <p className="text-base md:text-lg leading-relaxed">
             Trong miền kí ức mỗi người sẽ có định nghĩa mâm cơm tuổi thơ khác nhau...
           </p>
         </div>
@@ -221,19 +212,19 @@ export default function RestaurantPage() {
 
       {/* Thực đơn */}
       <motion.section
-        className="bg-[#FAE6CC] text-emerald-900 py-16 text-center"
+        className="bg-[#FAE6CC] text-emerald-900 py-12 md:py-16 text-center px-4"
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <h2 className="text-4xl font-bold">THỰC ĐƠN</h2>
-        <p className="mt-4 mb-[50px] text-lg">
-          Chỉ từ <span className="text-3xl">50.000 VND</span>
+        <h2 className="text-2xl md:text-4xl font-bold">THỰC ĐƠN</h2>
+        <p className="mt-4 mb-8 text-base md:text-lg">
+          Chỉ từ <span className="text-xl md:text-3xl">50.000 VND</span>
         </p>
         <a
           href="https://heyzine.com/flip-book/b84f7cb6c2.html#page/1"
-          className="border bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-[#E7000B] mt-[20px] hover:text-white transition"
+          className="border bg-emerald-900 text-white px-6 py-2 rounded-lg hover:bg-[#E7000B] hover:text-white transition"
           target="_blank"
         >
           MENU BOOK
@@ -242,24 +233,24 @@ export default function RestaurantPage() {
 
       {/* Liên hệ */}
       <motion.section
-        className="bg-gray-200 py-12 px-6 flex justify-center"
+        className="bg-gray-200 py-12 px-4 md:px-6 flex justify-center"
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <div className="flex flex-wrap w-full max-w-5xl">
-          <div className="w-full md:w-1/2 md:pr-6 flex flex-col justify-center">
-            <h2 className="text-3xl font-bold mb-4">LIÊN HỆ ĐẶT BÀN</h2>
+        <div className="flex flex-col md:flex-row w-full max-w-5xl gap-8">
+          <div className="w-full md:w-1/2 flex flex-col justify-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">LIÊN HỆ ĐẶT BÀN</h2>
             <p className="mb-2">Hotline: 0916 138 692</p>
             <p className="mb-2">Địa chỉ: Phường Tây hoa Lư , Ninh Bình </p>
           </div>
           <div className="w-full md:w-1/2">
             <form className="grid gap-3">
-              <input type="text" placeholder="Your name" className="p-3 border rounded-lg" />
-              <input type="text" placeholder="Your phone" className="p-3 border rounded-lg" />
-              <input type="email" placeholder="Your email" className="p-3 border rounded-lg" />
-              <textarea placeholder="Message" className="p-3 border rounded-lg h-28" />
+              <input type="text" placeholder="Your name" className="p-3 border rounded-lg w-full" />
+              <input type="text" placeholder="Your phone" className="p-3 border rounded-lg w-full" />
+              <input type="email" placeholder="Your email" className="p-3 border rounded-lg w-full" />
+              <textarea placeholder="Message" className="p-3 border rounded-lg h-28 w-full" />
               <button className="border px-6 py-2 rounded-lg hover:bg-emerald-900 hover:text-white transition">
                 Đặt ngay
               </button>
@@ -268,70 +259,63 @@ export default function RestaurantPage() {
         </div>
       </motion.section>
 
-     
+      {/* Lightbox */}
       <AnimatePresence>
-  {lightbox && lightbox.images && lightbox.images.length > 0 && (
-    <motion.div
-      className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      onClick={() => setLightbox(null)}
-    >
-      <div
-        className="relative flex items-center w-full h-full justify-center px-6"
-        onClick={(e) => e.stopPropagation()} // tránh click ảnh làm đóng
-      >
-        {/* Nút đóng */}
-        <button
-          className="absolute top-5 right-5 text-white text-3xl font-bold z-50"
-          onClick={() => setLightbox(null)}
-        >
-          ✕
-        </button>
-
-        {/* Prev */}
-        {lightbox.images.length > 1 && (
-          <button
-            className="absolute left-5 md:left-10 text-white text-4xl z-50"
-            onClick={showPrev}
-            aria-label="previous"
+        {lightbox && lightbox.images?.length > 0 && (
+          <motion.div
+            className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setLightbox(null)}
           >
-            ❮
-          </button>
+            <div
+              className="relative flex items-center w-full h-full justify-center px-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-5 right-5 text-white text-3xl font-bold z-50"
+                onClick={() => setLightbox(null)}
+              >
+                ✕
+              </button>
+
+              {lightbox.images.length > 1 && (
+                <button
+                  className="absolute left-5 md:left-10 text-white text-4xl z-50"
+                  onClick={showPrev}
+                  aria-label="previous"
+                >
+                  ❮
+                </button>
+              )}
+
+              <motion.img
+                key={`${lightbox.index}-${lightbox.images[lightbox.index]}`}
+                src={lightbox.images[lightbox.index]}
+                className="max-h-[90%] max-w-[90%] rounded-xl shadow-lg mx-auto"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.18 }}
+              />
+
+              {lightbox.images.length > 1 && (
+                <button
+                  className="absolute right-5 md:right-10 text-white text-4xl z-50"
+                  onClick={showNext}
+                  aria-label="next"
+                >
+                  ❯
+                </button>
+              )}
+            </div>
+            <div className="absolute bottom-5 text-white text-lg">
+              {lightbox.index + 1} / {lightbox.images.length}
+            </div>
+          </motion.div>
         )}
-
-        {/* Ảnh chính */}
-        <motion.img
-          key={`${lightbox.index}-${lightbox.images[lightbox.index]}`}
-          src={lightbox.images[lightbox.index]}
-          className="max-h-[90%] max-w-[90%] rounded-xl shadow-lg mx-auto"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.18 }}
-          onClick={(e) => e.stopPropagation()}
-        />
-
-        {/* Next */}
-        {lightbox.images.length > 1 && (
-          <button
-            className="absolute right-5 md:right-10 text-white text-4xl z-50"
-            onClick={showNext}
-            aria-label="next"
-          >
-            ❯
-          </button>
-        )}
-      </div>
-
-      {/* Page indicator */}
-      <div className="absolute bottom-5 text-white text-lg">
-        {lightbox.index + 1} / {lightbox.images.length}
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+      </AnimatePresence>
     </div>
   );
 }
