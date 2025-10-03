@@ -1,57 +1,162 @@
-import React from 'react';
-const placesData = [
-  { title: "Tam The Palace ", img: "images/tamthe/ĐIỆN TAM THẾ.jpg" },
-  { title: "Maitreya Buddha Statue", img: "https://vrtour.vn/assets/templates/places/03-bc2b388af21f918ccb3d7e1f1dcdbb7b4318466772f26a0dddf29c15e3fc8dcf.jpg" },
-  { title: "Arhat Corridor ", img: "https://cdn.baogialai.com.vn/images/5d93661b5836672daa8629aec90c6a0bf612943c151dbc9ed94825747e54d2ef1aab495fd4cb10a7c1c6b88f809ac76d8d7c137ec98562003490c77416036c7f/images2700509_12c.jpg" },
-  { title: "Eightfold Path", img: "/images/batchinhdao.JPG" },
-  { title: "Wind Chimes Cafe", img: "/images/cafechuonggio.JPG" },
-  { title: "Ancient Pagoda", img: "/images/chuaco.jpg" },
-  { title: "Stupa", img: "/images/baothap.JPG" },
-  { title: "Electric cars", img: "https://vcdn1-dulich.vnecdn.net/2025/02/07/xe-dien1-1736930491-1657-1738896489.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=rz6XC6Jvu6GsHiNyPnKrkQ" },
-  { title: "Buddha Relics", img: "https://nld.mediacdn.vn/zoom/700_438/291774122806476800/2025/5/20/49832383311645949290413943455401801062219134n-17475391273651256308037-0-0-1010-1616-crop-1747752265291503412795.jpg" },
-  { title: "hotel ", img: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/11/61/48/20171023-054359-hdr-largejpg.jpg?w=1000&h=-1&s=1" },
+"use client";
+import React, { useState } from "react";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import Link from "next/link";
+
+const places = [
+  { name: "# Introduction to Bai Dinh Pagoda #", link: "/vi/visit/45", image: '/images/DJI_0033.jpg' },
+  { name: "1. Tam Quan Gate", link: "http://qr.chuabaidinh.com.vn/locations/3", image: '/images/tamquan.jpg' },
+  { name: "2. La Han corridor", link: "http://qr.chuabaidinh.com.vn/locations/4", image: '/images/hanhlanglahan.png' },
+  { name: "3. Quan Am Palace", link: "http://qr.chuabaidinh.com.vn/locations/11", image: '/images/dienquanam1.jpg' },
+  { name: "4. Patriarch's Palace", link: "http://qr.chuabaidinh.com.vn/locations/10", image: '/images/diengiaochu.jpg' },
+  { name: "5. Wind chimes", link: "http://qr.chuabaidinh.com.vn/locations/26", image: '/images/gac-chuong.jpg' },
+  { name: "6. Tam The Palace", link: "http://qr.chuabaidinh.com.vn/locations/12", image: '/images/tamthe1.JPG' },
+  { name: "7. Ancient temple", link: "http://qr.chuabaidinh.com.vn/locations/17", image: '/images/chuaco.png' },
+  { name: "8. Stupa", link: "http://qr.chuabaidinh.com.vn/locations/6", image: '/images/baothap2.JPG' },
+  { name: "9. Eightfold path", link: "http://qr.chuabaidinh.com.vn/locations/16", image: '/images/batchinhdao.jpg'},
 ];
 
 const FamousPlacesen = () => {
+  const [hoverIndex, setHoverIndex] = useState(null);
   return (
-   <div className="max-w-[1200px]  mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-8 ">Places to Visit </h1>
+    <div className="w-full relative mt-[-60px] lg:mt-[-150px]">
+      <div className="bg-[#F1EBE5]/40 w-full">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
 
-      {/* Hàng 1 */}
-      <div className="flex gap-4 mb-4">
-        {/* Ô lớn bên trái */}
-        <div className="flex-1 relative overflow-hidden rounded-lg" style={{ height: "400px" }}>
-          <img src={placesData[0].img} alt={placesData[0].title} className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-white font-semibold">{placesData[0].title}</div>
-        </div>
+          {/* Tiêu đề */}
+          <h1 className="inline-block px-6 py-3 text-2xl font-bold w-full sm:w-[30%] text-[#0F7F3E] bg-gradient-to-r from-amber-200 to-stone-300 rounded-xl shadow-md">
+            TOUR ITINERARY
+          </h1>
 
-        {/* 4 ô nhỏ bên phải */}
-        <div className="flex-1 grid grid-cols-2 gap-4">
-          {placesData.slice(1, 5).map((place, idx) => (
-            <div key={idx} className="relative overflow-hidden rounded-lg" style={{ height: "195px" }}>
-              <img src={place.img} alt={place.title} className="w-full h-full object-cover" />
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">{place.title}</div>
+          {/* Hàng 1 */}
+          <div className="flex flex-col lg:flex-row gap-4">
+            {/* ảnh lớn */}
+            {places[0] && (
+              <Link
+                href={places[0].link}
+                target="_blank"
+                onMouseEnter={() => setHoverIndex(0)}
+                onMouseLeave={() => setHoverIndex(null)}
+                className={`flex-1 relative overflow-hidden rounded-lg w-full lg:h-[400px] transition-all duration-300 ${
+                  hoverIndex === 0 ? "ring-4 ring-red-500 scale-[1.02]" : ""
+                }`}
+              >
+                <img src={places[0].image} alt={places[0].name} className="w-full h-full object-cover" />
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-white font-semibold">
+                  {places[0].name}
+                </div>
+              </Link>
+            )}
+
+            {/* 4 ảnh nhỏ */}
+            <div className="flex-1 grid grid-cols-2 gap-2">
+              {places.slice(1, 5).map((place, idx) => (
+                <Link
+                  key={idx}
+                  href={place.link}
+                  target="_blank"
+                  onMouseEnter={() => setHoverIndex(idx+1)}
+                  onMouseLeave={() => setHoverIndex(null)}
+                  className={`relative overflow-hidden rounded-lg w-full h-40 sm:h-48 md:h-48 transition-all duration-300 ${
+                    hoverIndex === idx+1 ? "ring-4 ring-red-500 scale-[1.02]" : ""
+                  }`}
+                >
+                  <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
+                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">
+                    {place.name}
+                  </div>
+                </Link>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* Hàng 2 */}
-      <div className="flex gap-4">
-        {/* 4 ô nhỏ bên trái */}
-        <div className="flex-1 grid grid-cols-2 gap-4">
-          {placesData.slice(5, 9).map((place, idx) => (
-            <div key={idx} className="relative overflow-hidden rounded-lg" style={{ height: "195px" }}>
-              <img src={place.img} alt={place.title} className="w-full h-full object-cover" />
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">{place.title}</div>
+          {/* Hàng 2 */}
+          <div className="flex flex-col lg:flex-row gap-4 mt-4">
+            {/* 4 ảnh nhỏ */}
+            <div className="flex-1 grid grid-cols-2 gap-2">
+              {places.slice(5, 9).map((place, idx) => (
+                <Link
+                  key={idx}
+                  href={place.link}
+                  target="_blank"
+                  onMouseEnter={() => setHoverIndex(idx+5)}
+                  onMouseLeave={() => setHoverIndex(null)}
+                  className={`relative overflow-hidden rounded-lg w-full h-40 sm:h-48 md:h-48 transition-all duration-300 ${
+                    hoverIndex === idx+5 ? "ring-4 ring-red-500 scale-[1.02]" : ""
+                  }`}
+                >
+                  <img src={place.image} alt={place.name} className="w-full h-full object-cover" />
+                  <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-1 text-white text-sm font-semibold">
+                    {place.name}
+                  </div>
+                </Link>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Ô lớn bên phải */}
-        <div className="flex-1 relative overflow-hidden rounded-lg" style={{ height: "400px" }}>
-          <img src={placesData[9].img} alt={placesData[9].title} className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-white font-semibold">{placesData[9].title}</div>
+            {/* ảnh lớn */}
+            {places[9] && (
+              <Link
+                href={places[9].link}
+                target="_blank"
+                onMouseEnter={() => setHoverIndex(9)}
+                onMouseLeave={() => setHoverIndex(null)}
+                className={`flex-1 relative overflow-hidden rounded-lg w-full lg:h-[400px] transition-all duration-300 ${
+                  hoverIndex === 9 ? "ring-4 ring-red-500 scale-[1.02]" : ""
+                }`}
+              >
+                <img src={places[9].image} alt={places[9].name} className="w-full h-full object-cover" />
+                <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-white font-semibold">
+                  {places[9].name}
+                </div>
+              </Link>
+            )}
+          </div>
+
+          {/* Timeline sơ đồ */}
+          <div className="py-6">
+            <h2 className="inline-block px-6 py-3 text-xl sm:text-2xl lg:text-2xl font-bold w-full sm:w-[38%] text-[#0F7F3E] bg-gradient-to-r from-amber-200 to-stone-300 rounded-xl shadow-md mb-[3%]">
+              TOUR ROUTE MAP
+            </h2>
+
+            <div className="relative">
+              <div className="hidden sm:block absolute top-5 left-0 w-full h-1 bg-[#356D3D]"></div>
+
+              <div className="grid grid-cols-3 sm:flex sm:flex-row justify-between items-center gap-4 sm:gap-0 relative">
+                {places.slice(1, 10).map((step, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center"
+                    onMouseEnter={() => setHoverIndex(index+1)}
+                    onMouseLeave={() => setHoverIndex(null)}
+                  >
+                    <Link href={step.link} target="_blank">
+                      <div className="flex flex-col items-center cursor-pointer group">
+                        <div
+                          className={`flex items-center justify-center w-10 h-10 bg-white rounded-full border-4 z-10 transition-transform ${
+                            hoverIndex === index+1
+                              ? "border-red-500 scale-125"
+                              : "border-[#356D3D] group-hover:border-[#E7000B]"
+                          }`}
+                        >
+                          <FaMapMarkerAlt className="text-[#356D3D]" />
+                        </div>
+                        <p
+                          className={`mt-2 text-xs sm:text-sm md:text-sm font-semibold text-center truncate max-w-[100px] transition-all ${
+                            hoverIndex === index+1
+                              ? "text-[#E7000B] scale-110 max-w-[200px]"
+                              : "group-hover:text-[#E7000B]"
+                          }`}
+                        >
+                          {step.name}
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

@@ -48,11 +48,17 @@ const VisitTable = () => {
     setEditVisit(visit);
     setFormData({
       name: visit.name || "",
+      name_en: visit.name_en || "",
       title_1: visit.title_1 || "",
+      title_1_en: visit.title_1_en || "",
       title_2: visit.title_2 || "",
+      title_2_en: visit.title_2_en || "",
       title_3: visit.title_3 || "",
+      title_3_en: visit.title_3_en || "",
       title_4: visit.title_4 || "",
+      title_4_en: visit.title_4_en || "",
       title_5: visit.title_5 || "",
+      title_5_en: visit.title_5_en || "",
     });
     setUploadFiles({});
   };
@@ -84,7 +90,6 @@ const VisitTable = () => {
       });
 
       if (res.ok) {
-        // reload data
         const res2 = await fetch(`${API_URL}/api/visit`);
         const data = await res2.json();
         setVisits(data);
@@ -136,13 +141,13 @@ const VisitTable = () => {
                       src={`${API_URL}${item.images_1}`}
                       alt="visit"
                       className="w-20 h-16 object-cover rounded-lg border cursor-pointer hover:scale-105 transition"
-                      onClick={() => setSelectedVisit(item)} // chỉ show ảnh
+                      onClick={() => setSelectedVisit(item)}
                     />
                   )}
                 </td>
                 <td className="px-6 py-4 text-center flex justify-center gap-2">
                   <button
-                    onClick={() => openEditModal(item)} // mở modal edit
+                    onClick={() => openEditModal(item)}
                     className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 hover:text-blue-800 transition"
                   >
                     ✏️
@@ -172,11 +177,9 @@ const VisitTable = () => {
             </button>
             <h2 className="text-lg font-bold mb-4">{selectedVisit.name}</h2>
             <div className="grid grid-cols-3 gap-4">
-              {selectedVisit.images_1 && <img src={`${API_URL}${selectedVisit.images_1}`} alt="1" className="w-full h-40 object-cover rounded" />}
-              {selectedVisit.images_2 && <img src={`${API_URL}${selectedVisit.images_2}`} alt="2" className="w-full h-40 object-cover rounded" />}
-              {selectedVisit.image_3 && <img src={`${API_URL}${selectedVisit.image_3}`} alt="3" className="w-full h-40 object-cover rounded" />}
-              {selectedVisit.images_4 && <img src={`${API_URL}${selectedVisit.images_4}`} alt="4" className="w-full h-40 object-cover rounded" />}
-              {selectedVisit.images_5 && <img src={`${API_URL}${selectedVisit.images_5}`} alt="5" className="w-full h-40 object-cover rounded" />}
+              {["images_1","images_2","image_3","images_4","images_5"].map((field,key)=>(
+                selectedVisit[field] && <img key={key} src={`${API_URL}${selectedVisit[field]}`} alt={field} className="w-full h-40 object-cover rounded" />
+              ))}
             </div>
           </div>
         </div>
@@ -185,7 +188,7 @@ const VisitTable = () => {
       {/* Modal edit */}
       {editVisit && (
         <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg max-w-3xl w-full relative">
+          <div className="bg-white p-6 rounded-lg max-w-3xl w-full relative overflow-y-auto max-h-[90vh]">
             <button
               className="absolute top-2 right-2 text-gray-600 hover:text-red-600 text-xl"
               onClick={() => setEditVisit(null)}
@@ -194,63 +197,21 @@ const VisitTable = () => {
             </button>
             <h2 className="text-lg font-bold mb-4">Sửa điểm đến: {editVisit.name}</h2>
             <form onSubmit={handleEditSubmit} className="grid grid-cols-1 gap-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Tên điểm đến"
-                value={formData.name || ""}
-                onChange={handleInputChange}
-                className="border rounded px-3 py-2 w-full"
-                required
-              />
-              <input
-                type="text"
-                name="title_1"
-                placeholder="Tiêu đề 1"
-                value={formData.title_1 || ""}
-                onChange={handleInputChange}
-                className="border rounded px-3 py-2 w-full"
-              />
-              <input
-                type="text"
-                name="title_2"
-                placeholder="Tiêu đề 2"
-                value={formData.title_2 || ""}
-                onChange={handleInputChange}
-                className="border rounded px-3 py-2 w-full"
-              />
-              <input
-                type="text"
-                name="title_3"
-                placeholder="Tiêu đề 3"
-                value={formData.title_3 || ""}
-                onChange={handleInputChange}
-                className="border rounded px-3 py-2 w-full"
-              />
-              <input
-                type="text"
-                name="title_4"
-                placeholder="Tiêu đề 4"
-                value={formData.title_4 || ""}
-                onChange={handleInputChange}
-                className="border rounded px-3 py-2 w-full"
-              />
-              <input
-                type="text"
-                name="title_5"
-                placeholder="Tiêu đề 5"
-                value={formData.title_5 || ""}
-                onChange={handleInputChange}
-                className="border rounded px-3 py-2 w-full"
-              />
-
-              {/* File Upload */}
+              {["name","name_en","title_1","title_1_en","title_2","title_2_en","title_3","title_3_en","title_4","title_4_en","title_5","title_5_en"].map((field)=>(
+                <input
+                  key={field}
+                  type="text"
+                  name={field}
+                  placeholder={field}
+                  value={formData[field] || ""}
+                  onChange={handleInputChange}
+                  className="border rounded px-3 py-2 w-full"
+                />
+              ))}
               <div className="grid grid-cols-2 gap-4">
-                <input type="file" name="images_1" onChange={handleFileChange} />
-                <input type="file" name="images_2" onChange={handleFileChange} />
-                <input type="file" name="image_3" onChange={handleFileChange} />
-                <input type="file" name="images_4" onChange={handleFileChange} />
-                <input type="file" name="images_5" onChange={handleFileChange} />
+                {["images_1","images_2","image_3","images_4","images_5"].map((field)=>(
+                  <input key={field} type="file" name={field} onChange={handleFileChange} />
+                ))}
               </div>
 
               <div className="flex justify-end gap-2 mt-4">

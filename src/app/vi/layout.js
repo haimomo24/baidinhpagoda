@@ -20,7 +20,7 @@ export default function ViLayout({ children }) {
         <HeaderPageVi />
         {children}
         <FooterPage />
-        <FloatingButtons /> {/* 👈 gọi ra ở đây */}
+        <FloatingButtons /> 
       </body>
     </html>
   );

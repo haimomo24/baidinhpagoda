@@ -1,74 +1,336 @@
 "use client";
 
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
-import { Heart } from "lucide-react";
+import { SiTiktok } from "react-icons/si";
+import { ChevronDown, Check, Menu, X } from "lucide-react";
+import { Inter, Merriweather } from "next/font/google";
+import { SiZalo } from "react-icons/si";
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+// Font Inter: body
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+// Font Merriweather: menu & heading
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
 export default function HeaderPageEn() {
-  const lang = "en";
+  const router = useRouter();
+  const [lang, setLang] = useState("vi"); 
+  const [openLang, setOpenLang] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const menuItems = [
-    { name: "Destinations", link: "#" },
-    { name: "Experiences", link: "#" },
-    { name: "Plan", link: "#" },
-    { name: "News", link: "#" },
-    { name: "Blog", link: "#" },
+    { name: "HOME", link: "/en" },
+    { name: "NEWS", link: "#blogen" },
+    {
+      name: "SERVICE",
+      link: "#",
+      subMenu: [
+        { name: "Heritage journey", link: "/en/heritage-journey" },
+        { name: "Electric Cars", link: "/en/electric-car" },
+        { name: "Bai Dinh Night Tour", link: "/en/bai-dinh-night" },
+        { name: "Hotel", link: "/en/hotel" },
+        { name: "Restaurant", link: "/en/restaurant" },
+        { name: "Conference", link: "/en/conference" },
+      ],
+    },
+    { isLogo: true },
+    {
+      name: "EVENT",
+      subMenu: [
+        { name: "Retreat", link: "https://chuabaidinhninhbinh.com" },
+        { name: "Other events", link: "#sken" },
+      ],
+    },
+    {
+      name: "DESTINATION",
+      link: "#",
+      subMenu: [
+        { name: "Trang An", link: "https://trangandanhthang.vn/" },
+        { name: "Tam Chuc", link: "https://tamchuc.com.vn/" },
+        { name: "Hoa Lu Ancient Town", link: "https://www.phocohoalu.com/" },
+        { name: " Golf", link: "https://trangangolfandresort.com/" },
+        { name: "Tam Coc", link: "https://tamcocbichdong.vn/" },
+      ],
+    },
+    {
+      name: "CONTACT",
+      link: "#",
+      subMenu: [
+        { name: "Recruitment", link: "/vi/recruitment" },
+        { name: "Contact now", link: "/vi/contact" },
+      ],
+    },
   ];
 
   const languages = [
-    { code: "vi", label: "Tiếng Việt" },
-    { code: "en", label: "English" },
+    { code: "vi", label: "Vi" },
+    { code: "en", label: "Eng" },
   ];
 
+  // ✅ Sửa: chuyển ngôn ngữ
   const changeLang = (newLang) => {
-    if (newLang !== lang) {
-      window.location.href = `/${newLang}`;
+    setLang(newLang);
+    setOpenLang(false);
+    if (newLang === "vi") {
+      router.push("/vi");
+    } else {
+      router.push("/en");
     }
   };
 
   return (
-    <header className="w-full border-b shadow-sm font-sans bg-white">
-      {/* --- Main Navigation --- */}
-      <div className="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
-        {/* Logo */}
-        <div className="flex items-center gap-2 font-bold text-lg text-gray-900">
-          <img
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAllBMVEX///8VQC4AKw4ANiEAMRkMPCkAKQoANiARPiy3wLwAIwAALxYAMxwAJwSrtLA/W057i4OPnZYAOSXT2Nbi5eOAkIlZbmTCycZPZ1xfc2l0hX04VklkeG8AHwDx8/IAIQDo6+nV2tigq6YAAAAAGADK0M2yu7eJl5CWo51HYVUeRTQsTj8yUUJugHcAHAAAGQAAEgAADADAtUqfAAAKtklEQVR4nO2deXuyOhPGQyCAJGiJCy6VoucgarXneb//l3uzsATUtrY+VXrN/Zcg4vxMmJmsIgQCgUAgEAgEAoFAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBDo9yr6b3xvE/6qNjazPNq/txl/TasF9S3L8ulrdm9T/oqS55BbWjycpPc25/bahjbd7RUgmWIe5Pc26MaKCbOdDeKylloh6nHGvM29jbqhRjtRaE/ihV0QIpQHnC5W9zbsRkrmAce7kXxZE6J06vLwObmvabfRGguunn5tEIqau/d5uL2fYTdSvHd8y4mLowYhWlHLYqR3L9NuIlEVJdMFwiGV0bGowN3UOCAqPLxHKIJHMO/o45h6XhHh3ye0LA93sxh3ZQrzIaFFXu9l5Lf0YlWEpTe5RGiF6Z2M/I6SsLa/DO1NwjSoruhkNa0J+aE81yREU+9XEPp4ULnKFiHSwaTjhIwbIb1NiGLLUadw+uP2fV+KkIeRee6EULSqXOly6fBnjbuJEtci7dT6DCFKjiIv4MefNO022tiEHtol450hFPnpAPu4ayn4aIAJO23iMt8SjO7J+R4hzqFTrUWRkPrk5Gy2JwQfsHjrtD1x8IlqI3dEByaCxL51UrQziLPP0PBAyWl7YidydM/6KQO/q7VqFbXMHQfcpmv1csO8k/bEQLZCWIS6oRk/Iew7NjdqYR5yG6/NCxQh2f2Qhd/VCWH2Sok7NStmOgtFlY3rE5pw8GM2fk8tQknj84Km91p42MwivkHdZcIo4FVWlu4wwQuNlYh8jQflOE13CYcek8lb8QgubHlQxJHIVs17PYbRWcIkVFkMK4abdJ93oA96jmp6LFN50EFCbe2aWSahb2ZtmtDyVIiY8M4Rhgoq8j4k1DU4lu19sriPwVfrmVvkRbuQTxOi7Yuop7gb3Yoi/awGXT5PKIdv/E40opJZyOpWxRWESI25TR++FFPKAmMuwlWEcsyNuY/eYzMNGs2GKwlFAyQ4oIdW8qfZ9LuWUDrVxy7E9lN0PaEox79s4231FcJuqSQs2oINwk1B2O1JUlM9gBjo8JhidVR0jqa6y/iku6NTil1dTEUgn+jxNlK4y0gnrc768g0eXpaqlT7VDigrx2rKmW36bct9+Ch/UWURzvXhpBwyLQdEt3bnC/FSGRZZHdFvdyTfPquiEO1mIXb6ORy15o5+xpe2xvA3D967/6c5We1sxC/GLc7Gw3T6z88Y+mVtw2BuHJ4lxPrgXE4zDtyHTwDmgW1Mc76OcOOx8Pknjf2aMs+nr2VVvYZwNMA+jdu3e0Rl2CLBUUeAKwifAmJ1AxChV8HheQrx84SWHJE7HXN8TM1IFQNbhPwioYqN3eov1U2GFqF3kXDXvT5v3avfIrQvEnawVx8IgfCh9fsJj18l5LP7GHy1suUXCYOOpDQIrV/4+Xh4mVDEQ/LSlek0SLbysM9lV8VnCXu+jweP3Z3fVszV1MTPEcp5fk7nlrIlIo8Oj0/8Q0JylPP8vA72RkkAXvQfvkdoEV5f0CkV3U4fE6pT3XoGtRIXCIHw0WWsCvqlhKhcD/MZwpf7mfkNRfjThLSjI915wD9F2KlZ+k2l5cqt9wi7vRAYZXu1cusdQuZ3psl0QWtsv0P4Gxbkyy0VvH+L7VoahKs/dvA7NlVAq3FzpXNBiLJxF9fkva8m4W8UEHZfztkVlr9JE7mqjXWl3/dLygO7uyna55TOu5yigUAgEAgEAoFAIBAIBAKBQI+n0XC4uvO4U3/c1FOWPVUH23NL6IbzevLdfDzO+41+w9W8Hins7wIcBsELO178k4RxvT4sFt+7bQ6jRkWfZHaclzpeOxC5oMwNAtcWooHU//obK5CHXrBchg5m47T1kYHDqtev1LVZYK7Sit+m5StOiedO5/Mpdt1F+y5aWeBWM902/pJ5lJk/xuFNj8sFNq/0dt1fSqxCe9HPsg2Tq3gzqViYkslOeW+VjtYe8b3lpvURixpbRmzFR9m0Po7diX4RBb5VjvxuGHfPIk64uXlysvctf2kQLFxNWE3Zsf1r10xlrjJOzr6zjeKXq3pUQSVyBdNboxrKfXfMEQm5PoYZda0g3LqWFVbGpMw7tyXNSJiODaK+XBRl7OJaEop7ESoU5Idrl71lelx6JAmNuclyNrajXunSNT6htj0OR81rrXrTzoJw9SLuaCyi7OFzmyXOubi7UcdjWXkIqVxTTVja8Ho14T+j9wll6TZ2Q8jVRmVP5rVyKC0oK25BuCCt8cMze30WE8aC2tcqQotX20iZhMP1et3PvWtraaLvcJlQGWGaitVs2bBxrZp/vzIJh26r6FF+Zt1vpHZz9+ovjulerm3zytUKBuFT7jKGxS/wtbWL75Sh21wuuMYzOeO53OJDXkuzvbjcdxKDcGwbO7TrrzgzO9ihPWGy79WE7mwt55DR/IRwHNkWz6Ory/BDQvUcGk7CdzPpHoyKO3BXqZwSRfYG4au4wXnvaaiPB2rpfu2aY+H45rIU9R5pBiF5PlKbsdHVnuYjwoRI/137lR5+LZ6xygMOhBWZdD98VxOGnxnk3uMYxdhcJCQJ9T79L1mLcBAJ5Tcl9BIRDxmx7MAMUFj8uLJq8YlJiPoSiR1LQvX00taXpKtmrI5d6V5FCKx3q1eESFV65a7N51BfcbUvfYfQf3Mx8/3Q3ER2GKooyYRVQWoSojEtYsYFwuSJui9NZzNVe7euzXCkCVP5h1g+T5rxEAv921vckJDkzsma5GeqLpK7WXrlHzlpQjSxdcyoa2kjWPiebzf3GBiF6gI1iTpMTEI0VJX+0CDUcx/jWxIylLOG05TRXm9PIq3ynSahci4iZmSKUG52Yj6HcoFzKyAeC4dpuuaCEG3kL+RNGmXoCbH9jaOFTN5Co5KO2S7uCYlfUry/aRImnqpbfSoJ5cI9c073lIi3Gl+ZhN5a3iyWm9eU27yWhCiSlZ5Gu9rT7NZboVv7UpFqNZKqkDDV/gjkg1huYFkSqiRTBDflg+JWaN6RdoWPbNtV98LSdeK4SYiemcqz8beztvcJ1aYsYeUB13S3jZS2crMBd9Uk1Dt3Fl5WFL/53E1PCKmT63tFc7tyzTUhGqiZ1bSO+POQ0mX/ls+hJJRpdh3ceVjNouzXiUBNiFQ+oo3d4Ea1PCHs43rHa1kj9N+zGITIJw3CYz/g/N+VdeuIr5xN0W7oYWNj1bDygAahykeK4hC+1dhU6IRw79aGSjfkjduEKlGqCEVqt57MYuHjbp21SQ9ZhPwDNhq+kVOGMZMQTXmVCxzsOpKfEMauueMQ9osczyRUiVJFWPwEIsm7NWEishrflWhZ2CiEBStahQ1CkY9U2c4U+2FZiiLR42Z8HGCz4yB+8y3ymrYIZaJE6zY+W0T5nn85Wrx5nmsQHhyPFeEs3VNCXCtB02VzJ6vngNnYydDhP5MwcZzKyD51MDtG0dMulJ05RvAY/nGQqdijnvc2EaiN/ejHOCj6aWQHjU2p7K5ZfumvP5N8u42M32YdiePK0On+MEuSvP1vlGn/6TgfoXWemmdXZmdYf+ouhV7sybrRpdiL2gURR0fxwVHe/BXzo/5Z4tlzqdnDLZNOR6P0d0zUB4FAIBAIBAKBQCAQCAQCgUAgEAgEAoFAIBAIBAKBQCAQ6Ar9H9mAvgCWeMPOAAAAAElFTkSuQmCC"
-            alt="Trang An Group"
-            className="h-[70px] w-[70px]"
-          />
-        </div>
-
-        {/* Menu */}
-        <nav className="flex gap-6 text-base font-semibold text-gray-900">
+    <header
+      style={{
+        backgroundImage:
+          'url("https://png.pngtree.com/thumb_back/fh260/background/20210827/pngtree-color-block-texture-watercolor-smudge-beige-background-image_770429.jpg")',
+        backgroundSize: "100% 100%",
+        backgroundPosition: "center",
+      }}
+      className={`w-full h-[100px] ${inter.className} md:sticky md:top-0 md:z-50`}
+    >
+      <div className="flex flex-col px-4 py-2 max-w-7xl mx-auto">
+        {/* Menu desktop */}
+        <nav
+          className={`hidden mt-[10px] md:flex justify-center gap-15 text-[17px] font-semibold text-[#176734] relative ${merriweather.className}`}
+        >
           {menuItems.map((item, idx) => (
-            <a
-              key={idx}
-              href={item.link}
-              className="hover:text-red-600 transition-colors"
-            >
-              {item.name}
-            </a>
+            <div key={idx} className="relative group flex items-center">
+              {item.isLogo ? (
+                <div className="relative w-[60px] h-[60px] perspective-1000 mx-auto">
+                  <div className="absolute inset-0 animate-flipLogo preserve-3d">
+                    <img
+                      src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
+                      alt="Logo Front"
+                      className="absolute inset-0 h-full w-full object-contain backface-hidden"
+                    />
+                    <img
+                      src="/images/log di san the gioi-01.svg"
+                      alt="Logo Back"
+                      className="absolute inset-0 h-full w-full object-contain backface-hidden rotate-y-180"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <a
+                    href={item.link}
+                    className="inline-block cursor-pointer transition-all duration-300 transform hover:text-red-600 hover:scale-110"
+                  >
+                    {item.name}
+                  </a>
+                  {item.subMenu && (
+                    <div className="absolute left-0 top-full hidden group-hover:block bg-white rounded-xl shadow-lg min-w-[200px] z-50 animate-fadeIn">
+                      {item.subMenu.map((sub, i) => (
+                        <a
+                          key={i}
+                          href={sub.link}
+                          className="block px-4 py-2 text-sm text-[#0F7F3E] rounded-md hover:bg-red-50 hover:text-red-600 transition-colors"
+                        >
+                          {sub.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           ))}
         </nav>
 
-        {/* Icons + Language */}
-        <div className="flex items-center gap-4">
-          <FaFacebookF className="w-4 h-4 cursor-pointer hover:text-blue-600" />
-          <FaInstagram className="w-4 h-4 cursor-pointer hover:text-pink-600" />
-          <FaYoutube className="w-4 h-4 cursor-pointer hover:text-red-600" />
-          <Heart className="w-5 h-5 cursor-pointer hover:text-red-600" />
+        {/* Mobile top bar: [Menu] [Logo] [Lang] */}
+        <div className="flex md:hidden mt-[15px] justify-between items-center">
+          <button onClick={() => setOpenMenu(!openMenu)} className="p-2 z-20">
+            {openMenu ? <X size={28} /> : <Menu size={28} />}
+          </button>
 
-          <select
-            value={lang}
-            onChange={(e) => changeLang(e.target.value)}
-            className="border rounded px-2 py-1 text-sm cursor-pointer"
+          {/* Logo */}
+          <div className="relative w-[50px] h-[50px] perspective-1000 mx-auto">
+            <div className="absolute inset-0 animate-flipLogo preserve-3d">
+              <img
+                src="/images/e14e901b-87a0-4313-8cfd-0854c8d8e9de.svg"
+                alt="Logo Front"
+                className="absolute inset-0 h-full w-full object-contain backface-hidden"
+              />
+              <img
+                src="/images/log di san the gioi-01.svg"
+                alt="Logo Back"
+                className="absolute inset-0 h-full w-full object-contain backface-hidden rotate-y-180"
+              />
+            </div>
+          </div>
+
+          {/* Language mobile */}
+          <div className="relative z-20">
+            <button
+              onClick={() => setOpenLang(!openLang)}
+              className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded-full bg-white text-sm font-medium text-gray-700"
+            >
+              {languages.find((l) => l.code === lang)?.label}
+              <ChevronDown
+                className={`w-4 h-4 text-gray-500 transition-transform ${
+                  openLang ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {openLang && (
+              <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+                {languages.map((l) => (
+                  <div
+                    key={l.code}
+                    onClick={() => changeLang(l.code)}
+                    className={`px-3 py-2 text-sm cursor-pointer flex items-center justify-between rounded-md hover:bg-red-50 hover:text-red-600 ${
+                      lang === l.code
+                        ? "text-red-600 font-semibold"
+                        : "text-gray-700"
+                    }`}
+                  >
+                    {l.label}
+                    {lang === l.code && <Check className="w-4 h-4" />}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Mobile menu + icon dưới cùng */}
+        {openMenu && (
+          <div className="md:hidden bg-[#FFFFFF] space-y-2 text-gray-800 font-medium z-100">
+            {menuItems.map((item, idx) => {
+              if (item.isLogo) return null;
+              return (
+                <div key={idx}>
+                  <a
+                    href={item.link}
+                    className="block px-3 py-2 rounded hover:bg-red-50 hover:text-red-600"
+                  >
+                    {item.name}
+                  </a>
+                  {item.subMenu && (
+                    <div className="ml-4 space-y-1">
+                      {item.subMenu.map((sub, i) => (
+                        <a
+                          key={i}
+                          href={sub.link}
+                          className="block px-3 py-1 text-sm text-gray-600 rounded hover:bg-gray-50 hover:text-red-600"
+                        >
+                          {sub.name}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
+            {/* Icon dưới cùng mobile */}
+            <div className="flex items-center gap-2 justify-center">
+              <Link
+                href="https://www.facebook.com/chuabaidinh35"
+                className="p-2 rounded-full border border-gray-200"
+              >
+                <FaFacebookF className="w-4 h-4 text-blue-600" />
+              </Link>
+              <Link
+                href="https://www.instagram.com/baidinhpagoda/"
+                className="p-2 rounded-full border border-gray-200"
+              >
+                <FaInstagram className="w-4 h-4 text-pink-600" />
+              </Link>
+              <button className="p-2 rounded-full border border-gray-200">
+                <SiZalo className="w-5 h-5 text-blue-600" />
+              </button>
+              <Link
+                href="https://youtube.com/@baidinhpagoda?si=KOZ7yP9cqIXn-5Ao"
+                className="p-2 rounded-full border border-gray-200"
+              >
+                <FaYoutube className="w-4 h-4 text-red-600" />
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Desktop icon + ngôn ngữ */}
+      <div className="hidden mt-[-40px] mr-[2%] md:flex justify-end gap-4">
+        <div className="flex items-center gap-3">
+          {/* Các icon mạng xã hội giống code gốc */}
+          <Link
+            href="https://www.facebook.com/chuabaidinh35"
+            className="p-2 rounded-full"
           >
-            {languages.map((l) => (
-              <option key={l.code} value={l.code}>
-                {l.label}
-              </option>
-            ))}
-          </select>
+            <FaFacebookF className="w-3 h-3 text-blue-600" />
+          </Link>
+          <Link
+            href="https://www.tiktok.com/@chuabaidinh35?lang=vi-VN"
+            className="p-2 rounded-full"
+          >
+            <SiTiktok className="w-3 h-3 hover:text-black" />
+          </Link>
+          <Link
+            href="https://www.instagram.com/baidinhpagoda/"
+            className="p-2 rounded-full border border-gray-200"
+          >
+            <FaInstagram className="w-3 h-3 text-pink-600" />
+          </Link>
+          <Link
+            href="https://zalo.me/0913899135"
+            className="p-2 rounded-full border border-gray-200"
+          >
+            <img
+              src="/images/7044033_zalo_icon.png"
+              alt="Logo Front"
+              className="w-3 h-3 object-contain"
+            />
+          </Link>
+          <Link
+            href="https://youtube.com/@baidinhpagoda"
+            className="p-2 rounded-full border border-gray-200"
+          >
+            <FaYoutube className="w-3 h-3 text-red-600" />
+          </Link>
+        </div>
+
+        {/* Language desktop */}
+        <div className="relative mt-[10px]">
+          <button
+            onClick={() => setOpenLang(!openLang)}
+            className="flex items-center gap-1 px-3 py-1.5 border border-gray-300 rounded-full bg-white text-sm font-medium text-gray-700"
+          >
+            {languages.find((l) => l.code === lang)?.label}
+            <ChevronDown
+              className={`w-4 h-4 text-gray-500 transition-transform ${
+                openLang ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+          {openLang && (
+            <div className="absolute right-0 mt-2 w-36 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+              {languages.map((l) => (
+                <div
+                  key={l.code}
+                  onClick={() => changeLang(l.code)}
+                  className={`px-3 py-2 text-sm cursor-pointer flex items-center justify-between rounded-md hover:bg-red-50 hover:text-red-600 ${
+                    lang === l.code
+                      ? "text-red-600 font-semibold"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {l.label}
+                  {lang === l.code && <Check className="w-4 h-4" />}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </header>

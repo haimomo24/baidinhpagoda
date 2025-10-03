@@ -51,10 +51,15 @@ const KhuyenMai = () => {
       const formDataToSend = new FormData();
       formDataToSend.append("name", formData.name || "");
       formDataToSend.append("description", formData.description || "");
+      formDataToSend.append("title", formData.title || "");
       formDataToSend.append("unit", formData.unit || "");
       formDataToSend.append("price_1", formData.price_1 || "");
       formDataToSend.append("price_2", formData.price_2 || "");
-      formDataToSend.append("title", formData.title || "");
+
+      // Thêm các trường tiếng Anh
+      formDataToSend.append("name_en", formData.name_en || "");
+      formDataToSend.append("description_en", formData.description_en || "");
+      formDataToSend.append("title_en", formData.title_en || "");
 
       // Nếu người dùng upload file ảnh mới thì thêm vào
       if (formData.image instanceof File) {
@@ -62,7 +67,7 @@ const KhuyenMai = () => {
       }
 
       const res = await fetch(
-        `http://localhost:4000/api/promotion/${editItem.id}`,
+        `http://113.160.202.187:1989/api/promotion/${editItem.id}`,
         {
           method: "PUT",
           body: formDataToSend,
@@ -119,12 +124,12 @@ const KhuyenMai = () => {
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
             <th className="px-6 py-3">ID</th>
-            <th className="px-6 py-3">Tên sản phẩm</th>
-            <th className="px-6 py-3">Chú thích</th>
+            <th className="px-6 py-3">Tên sản phẩm (VN)</th>
+            <th className="px-6 py-3">Chú thích (VN)</th>
             <th className="px-6 py-3">Đơn vị</th>
             <th className="px-6 py-3">Giá công bố</th>
             <th className="px-6 py-3">Giá bán</th>
-            <th className="px-6 py-3">Diễn giải</th>
+            <th className="px-6 py-3">Diễn giải (VN)</th>
             <th className="px-6 py-3">Hình ảnh</th>
             <th className="px-6 py-3">Action</th>
           </tr>
@@ -211,20 +216,50 @@ const KhuyenMai = () => {
             </button>
             <h2 className="text-lg font-bold mb-4">Sửa khuyến mãi</h2>
             <div className="space-y-3">
+              {/* VN */}
               <input
                 type="text"
                 className="w-full border p-2 rounded"
                 value={formData.name || ""}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Tên sản phẩm"
+                placeholder="Tên sản phẩm (VN)"
               />
               <input
                 type="text"
                 className="w-full border p-2 rounded"
                 value={formData.description || ""}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                placeholder="Chú thích"
+                placeholder="Chú thích (VN)"
               />
+              <textarea
+                className="w-full border p-2 rounded"
+                value={formData.title || ""}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                placeholder="Diễn giải (VN)"
+              />
+
+              {/* EN */}
+              <input
+                type="text"
+                className="w-full border p-2 rounded"
+                value={formData.name_en || ""}
+                onChange={(e) => setFormData({ ...formData, name_en: e.target.value })}
+                placeholder="Tên sản phẩm (EN)"
+              />
+              <input
+                type="text"
+                className="w-full border p-2 rounded"
+                value={formData.description_en || ""}
+                onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
+                placeholder="Chú thích (EN)"
+              />
+              <textarea
+                className="w-full border p-2 rounded"
+                value={formData.title_en || ""}
+                onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
+                placeholder="Diễn giải (EN)"
+              />
+
               <input
                 type="text"
                 className="w-full border p-2 rounded"
@@ -245,12 +280,6 @@ const KhuyenMai = () => {
                 value={formData.price_2 || ""}
                 onChange={(e) => setFormData({ ...formData, price_2: e.target.value })}
                 placeholder="Giá bán"
-              />
-              <textarea
-                className="w-full border p-2 rounded"
-                value={formData.title || ""}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                placeholder="Diễn giải"
               />
 
               {/* input ảnh mới */}
