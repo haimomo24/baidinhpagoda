@@ -65,8 +65,8 @@ export default function HeaderPageEn() {
       name: "CONTACT",
       link: "#",
       subMenu: [
-        { name: "Recruitment", link: "/vi/recruitment" },
-        { name: "Contact now", link: "/vi/contact" },
+        { name: "Recruitment", link: "/en/recruitment" },
+        { name: "Contact now", link: "/en/contact" },
       ],
     },
   ];

@@ -79,7 +79,7 @@ const RestaurantPageen = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
               >
-                NHÀ HÀNG CÁT TƯỜNG
+                 CAT TUONG RESTAURANT
               </motion.h1>
               <motion.p
                 className="text-lg md:text-xl mt-2"
@@ -87,7 +87,7 @@ const RestaurantPageen = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
               >
-                CAT TUONG RESTAURANT
+                NHÀ HÀNG CÁT TƯỜNG
               </motion.p>
             </div>
           </section>

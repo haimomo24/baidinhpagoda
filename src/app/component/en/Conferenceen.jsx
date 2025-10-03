@@ -78,7 +78,7 @@ const Conferenceen = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
               >
-                PHÒNG HỘI NGHỊ
+                CONFERENCE ROOM
               </motion.h1>
               <motion.p
                 className="text-lg md:text-xl mt-2"
@@ -86,7 +86,7 @@ const Conferenceen = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
               >
-                CONFERENCE ROOM
+                 PHÒNG HỘI NGHỊ
               </motion.p>
             </div>
           </section>

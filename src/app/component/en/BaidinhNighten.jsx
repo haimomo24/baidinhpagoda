@@ -76,7 +76,7 @@ const BaidinhNighten = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 1 }}
               >
-                BÁI ĐÍNH VỀ ĐÊM
+                 BAIDINH NIGHT TOUR
               </motion.h1>
               <motion.p
                 className="text-lg md:text-xl mt-2"
@@ -84,7 +84,7 @@ const BaidinhNighten = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
               >
-                BAIDINH NIGHT TOUR
+                BÁI ĐÍNH VỀ ĐÊM
               </motion.p>
             </div>
           </section>
