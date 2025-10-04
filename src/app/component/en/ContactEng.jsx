@@ -112,7 +112,7 @@ const ContactEng = () => {
           {/* Contact Information */}
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-6">Thông tin liên hệ</h2>
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">Contact information</h2>
               
               <div className="">
                 <div className="flex items-start space-x-4">
@@ -123,8 +123,8 @@ const ContactEng = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800">Địa chỉ</h3>
-                    <p className="text-gray-600"> Phường Tây Hoa Lư, Ninh Bình, Việt Nam</p>
+                    <h3 className="text-lg font-semibold text-gray-800"> Address:</h3>
+                    <p className="text-gray-600"> Tay Hoa Lu Ward, Ninh Binh </p>
                   </div>
                 </div>
 
@@ -135,7 +135,7 @@ const ContactEng = () => {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800">Điện thoại</h3>
+                    <h3 className="text-lg font-semibold text-gray-800">phone</h3>
                     <p className="text-gray-600">
                       <a href="tel:+842293781999" className="hover:text-blue-600">
                       1900.966.909
@@ -167,7 +167,7 @@ const ContactEng = () => {
 
             {/* Contact Form */}
             <div className="bg-gray-100 h-[530px] p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold  mb-6">Thông điệp </h3>
+              <h3 className="text-2xl font-bold  mb-6">Message</h3>
               
               {/* Status Messages */}
               {submitStatus && (
@@ -208,7 +208,7 @@ const ContactEng = () => {
                     name="fullname"
                     value={formData.fullname}
                     onChange={handleInputChange}
-                    placeholder="Họ và tên *"
+                    placeholder="Name *"
                     required
                     disabled={isSubmitting}
                     className="w-full px-4 py-3 border  border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
@@ -229,7 +229,7 @@ const ContactEng = () => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  placeholder="Số điện thoại"
+                  placeholder="phone"
                   disabled={isSubmitting}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
@@ -238,7 +238,7 @@ const ContactEng = () => {
                   value={formData.message}
                   onChange={handleInputChange}
                   rows="4"
-                  placeholder="Lời nhắn - thông điệp bạn muốn gửi đến "
+                  placeholder="Message "
                   required
                   disabled={isSubmitting}
                   className="w-full h-[230px] px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
@@ -262,7 +262,7 @@ const ContactEng = () => {
                         Đang gửi...
                       </div>
                     ) : (
-                      'Gửi '
+                      'send '
                     )}
                   </button>
                     </div> 
@@ -274,7 +274,7 @@ const ContactEng = () => {
             {/* Google Maps */}
             <div className="space-y-6">
               <div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Vị trí</h2>
+                <h2 className="text-3xl font-bold text-gray-800 mb-6">Location</h2>
                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                   <div className="h-96 lg:h-[600px]">
                     <iframe
@@ -301,7 +301,7 @@ const ContactEng = () => {
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         </svg>
-                        Chỉ đường
+                        Directions
                       </a>
                       <button 
                         onClick={() => {
