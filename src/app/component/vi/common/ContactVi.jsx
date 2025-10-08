@@ -163,7 +163,7 @@ const ContactVi = () => {
                   ></iframe>
                 </div>
                 <div className="p-6">
-                  <h4 className="text-lg font-semibold text-gray-800 mb-2">Khách xá Bái Đính</h4>
+                  <h4 className="text-lg font-semibold text-gray-800 mb-2">Chùa Bái Đính</h4>
                   <p className="text-gray-600 mb-4">Phường tây Hoa Lư Ninh Bình</p>
                   <div className="flex flex-wrap gap-4">
                     <a
