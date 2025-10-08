@@ -113,7 +113,7 @@ const ImageMapen = () => {
             </h1>
 
             <div
-              onClick={() => router.push(`/vi/visit/${currentRegion.id}`)} 
+              onClick={() => router.push(`/en/visit/${currentRegion.id}`)} 
               className="bg-white rounded-lg shadow-xl p-3 sm:p-4 relative flex-1 flex flex-col cursor-pointer hover:shadow-2xl transition"
             >
               {/* Navigation */}

@@ -1,10 +1,13 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // ✅ import router
 
 // URL backend
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1989";
 
 const VisiteDashboard = () => {
+  const router = useRouter(); // ✅ khởi tạo router
+
   const [formData, setFormData] = useState({
     mainTitle: "",
     title1: "",
@@ -78,24 +81,8 @@ const VisiteDashboard = () => {
       const result = await res.json();
       if (res.ok) {
         alert("✅ Bài review đã được tạo!");
-        setFormData({
-          mainTitle: "",
-          title1: "",
-          image1: null,
-          image1Preview: null,
-          title2: "",
-          image2: null,
-          image2Preview: null,
-          title3: "",
-          image3: null,
-          image3Preview: null,
-          title4: "",
-          image4: null,
-          image4Preview: null,
-          title5: "",
-          image5: null,
-          image5Preview: null,
-        });
+        // ✅ Chuyển hướng về trang /dashboard/diemden
+        router.push("/dashboard/diemden");
       } else {
         alert("❌ Lỗi: " + result.error);
       }

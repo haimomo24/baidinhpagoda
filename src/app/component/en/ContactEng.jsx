@@ -273,76 +273,90 @@ const ContactEng = () => {
   
             {/* Google Maps */}
             <div className="space-y-6">
-              <div>
-                <h2 className="text-3xl font-bold text-gray-800 mb-6">Location</h2>
-                <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                  <div className="h-96 lg:h-[600px]">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.8234567890123!2d105.8637726!3d20.2736257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31367ea560375713%3A0xab30ab2390bc9816!2sBai%20Dinh%20Hotel!5e0!3m2!1svi!2s!4v1704123456789!5m2!1svi!2s"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen=""
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      title="Bai Dinh Hotel Location"
-                    ></iframe>
-                  </div>
-                  <div className="p-6">
-                    <h4 className="text-lg font-semibold text-gray-800 mb-2">Bai Dinh Guest House</h4>
-                    <p className="text-gray-600 mb-4">Address: Tay Hoa Lu Ward, Ninh Binh</p>
-                    <div className="flex flex-wrap gap-4">
-                      <a
-                        href="https://www.google.com/maps/place/Bai+Dinh+Hotel/@20.2736257,105.8637726,1066m/data=!3m1!1e3!4m9!3m8!1s0x31367ea560375713:0xab30ab2390bc9816!5m2!4m1!1i2!8m2!3d20.2736257!4d105.8663475!16s%2Fg%2F11b6c__yy7"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center px-4 py-2  bg-[#356D3D] text-white rounded-lg hover: bg-[#356D3D] transition duration-300"
-                      >
-                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        </svg>
-                        Directions
-                      </a>
-                      <button 
-                        onClick={() => {
-                          navigator.clipboard.writeText('Gia Sinh, Gia Viễn, Ninh Bình, Việt Nam')
-                          alert('Đã sao chép địa chỉ!')
-                        }}
-                        className="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-300"
-                      >
-                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                        </svg>
-                        Copy address
-                      </button>
-                    </div>
-                  </div>
-                </div>
-  
-                {/* Additional Info */}
-                <div className="bg-white p-6 rounded-xl shadow-lg">
-                  <h4 className="text-xl font-semibold text-gray-800 mb-4">More information</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="font-medium text-gray-700">Located in Bai Dinh Pagoda</span>
-                      
-                    </div>
-                    <div>
-                      <span className="font-medium text-gray-700">From Noi Bai Airport:</span>
-                      <p className="text-gray-600">About 2 hours drive</p>
-                    </div>
-                    <div>
-                      <span className="font-medium text-gray-700">From Hanoi center:</span>
-                      <p className="text-gray-600">About 100km</p>
-                    </div>
-                    <div>
-                      <span className="font-medium text-gray-700">Parking lot:</span>
-                      <p className="text-gray-600">Free of charge</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div>
+    <h2 className="text-3xl font-bold text-gray-800 mb-6">Location</h2>
+    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="h-96 lg:h-[600px]">
+       <iframe
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3728.982188501509!2d105.86445!3d20.274387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31367e8d5a7b4d03%3A0xd42d9d8d02f5ab26!2zQ2jDuWEgQsOjaSDEkMOsbmgsIEdpYSBWaeG7h24sIE5pbmggQsOsbmgsIFZpZXRuYW0!5e0!3m2!1svi!2s!4v1738981234567!5m2!1svi!2s"
+  width="100%"
+  height="100%"
+  style={{ border: 0 }}
+  allowFullScreen=""
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+  title="Chùa Bái Đính Location"
+/>
+
+      </div>
+
+      <div className="p-6">
+        <h4 className="text-lg font-semibold text-gray-800 mb-2">Bai Dinh Pagoda</h4>
+        <p className="text-gray-600 mb-4"> Tay Hoa Lu Ward, Ninh Binh</p>
+
+        <div className="flex flex-wrap gap-4">
+          <a
+            href="https://www.google.com/maps/place/Ch%C3%B9a+B%C3%A1i+%C4%90%C3%ADnh/@20.2505559,105.8498282,15z/data=!4m6!3m5!1s0x31367c8795b84b5b:0x5c91b4760d2834b3!8m2!3d20.2505559!4d105.8498282!16s%2Fm%2F0h9gkx2"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-4 py-2 bg-[#356D3D] text-white rounded-lg hover:bg-[#2e5d34] transition duration-300"
+          >
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+            </svg>
+            Directions
+          </a>
+
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText('Chùa Bái Đính, Xã Gia Sinh, Huyện Gia Viễn, Ninh Bình, Việt Nam');
+              alert('Đã sao chép địa chỉ!');
+            }}
+            className="inline-flex items-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-300"
+          >
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+            Copy address
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {/* Additional Info */}
+    <div className="bg-white p-6 rounded-xl shadow-lg">
+      <h4 className="text-xl font-semibold text-gray-800 mb-4">More information</h4>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        <div>
+          <span className="font-medium text-gray-700">Located at: Bai Dinh Pagoda</span>
+        </div>
+        <div>
+          <span className="font-medium text-gray-700">From Noi Bai Airport:</span>
+          <p className="text-gray-600">About 2 hours drive</p>
+        </div>
+        <div>
+          <span className="font-medium text-gray-700">From Hanoi center:</span>
+          <p className="text-gray-600">Khoảng 100 km</p>
+        </div>
+        <div>
+          <span className="font-medium text-gray-700">Parking lot:</span>
+          <p className="text-gray-600">Free of charge</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>

@@ -5,7 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const BaidinhNighten = () => {
     const [lightbox, setLightbox] = useState(null);
-    
+    const [formData, setFormData] = useState({
+        name: "",
+        phone: "",
+        email: "",
+        message: "",
+      });
+      const [loading, setLoading] = useState(false);
       const heroImages = ["/images/IMG_6855.JPG"];
       const nightImages = [
         "/images/DSC05320.JPG",
@@ -58,6 +64,35 @@ const BaidinhNighten = () => {
         window.addEventListener("keydown", handler);
         return () => window.removeEventListener("keydown", handler);
       }, [lightbox]);
+      const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("http://113.160.202.187:1989/api/baidinhnight", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        alert("Booking successfully!");
+        setFormData({ name: "", phone: "", email: "", message: "" });
+      } else {
+        alert("Error booking, please try again!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Network error!");
+    }
+    setLoading(false);
+  };
   return (
     <div className="w-full">
           {/* Hero */}
@@ -218,30 +253,49 @@ Ninh Binh...
                 <p className="mb-2">Address: Tay Hoa Lu Ward, Ninh Binh</p>
               </div>
               <div className="w-full md:w-1/2">
-                <form className="grid gap-3">
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    className="p-3 border rounded-lg w-full"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Your phone"
-                    className="p-3 border rounded-lg w-full"
-                  />
-                  <input
-                    type="email"
-                    placeholder="Your email"
-                    className="p-3 border rounded-lg w-full"
-                  />
-                  <textarea
-                    placeholder="Message"
-                    className="p-3 border rounded-lg h-28 w-full"
-                  />
-                  <button className="border px-6 py-2 rounded-lg hover:bg-emerald-900 hover:text-white transition">
-                    Book now
-                  </button>
-                </form>
+                <form className="grid gap-3" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                value={formData.name}
+                onChange={handleChange}
+                className="p-3 border rounded-lg w-full"
+                required
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder="Your phone"
+                value={formData.phone}
+                onChange={handleChange}
+                className="p-3 border rounded-lg w-full"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your email"
+                value={formData.email}
+                onChange={handleChange}
+                className="p-3 border rounded-lg w-full"
+                required
+              />
+              <textarea
+                name="message"
+                placeholder="Message"
+                value={formData.message}
+                onChange={handleChange}
+                className="p-3 border rounded-lg h-28 w-full"
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="border px-6 py-2 rounded-lg hover:bg-emerald-900 hover:text-white transition disabled:opacity-50"
+              >
+                {loading ? "Sending..." : "Booking Now"}
+              </button>
+            </form>
               </div>
             </div>
           </motion.section>

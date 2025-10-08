@@ -5,15 +5,15 @@ import Link from "next/link";
 
 const places = [
   { name: "# Introduction to Bai Dinh Pagoda #", link: "/vi/visit/45", image: '/images/DJI_0033.jpg' },
-  { name: "1. Tam Quan Gate", link: "http://qr.chuabaidinh.com.vn/locations/3", image: '/images/tamquan.jpg' },
-  { name: "2. La Han corridor", link: "http://qr.chuabaidinh.com.vn/locations/4", image: '/images/hanhlanglahan.png' },
-  { name: "3. Quan Am Palace", link: "http://qr.chuabaidinh.com.vn/locations/11", image: '/images/dienquanam1.jpg' },
-  { name: "4. Patriarch's Palace", link: "http://qr.chuabaidinh.com.vn/locations/10", image: '/images/diengiaochu.jpg' },
-  { name: "5. Wind chimes", link: "http://qr.chuabaidinh.com.vn/locations/26", image: '/images/gac-chuong.jpg' },
-  { name: "6. Tam The Palace", link: "http://qr.chuabaidinh.com.vn/locations/12", image: '/images/tamthe1.JPG' },
-  { name: "7. Ancient temple", link: "http://qr.chuabaidinh.com.vn/locations/17", image: '/images/chuaco.png' },
-  { name: "8. Stupa", link: "http://qr.chuabaidinh.com.vn/locations/6", image: '/images/baothap2.JPG' },
-  { name: "9. Eightfold path", link: "http://qr.chuabaidinh.com.vn/locations/16", image: '/images/batchinhdao.jpg'},
+  { name: "1. Tam Quan Gate", link: "http://qr.chuabaidinh.com.vn/locations/3?language=en", image: '/images/tamquan.jpg' },
+  { name: "2. La Han corridor", link: "http://qr.chuabaidinh.com.vn/locations/4?language=en", image: '/images/hanhlanglahan.png' },
+  { name: "3. Quan Am Palace", link: "http://qr.chuabaidinh.com.vn/locations/11?language=en", image: '/images/dienquanam1.jpg' },
+  { name: "4. Patriarch's Palace", link: "http://qr.chuabaidinh.com.vn/locations/10?language=en", image: '/images/diengiaochu.jpg' },
+  { name: "5. Wind chimes", link: "http://qr.chuabaidinh.com.vn/locations/26?language=en", image: '/images/gac-chuong.jpg' },
+  { name: "6. Tam The Palace", link: "http://qr.chuabaidinh.com.vn/locations/12?language=en", image: '/images/tamthe1.JPG' },
+  { name: "7. Ancient temple", link: "http://qr.chuabaidinh.com.vn/locations/17?language=en", image: '/images/chuaco.png' },
+  { name: "8. Stupa", link: "http://qr.chuabaidinh.com.vn/locations/6?language=en", image: '/images/baothap2.JPG' },
+  { name: "9. Eightfold path", link: "http://qr.chuabaidinh.com.vn/locations/16?language=en", image: '/images/batchinhdao.jpg'},
 ];
 
 const FamousPlacesen = () => {

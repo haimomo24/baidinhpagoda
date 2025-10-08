@@ -6,10 +6,11 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1989"
 const VisitTable = () => {
   const [visits, setVisits] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedVisit, setSelectedVisit] = useState(null); // Modal xem ảnh
-  const [editVisit, setEditVisit] = useState(null); // Modal edit
+  const [selectedVisit, setSelectedVisit] = useState(null);
+  const [editVisit, setEditVisit] = useState(null);
   const [formData, setFormData] = useState({});
   const [uploadFiles, setUploadFiles] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   const truncateText = (text, maxLength = 50) => {
     if (!text) return "";
@@ -103,11 +104,29 @@ const VisitTable = () => {
     }
   };
 
+  const filteredVisits = visits.filter((item) => {
+    const term = searchTerm.toLowerCase();
+    return (
+      item.name?.toLowerCase().includes(term) ||
+      item.title_1?.toLowerCase().includes(term) ||
+      item.title_2?.toLowerCase().includes(term) ||
+      item.title_3?.toLowerCase().includes(term)
+    );
+  });
+
   if (loading) return <div className="text-center py-10">Đang tải dữ liệu...</div>;
 
   return (
     <div className="mt-5">
-      <div className="flex justify-end mb-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
+        <input
+          type="text"
+          placeholder="🔍 Tìm kiếm điểm đến..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="border rounded-lg px-3 py-2 w-full md:w-1/3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
+
         <a
           href="/dashboard/diemden/add"
           className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
@@ -129,38 +148,46 @@ const VisitTable = () => {
             </tr>
           </thead>
           <tbody>
-            {visits.map((item) => (
-              <tr key={item.id} className="border-b hover:bg-gray-50 transition">
-                <td className="px-6 py-4 font-medium text-gray-900">{item.name}</td>
-                <td className="px-6 py-4" title={item.title_1}>{truncateText(item.title_1)}</td>
-                <td className="px-6 py-4" title={item.title_2}>{truncateText(item.title_2)}</td>
-                <td className="px-6 py-4" title={item.title_3}>{truncateText(item.title_3)}</td>
-                <td className="px-6 py-4">
-                  {item.images_1 && (
-                    <img
-                      src={`${API_URL}${item.images_1}`}
-                      alt="visit"
-                      className="w-20 h-16 object-cover rounded-lg border cursor-pointer hover:scale-105 transition"
-                      onClick={() => setSelectedVisit(item)}
-                    />
-                  )}
-                </td>
-                <td className="px-6 py-4 text-center flex justify-center gap-2">
-                  <button
-                    onClick={() => openEditModal(item)}
-                    className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 hover:text-blue-800 transition"
-                  >
-                    ✏️
-                  </button>
-                  <button
-                    onClick={() => deleteVisit(item.id)}
-                    className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-600 bg-red-100 rounded-lg hover:bg-red-200 hover:text-red-800 transition"
-                  >
-                    🗑️
-                  </button>
+            {filteredVisits.length > 0 ? (
+              filteredVisits.map((item) => (
+                <tr key={item.id} className="border-b hover:bg-gray-50 transition">
+                  <td className="px-6 py-4 font-medium text-gray-900">{item.name}</td>
+                  <td className="px-6 py-4" title={item.title_1}>{truncateText(item.title_1)}</td>
+                  <td className="px-6 py-4" title={item.title_2}>{truncateText(item.title_2)}</td>
+                  <td className="px-6 py-4" title={item.title_3}>{truncateText(item.title_3)}</td>
+                  <td className="px-6 py-4">
+                    {item.images_1 && (
+                      <img
+                        src={`${API_URL}${item.images_1}`}
+                        alt="visit"
+                        className="w-20 h-16 object-cover rounded-lg border cursor-pointer hover:scale-105 transition"
+                        onClick={() => setSelectedVisit(item)}
+                      />
+                    )}
+                  </td>
+                  <td className="px-6 py-4 text-center flex justify-center gap-2">
+                    <button
+                      onClick={() => openEditModal(item)}
+                      className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-100 rounded-lg hover:bg-blue-200 hover:text-blue-800 transition"
+                    >
+                      ✏️
+                    </button>
+                    <button
+                      onClick={() => deleteVisit(item.id)}
+                      className="inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-600 bg-red-100 rounded-lg hover:bg-red-200 hover:text-red-800 transition"
+                    >
+                      🗑️
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="text-center py-6 text-gray-500">
+                  Không tìm thấy kết quả phù hợp.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
@@ -177,56 +204,114 @@ const VisitTable = () => {
             </button>
             <h2 className="text-lg font-bold mb-4">{selectedVisit.name}</h2>
             <div className="grid grid-cols-3 gap-4">
-              {["images_1","images_2","image_3","images_4","images_5"].map((field,key)=>(
-                selectedVisit[field] && <img key={key} src={`${API_URL}${selectedVisit[field]}`} alt={field} className="w-full h-40 object-cover rounded" />
-              ))}
+              {["images_1", "images_2", "image_3", "images_4", "images_5"].map(
+                (field, key) =>
+                  selectedVisit[field] && (
+                    <img
+                      key={key}
+                      src={`${API_URL}${selectedVisit[field]}`}
+                      alt={field}
+                      className="w-full h-40 object-cover rounded"
+                    />
+                  )
+              )}
             </div>
           </div>
         </div>
       )}
 
-      {/* Modal edit */}
+      {/* Modal sửa (FULL màn hình) */}
       {editVisit && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg max-w-3xl w-full relative overflow-y-auto max-h-[90vh]">
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+          <div className="bg-white w-full h-full overflow-y-auto relative p-8">
             <button
-              className="absolute top-2 right-2 text-gray-600 hover:text-red-600 text-xl"
+              className="absolute top-4 right-4 text-gray-600 hover:text-red-600 text-2xl"
               onClick={() => setEditVisit(null)}
             >
               ✕
             </button>
-            <h2 className="text-lg font-bold mb-4">Sửa điểm đến: {editVisit.name}</h2>
-            <form onSubmit={handleEditSubmit} className="grid grid-cols-1 gap-4">
-              {["name","name_en","title_1","title_1_en","title_2","title_2_en","title_3","title_3_en","title_4","title_4_en","title_5","title_5_en"].map((field)=>(
+
+            <h2 className="text-2xl font-bold mb-6">
+              Sửa điểm đến: <span className="text-blue-600">{editVisit.name}</span>
+            </h2>
+
+            <form onSubmit={handleEditSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Các ô input name */}
+              <div>
+                <label className="block font-semibold mb-1">Tên điểm đến (VN)</label>
                 <input
-                  key={field}
                   type="text"
-                  name={field}
-                  placeholder={field}
-                  value={formData[field] || ""}
+                  name="name"
+                  value={formData.name || ""}
                   onChange={handleInputChange}
                   className="border rounded px-3 py-2 w-full"
                 />
+              </div>
+
+              <div>
+                <label className="block font-semibold mb-1">Tên điểm đến (EN)</label>
+                <input
+                  type="text"
+                  name="name_en"
+                  value={formData.name_en || ""}
+                  onChange={handleInputChange}
+                  className="border rounded px-3 py-2 w-full"
+                />
+              </div>
+
+              {/* Các ô textarea cho title */}
+              {[
+                "title_1",
+                "title_1_en",
+                "title_2",
+                "title_2_en",
+                "title_3",
+                "title_3_en",
+                "title_4",
+                "title_4_en",
+                "title_5",
+                "title_5_en",
+              ].map((field) => (
+                <div key={field} className="col-span-1 md:col-span-2">
+                  <label className="block font-semibold mb-1">{field}</label>
+                  <textarea
+                    name={field}
+                    value={formData[field] || ""}
+                    onChange={handleInputChange}
+                    className="border rounded px-3 py-2 w-full h-24 resize-y"
+                  />
+                </div>
               ))}
-              <div className="grid grid-cols-2 gap-4">
-                {["images_1","images_2","image_3","images_4","images_5"].map((field)=>(
-                  <input key={field} type="file" name={field} onChange={handleFileChange} />
+
+              {/* Upload ảnh */}
+              <div className="col-span-1 md:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-4">
+                {["images_1", "images_2", "image_3", "images_4", "images_5"].map((field) => (
+                  <div key={field}>
+                    <label className="block font-semibold mb-1">{field}</label>
+                    <input
+                      type="file"
+                      name={field}
+                      onChange={handleFileChange}
+                      className="border rounded px-2 py-1 w-full"
+                    />
+                  </div>
                 ))}
               </div>
 
-              <div className="flex justify-end gap-2 mt-4">
+              {/* Nút lưu & huỷ */}
+              <div className="col-span-1 md:col-span-2 flex justify-end gap-3 mt-6">
                 <button
                   type="button"
-                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
                   onClick={() => setEditVisit(null)}
+                  className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
                 >
                   Huỷ
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
                 >
-                  Lưu
+                  Lưu thay đổi
                 </button>
               </div>
             </form>

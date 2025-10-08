@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 
 const TuyenDung = () => {
+  
       const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -36,40 +37,41 @@ const TuyenDung = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const form = new FormData()
-      form.append('name', formData.name)
-      form.append('email', formData.email)
-      form.append('phone', formData.phone)
-      form.append('position', formData.position)
-      form.append('message', formData.message)
-      form.append('cv', formData.cv)
+  e.preventDefault();
 
-      const res = await fetch('/api/recruitment', {
-        method: 'POST',
-        body: form,
-      })
+  try {
+    const form = new FormData();
+    form.append("fullname", formData.name);
+    form.append("email", formData.email);
+    form.append("phone", formData.phone);
+    form.append("position", formData.position);
+    form.append("message", formData.message);
+    form.append("cv_file", formData.cv); // tên trùng với cột trong SQL
 
-      const result = await res.json()
-      if (result.success) {
-        alert(result.message)
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          position: '',
-          message: '',
-          cv: null,
-        })
-      } else {
-        alert('Đã xảy ra lỗi: ' + result.message)
-      }
-    } catch (error) {
-      console.error('Submit Error:', error)
-      alert('Lỗi kết nối server')
+    const res = await fetch("http://113.160.202.187:1989/api/recruitment", {
+      method: "POST",
+      body: form,
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      alert(result.message);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        position: "",
+        message: "",
+        cv: null,
+      });
+    } else {
+      alert("Đã xảy ra lỗi: " + result.message);
     }
+  } catch (error) {
+    console.error("Submit Error:", error);
+    alert("Lỗi kết nối đến server!");
   }
+};
   return (
      <div className="min-h-screen   from-[#f0f9f3] to-white py-12 px-4 md:px-10 lg:px-32 font-[serif]">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">

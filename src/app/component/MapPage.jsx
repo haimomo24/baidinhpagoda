@@ -7,15 +7,15 @@ const MapPage = ({ regions, setCurrentIndex }) => {
 
   // Các điểm checkin 
   const points = [
-    { id: 36, top: "70%", left: "25%", link: "/vi/visit/36", name: "Cổng Tam Quan" },
-    { id: 7, top: "59%", left: "32%", link: "/vi/visit/36", name: "Tam Quan Nội" },
-    { id: 38, top: "47%", left: "39%", link: "/vi/visit/36", name: "Tháp Chuông" },
-    { id: 10, top: "25%", left: "44%", link: "/vi/visit/36", name: "Cầu Chuông Gió" },
-    { id: 39, top: "29%", left: "51%", link: "/vi/visit/36", name: "Điện Pháp Chủ" },
-    { id: 39, top: "37%", left: "46%", link: "/vi/visit/36", name: "Hồ tiên" },
-    { id: 34, top: "50%", left: "59%", link: "/vi/visit/36", name: "Lăng Diệu Niên" },
-    { id: 36, top: "60%", left: "54%", link: "/vi/visit/36", name: "Hồ Thuỷ Đình" },
-    { id: 37, top: "68%", left: "45%", link: "/vi/visit/36", name: "Bát Chính Đạo" },
+    { id: 63, top: "70%", left: "25%", link: "/vi/visit/36", name: "Cổng Tam Quan" },
+    { id: 44, top: "59%", left: "32%", link: "/vi/visit/44", name: "Tam Quan Nội" },
+    { id: 38, top: "47%", left: "39%", link: "/vi/visit/38", name: "Tháp Chuông" },
+    { id: 61, top: "25%", left: "44%", link: "/vi/visit/61", name: "Cầu Chuông Gió" },
+    { id: 39, top: "29%", left: "51%", link: "/vi/visit/39", name: "Điện Pháp Chủ" },
+    { id: 56, top: "37%", left: "46%", link: "/vi/visit/56", name: "Hồ tiên" },
+    { id: 57, top: "50%", left: "59%", link: "/vi/visit/57", name: "Lăng Diệu Liên" },
+    { id: 62, top: "60%", left: "54%", link: "/vi/visit/62", name: "Hồ Thuỷ Đình" },
+    { id: 42, top: "68%", left: "45%", link: "/vi/visit/42", name: "Bát Chính Đạo" },
   ];
 
   const handleHover = (point, idx) => {

@@ -60,7 +60,7 @@ const BlogPageen = () => {
           {/* Grid 3 cột */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {currentBlogs.map((item) => (
-              <Link key={item.id} href={`/vi/blog/${item.id}`}>
+              <Link key={item.id} href={`/en/blog/${item.id}`}>
                 <div className="rounded-lg overflow-hidden group cursor-pointer shadow-md bg-white">
                   <img
                     src={item.images_1 ? item.images_1 : "/default.jpg"}
@@ -68,8 +68,8 @@ const BlogPageen = () => {
                     className="w-full h-52 object-cover transform transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="p-4 bg-white">
-                    <h3 className="text-lg hover-shake font-bold mb-2 truncate">{item.title_1}</h3>
-                    <p className="text-gray-600 hover-shake text-sm line-clamp-2">{item.name}</p>
+                    <h3 className="text-lg hover-shake font-bold mb-2 truncate">{item.title_1_en}</h3>
+                    <p className="text-gray-600 hover-shake text-sm line-clamp-2">{item.name_en}</p>
                   </div>
                 </div>
               </Link>

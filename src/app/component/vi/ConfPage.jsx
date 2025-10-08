@@ -5,11 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const ConfPage = () => {
   const [lightbox, setLightbox] = useState(null);
-
+   const [formData, setFormData] = useState({
+      name: "",
+      phone: "",
+      email: "",
+      message: "",
+    });
+    const [loading, setLoading] = useState(false);
   const imagesA = [
-    "/images/397cd5a83dd8b786eec9.jpg",
-    "/images/8ef54698a4e82eb677f9.jpg",
-    "/images/518ad8073f77b529ec66.jpg",
+    "/images/phonga.jpg",
+    "/images/phonga.jpg",
+    "/images/phonga.jpg",
   ];
   const imagesB = [
     "/images/phonga.jpg",
@@ -59,6 +65,36 @@ const ConfPage = () => {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [lightbox]);
+  // Handle input
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("http://113.160.202.187:1989/api/conference", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        alert("Booking successfully!");
+        setFormData({ name: "", phone: "", email: "", message: "" });
+      } else {
+        alert("Error booking, please try again!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Network error!");
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="w-full">
@@ -202,28 +238,47 @@ const ConfPage = () => {
             <p className="mb-2">Địa chỉ: Phường Tây hoa Lư, Ninh Bình</p>
           </div>
           <div className="w-full md:w-1/2">
-            <form className="grid gap-3">
+            <form className="grid gap-3" onSubmit={handleSubmit}>
               <input
                 type="text"
+                name="name"
                 placeholder="Your name"
+                value={formData.name}
+                onChange={handleChange}
                 className="p-3 border rounded-lg w-full"
+                required
               />
               <input
                 type="text"
+                name="phone"
                 placeholder="Your phone"
+                value={formData.phone}
+                onChange={handleChange}
                 className="p-3 border rounded-lg w-full"
+                required
               />
               <input
                 type="email"
+                name="email"
                 placeholder="Your email"
+                value={formData.email}
+                onChange={handleChange}
                 className="p-3 border rounded-lg w-full"
+                required
               />
               <textarea
+                name="message"
                 placeholder="Message"
+                value={formData.message}
+                onChange={handleChange}
                 className="p-3 border rounded-lg h-28 w-full"
               />
-              <button className="border px-6 py-2 rounded-lg hover:bg-emerald-900 hover:text-white transition">
-                Đặt ngay
+              <button
+                type="submit"
+                disabled={loading}
+                className="border px-6 py-2 rounded-lg hover:bg-emerald-900 hover:text-white transition disabled:opacity-50"
+              >
+                {loading ? "Sending..." : "Booking Now"}
               </button>
             </form>
           </div>

@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // ✅ Thêm import
 
 const BlogDashboard = () => {
+  const router = useRouter(); // ✅ Khởi tạo router
+
   const [formData, setFormData] = useState({
     name: "",
     title_1: "",
@@ -61,23 +64,14 @@ const BlogDashboard = () => {
 
       const data = await res.json();
       if (res.ok) {
-        alert("Đăng blog thành công!");
-        setFormData({
-          name: "",
-          title_1: "",
-          images_1: null,
-          images_1Preview: null,
-          title_2: "",
-          images_2: null,
-          images_2Preview: null,
-          title_3: "",
-        });
+        alert("✅ Đăng blog thành công!");
+        router.push("/dashboard/blog"); // ✅ Chuyển về trang blog
       } else {
-        alert("Lỗi: " + data.error);
+        alert("❌ Lỗi: " + data.error);
       }
     } catch (err) {
       console.error("Lỗi upload:", err);
-      alert("Có lỗi xảy ra khi đăng bài.");
+      alert("❌ Có lỗi xảy ra khi đăng bài.");
     }
   };
 

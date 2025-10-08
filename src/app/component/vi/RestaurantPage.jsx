@@ -60,6 +60,31 @@ export default function RestaurantPage() {
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [lightbox]);
+  // Xử lý gửi form booking
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("http://113.160.202.187:1989/api/restaurant", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+      alert(result.message || "Đặt bàn thành công!");
+      e.target.reset();
+    } catch (err) {
+      alert("Lỗi khi gửi booking!");
+      console.error(err);
+    }
+  };
 
   return (
     <div className="w-full">
@@ -246,13 +271,35 @@ export default function RestaurantPage() {
             <p className="mb-2">Địa chỉ: Phường Tây hoa Lư , Ninh Bình </p>
           </div>
           <div className="w-full md:w-1/2">
-            <form className="grid gap-3">
-              <input type="text" placeholder="Your name" className="p-3 border rounded-lg w-full" />
-              <input type="text" placeholder="Your phone" className="p-3 border rounded-lg w-full" />
-              <input type="email" placeholder="Your email" className="p-3 border rounded-lg w-full" />
-              <textarea placeholder="Message" className="p-3 border rounded-lg h-28 w-full" />
+            <form className="grid gap-3" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                className="p-3 border rounded-lg w-full"
+                required
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder="Your phone"
+                className="p-3 border rounded-lg w-full"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your email"
+                className="p-3 border rounded-lg w-full"
+                required
+              />
+              <textarea
+                name="message"
+                placeholder="Message"
+                className="p-3 border rounded-lg h-28 w-full"
+              />
               <button className="border px-6 py-2 rounded-lg hover:bg-emerald-900 hover:text-white transition">
-                Đặt ngay
+                Booking now
               </button>
             </form>
           </div>
