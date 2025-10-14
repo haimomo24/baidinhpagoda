@@ -37,7 +37,7 @@ const SiderbarDashboard = () => {
     { name: " Nhà hàng", path: "/dashboard/restaurant" },
     { name: "Phòng hội nghị", path: "/dashboard/hoi-nghi" },
      { name: "Tour Bái Đính về đêm", path: "/dashboard/baidinhnight" },
-    { name: "Quản lý tuyển dụng", path: "/dashboard/auth" },
+    { name: "Hành trình di sản", path: "/dashboard/hanhtrinhdisan" },
      { name: "Báo cáo", path: "/dashboard/auth" },
      
     { name: "Quản lý tài khoản", path: "/dashboard/auth" },

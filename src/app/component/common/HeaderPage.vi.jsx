@@ -258,12 +258,20 @@ export default function HeaderPageVi() {
     </Link>
     
     {/* Dropdown */}
-    <div className="absolute hidden group-hover:flex flex-col gap-2 top-full left-0 mt-[-5px] bg-white p-2 rounded-xl shadow-lg border border-gray-200 w-48">
-      
+    <div className="absolute hidden group-hover:flex flex-col gap-2 top-full left-0 mt-[-15px] bg-white p-2 rounded-xl shadow-lg border border-gray-200 w-48">
+      <Link href="https://www.facebook.com/chuabaidinh35" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-blue-50">
+        <FaFacebookF className="w-3 h-3 text-blue-600" />
+        <span className="text-sm text-[10px] text-gray-700">Chùa Bái Đính </span>
+      </Link>
+      <Link href="https://www.facebook.com/khachxabaidinh/?locale=vi_VN" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-blue-50">
+        <FaFacebookF className="w-3 h-3 text-blue-600" />
+        <span className="text-sm text-[10px] text-gray-700">Khách Xá Bái Đính </span>
+      </Link>
       <Link href="https://www.facebook.com/share/1CteQUwNM6/?mibextid=wwXIfr" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-blue-50">
         <FaFacebookF className="w-3 h-3 text-blue-600" />
         <span className="text-sm text-[10px] text-gray-700">Danh lam Bái Đính </span>
-      </Link><Link href="https://www.facebook.com/ninhbinhmiendisan/
+      </Link>
+      <Link href="https://www.facebook.com/ninhbinhmiendisan/
 " className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-blue-50">
         <FaFacebookF className="w-3 h-3 text-blue-600" />
         <span className="text-sm text-[10px] text-gray-700">Ninh Bình - Miền Di Sản</span>
@@ -283,7 +291,11 @@ export default function HeaderPageVi() {
       <SiTiktok className="w-3 h-3 hover:text-black" />
     </Link>
     {/* Dropdown */}
-    <div className="absolute hidden group-hover:flex flex-col gap-2 top-full left-0 mt-[-5px]  bg-white p-2 rounded-xl shadow-lg border border-gray-200 w-48">
+    <div className="absolute hidden group-hover:flex flex-col gap-2 top-full left-0 mt-[-15px]  bg-white p-2 rounded-xl shadow-lg border border-gray-200 w-48">
+       <Link href="https://www.tiktok.com/@chuabaidinh35?lang=vi-VN" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-gray-100">
+        <SiTiktok className="w-4 h-4" />
+        <span className="text-sm text-[10px] text-gray-700">Chùa Bái Đính</span>
+      </Link>
        <Link href="https://www.tiktok.com/@baidinhpagodaofficial" className="flex items-center gap-2 px-3 py-2 rounded-md border border-gray-200 hover:bg-gray-100">
         <SiTiktok className="w-4 h-4" />
         <span className="text-sm text-[10px] text-gray-700">Check-in Bái Đính</span>

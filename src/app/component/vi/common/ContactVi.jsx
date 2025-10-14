@@ -83,7 +83,7 @@ const ContactVi = () => {
 
             {/* Form liên hệ */}
             <div className="bg-gray-100 h-[530px] p-8 rounded-xl shadow-lg">
-              <h3 className="text-2xl font-bold mb-6">Thông điệp</h3>
+              <h3 className="text-2xl font-bold mb-6"> LIÊN HỆ</h3>
 
               {submitStatus && (
                 <div className={`mb-4 p-4 rounded-lg ${
@@ -130,7 +130,7 @@ const ContactVi = () => {
                   value={formData.message} 
                   onChange={handleChange} 
                   rows="4" 
-                  placeholder="Lời nhắn - thông điệp bạn muốn gửi đến"
+                  placeholder="Nội dung"
                   required 
                   className="w-full h-[230px] px-4 py-3 border border-gray-300 rounded-lg outline-none resize-none"
                 ></textarea>
@@ -152,7 +152,7 @@ const ContactVi = () => {
               <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                 <div className="h-96 lg:h-[530px]">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.8234567890123!2d105.8637726!3d20.2736257!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31367ea560375713%3A0xab30ab2390bc9816!2sBai%20Dinh%20Hotel!5e0!3m2!1svi!2s!4v1704123456789!5m2!1svi!2s"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.845245826459!2d105.8558039!3d20.2734707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31367f004051213b%3A0xaf534a981e542cef!2zQ8O0bmcgY2jDrW5oIENow7lhIELDqWkgxJDDrW5o!5e0!3m2!1svi!2s!4v1728900000000!5m2!1svi!2s"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -167,7 +167,7 @@ const ContactVi = () => {
                   <p className="text-gray-600 mb-4">Phường tây Hoa Lư Ninh Bình</p>
                   <div className="flex flex-wrap gap-4">
                     <a
-                      href="https://www.google.com/maps/place/Bai+Dinh+Hotel/@20.2736257,105.8637726,1066m/data=!3m1!1e3!4m9!3m8!1s0x31367ea560375713:0xab30ab2390bc9816!5m2!4m1!1i2!8m2!3d20.2736257!4d105.8663475!16s%2Fg%2F11b6c__yy7"
+                      href="https://www.google.com/maps/place/C%E1%BB%95ng+ch%C3%ADnh+ch%C3%B9a+B%C3%A1i+%C4%90%C3%ADnh/@20.2734707,105.8558039,1018m/data=!3m1!1e3!4m6!3m5!1s0x31367f004051213b:0xaf534a981e542cef!8m2!3d20.2745178!4d105.8566303!16s%2Fg%2F11w36zyc7c?entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-4 py-2 bg-[#356D3D] text-white rounded-lg hover:bg-[#356D3D] transition duration-300"

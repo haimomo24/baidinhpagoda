@@ -57,7 +57,7 @@ export default function HeaderPageEn() {
         { name: "Trang An", link: "https://trangandanhthang.vn/" },
         { name: "Tam Chuc", link: "https://tamchuc.com.vn/" },
         { name: "Hoa Lu Ancient Town", link: "https://www.phocohoalu.com/" },
-        { name: " Golf", link: "https://trangangolfandresort.com/" },
+        { name: "Tramg An Golf and resort", link: "https://trangangolfandresort.com/" },
         { name: "Tam Coc", link: "https://tamcocbichdong.vn/" },
       ],
     },

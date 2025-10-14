@@ -24,7 +24,14 @@ const FamousPlacesen = () => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
 
           {/* Tiêu đề */}
-          <h1 className="inline-block px-6 py-3 text-2xl font-bold w-full sm:w-[30%] text-[#0F7F3E] bg-gradient-to-r from-amber-200 to-stone-300 rounded-xl shadow-md">
+          <h1 className=" sm:w-[30%] text-[#0F7F3E] 
+            relative inline-block px-10 py-3 mb-6
+            text-1xl sm:text-2xl font-bold
+            text-[#0F7F3E] text-center md:text-left
+            bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
+            rounded-xl shadow-2xl
+            transition-all duration-300 ease-out
+            hover:text-red-600 hover:scale-105 hover:shadow-xl">
             TOUR ITINERARY
           </h1>
 
@@ -114,7 +121,14 @@ const FamousPlacesen = () => {
 
           {/* Timeline sơ đồ */}
           <div className="py-6">
-            <h2 className="inline-block px-6 py-3 text-xl sm:text-2xl lg:text-2xl font-bold w-full sm:w-[38%] text-[#0F7F3E] bg-gradient-to-r from-amber-200 to-stone-300 rounded-xl shadow-md mb-[3%]">
+            <h2 className="sm:w-[30%] text-[#0F7F3E] 
+            relative inline-block px-10 py-3 mb-6
+            text-1xl sm:text-2xl font-bold
+            text-[#0F7F3E] text-center md:text-left
+            bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
+            rounded-xl shadow-2xl
+            transition-all duration-300 ease-out
+            hover:text-red-600 hover:scale-105 hover:shadow-xl">
               TOUR ROUTE MAP
             </h2>
 

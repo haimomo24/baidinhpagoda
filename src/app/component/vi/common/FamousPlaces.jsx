@@ -13,19 +13,26 @@ const places = [
   { name: "6. Điện Tam Thế", link: "http://qr.chuabaidinh.com.vn/locations/12", image: '/images/tamthe1.JPG' },
   { name: "7. Chùa cổ", link: "http://qr.chuabaidinh.com.vn/locations/17", image: '/images/chuaco.png' },
   { name: "8. Bảo Tháp", link: "http://qr.chuabaidinh.com.vn/locations/6", image: '/images/baothap2.JPG' },
-  { name: "9. Bát chính đạo", link: "http://qr.chuabaidinh.com.vn/locations/16", image: '/images/batchinhdao.jpg'},
+  { name: "9. Bát Chính Đạo", link: "http://qr.chuabaidinh.com.vn/locations/16", image: '/images/batchinhdao.jpg'},
 ];
 
 const FamousPlaces = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
 
   return (
-    <div className="w-full relative mt-[-60px] lg:mt-[-150px]">
+    <div className="w-full relative mt-[-60px] lg:mt-[-190px]">
       <div className="bg-[#F1EBE5]/40 w-full">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
 
           {/* Tiêu đề */}
-          <h1 className="inline-block px-6 py-3 text-2xl font-bold w-full sm:w-[30%] text-[#0F7F3E] bg-gradient-to-r from-amber-200 to-stone-300 rounded-xl shadow-md">
+          <h1 className="sm:w-[32%] text-[#0F7F3E] 
+            relative inline-block px-10 py-3 mb-6
+            text-1xl sm:text-2xl font-bold
+            text-[#0F7F3E] text-center md:text-left
+            bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
+            rounded-xl shadow-2xl
+            transition-all duration-300 ease-out
+            hover:text-red-600 hover:scale-105 hover:shadow-xl">
             LỘ TRÌNH THAM QUAN
           </h1>
 
@@ -115,7 +122,14 @@ const FamousPlaces = () => {
 
           {/* Timeline sơ đồ */}
           <div className="py-6">
-            <h2 className="inline-block px-6 py-3 text-xl sm:text-2xl lg:text-2xl font-bold w-full sm:w-[38%] text-[#0F7F3E] bg-gradient-to-r from-amber-200 to-stone-300 rounded-xl shadow-md mb-[3%]">
+            <h2 className="sm:w-[39%] text-[#0F7F3E] 
+            relative inline-block px-10 py-3 mb-6
+            text-1xl sm:text-2xl font-bold
+            text-[#0F7F3E] text-center md:text-left
+            bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
+            rounded-xl shadow-2xl
+            transition-all duration-300 ease-out
+            hover:text-red-600 hover:scale-105 hover:shadow-xl">
               SƠ ĐỒ LỘ TRÌNH THAM QUAN
             </h2>
 

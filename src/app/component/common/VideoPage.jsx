@@ -7,7 +7,7 @@ const VideoPage = () => {
       {/* Tiêu đề với đường kẻ ngang */}
       <div className="w-full max-w-6xl flex items-center mb-6">
       <h2 className="relative inline-block mb-6 select-none 
-               text-2xl sm:text-2xl lg:text-2xl font-bold 
+               text-1xl sm:text-2xl lg:text-2xl font-bold 
                text-[#176734] text-center md:text-left 
                px-8 py-2 
                bg-gradient-to-r from-stone-200 via-amber-200 to-stone-400

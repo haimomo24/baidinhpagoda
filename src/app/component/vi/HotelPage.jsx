@@ -42,7 +42,7 @@ export default function HotelPage() {
       return
     }
     // Demo: đưa sang trang booking với typeId (không cần roomId từ DB nữa)
-    router.push(`/booking?typeId=${typeId}`)
+    router.push(`/vi/hotel/Baidinh-triple`)
   }
 
   return (

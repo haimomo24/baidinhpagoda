@@ -27,7 +27,6 @@ const SliderImage = () => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slidesData.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -47,15 +46,18 @@ const SliderImage = () => {
         </div>
       ))}
 
-      {/* Text cố định góc trái trên cùng với hiệu ứng fade-in */}
-      <motion.div
-        className="absolute top-5 left-5 sm:top-8 sm:left-10 text-white text-lg sm:text-2xl md:text-3xl font-bold drop-shadow-xl"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-      >
-        Bái Đính - Vãng Cảnh Vô Ưu - Gieo Mầm An Lạc
-      </motion.div>
+      {/* ✅ Text chỉ hiển thị khi currentIndex === 0 */}
+      {currentIndex === 0 && (
+        <motion.div
+          className="absolute top-7 left-5 sm:top-8 sm:left-10 mt-[50px] text-white text-lg sm:text-2xl md:text-3xl font-bold drop-shadow-xl z-20"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
+          Bái Đính - Vãng Cảnh Vô Ưu - Gieo Mầm An Lạc
+        </motion.div>
+      )}
 
       {/* Dots */}
       <div className="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2 sm:space-x-3">
