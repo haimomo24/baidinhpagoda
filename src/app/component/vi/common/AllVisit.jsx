@@ -7,7 +7,7 @@ const blogs = [
    {
     img: "https://mia.vn/media/uploads/blog-du-lich/tuyet-tinh-coc-ninh-binh-1-1690702331.jpg",
     title: "Tuyệt Tình Cốc",
-    link: "https://chuabaidinhnbinh.com/",
+    link: "https://maps.app.goo.gl/G2ytqTZ4Z89N4U3t7",
   },
   
   
@@ -169,7 +169,7 @@ const DesktopSlider = () => {
 // ========== MAIN ==========
 const BlogPage = () => {
   return (
-    <div className="w-full mt-[-20px] bg-[#F1EBE5]/70 py-12">
+    <div className="w-full mt-[-20px]  py-12">
       <div className="max-w-6xl mx-auto flex justify-start mb-10 px-4">
         <h2 className="
     inline-block px-6 py-3

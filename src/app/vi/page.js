@@ -6,6 +6,7 @@ import BlogPage from "../component/vi/common/BlogPage";
 import FamousPlaces from "../component/vi/common/FamousPlaces";
 import PromotionVi from "../component/vi/common/PromotionVi";
 import ImageMapen from "../component/vi/ImageMapvi";
+import NodePagevi from "../component/vi/NodePagevi";
 
 // app/vi/page.jsx
 export default function ViHome() {
@@ -28,9 +29,10 @@ export default function ViHome() {
   
   <AllVisit/>
  
-   <div id="blog">
+   {/* <div id="blog">
         <BlogPage />
-      </div>
+      </div> */}
+      <NodePagevi/>
    <VideoPage/>
   </div>
   

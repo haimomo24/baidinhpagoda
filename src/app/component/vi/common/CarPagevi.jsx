@@ -21,6 +21,7 @@ const CarPagevi = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phoneNumber, setPhoneNumber] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const total = ticketList.reduce((sum, ticket) => {
     const price = prices[ticket.type] || 0
@@ -36,37 +37,56 @@ const CarPagevi = () => {
     })
   }
 
-  const handleBookingSubmit = (e) => {
-    e.preventDefault()
-    const selectedTickets = ticketList.filter((t) => t.quantity > 0)
+  const handleBookingSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!name || !email || !phoneNumber) {
-      alert('Vui lòng nhập đầy đủ thông tin cá nhân.')
-      return
-    }
-
-    if (selectedTickets.length === 0) {
-      alert('Vui lòng chọn ít nhất một loại vé.')
-      return
-    }
-
-    // Không gửi đi đâu nữa, chỉ hiển thị confirm
-    alert(`
-      ✅ Đặt vé thành công!
-      Họ tên: ${name}
-      Email: ${email}
-      Số điện thoại: ${phoneNumber}
-      Ngày sử dụng: ${bookingDate}
-      Vé: ${selectedTickets.map((t) => `${t.type} x ${t.quantity}`).join(', ')}
-      Tổng tiền: ${total.toLocaleString()} đ
-    `)
-
-    // Reset form
-    setName('')
-    setEmail('')
-    setPhoneNumber('')
-    setTicketList(Object.keys(prices).map((type) => ({ type, quantity: 0 })))
+  if (!name || !phoneNumber || !bookingDate) {
+    alert("⚠️ Vui lòng nhập đầy đủ thông tin bắt buộc!");
+    return;
   }
+
+  const bookingData = {
+    fullname: name,
+    email,
+    phone: phoneNumber,
+    booking_date: bookingDate,
+    dong_hanh_te: ticketList.find(t => t.type === "Đồng hành an nhiên (TE)")?.quantity || 0,
+    dong_hanh_nl: ticketList.find(t => t.type === "Đồng hành an nhiên (NL)")?.quantity || 0,
+    hanh_trinh_te: ticketList.find(t => t.type === "Hành trình vui khoẻ (TE)")?.quantity || 0,
+    hanh_trinh_nl: ticketList.find(t => t.type === "Hành trình vui khoẻ (NL)")?.quantity || 0,
+    cham_net_te: ticketList.find(t => t.type === "Chạm nét tâm linh (TE)")?.quantity || 0,
+    cham_net_nl: ticketList.find(t => t.type === "Chạm nét tâm linh (NL)")?.quantity || 0,
+    total_price: total,
+  };
+
+  try {
+    setLoading(true);
+    const res = await fetch("http://113.160.202.187:1989/api/bookingcar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingData),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "Lỗi khi gửi dữ liệu đặt vé!");
+    }
+
+    alert("✅ Đặt vé thành công!");
+    setName("");
+    setEmail("");
+    setPhoneNumber("");
+    setTicketList(Object.keys(prices).map((type) => ({ type, quantity: 0 })));
+  } catch (error) {
+    console.error("❌ Lỗi khi gửi dữ liệu:", error);
+    alert("❌ Có lỗi xảy ra khi gửi dữ liệu. Vui lòng thử lại!");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <form
@@ -74,7 +94,7 @@ const CarPagevi = () => {
       className="mt-[50px] mb-20 px-6 max-w-[1300px] mx-auto"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Cột trái: Thông tin mô tả */}
+        {/* Cột trái: Mô tả */}
         <div>
           <h2 className="text-xl font-Philosopher font-bold text-gray-700 mb-4">
             Xe Điện - Vé Thăm Quan
@@ -83,16 +103,13 @@ const CarPagevi = () => {
             Du khách thập phương rút ngắn được thời gian di bộ từ bến xe vào
             chùa khi chỉ mất khoảng 10 phút ngồi xe điện. Bến xe điện được tổ
             chức quy củ, các xe được xếp lượt trình tự và tài xế chở khách cũng
-            không sợ bị chặt chém, bất khách đọc được vì giá đã được niêm yết và
-            do Ban Quản Lý bán ngay từ bến chính. Các biển chỉ dẫn, hướng dẫn
-            khách đi xe điện được dán khắp nơi.
+            không sợ bị chặt chém vì giá vé đã được niêm yết rõ ràng.
           </p>
           <p className="text-sm mt-2 text-gray-700">
             Giá vé xe điện chùa Bái Đính từ 100.000đ/người đối với người lớn,
             riêng trẻ em dưới 1m sẽ được miễn phí.
           </p>
 
-          {/* Hình ảnh */}
           <div className="mt-4">
             <img
               src="https://sinhtour.vn/wp-content/uploads/2024/01/ve-xe-dien-bai-dinh-1.jpg"
@@ -102,9 +119,9 @@ const CarPagevi = () => {
           </div>
         </div>
 
-        {/* Cột phải: Đặt vé */}
+        {/* Cột phải: Form đặt vé */}
         <div className="border rounded-lg p-4 space-y-4 shadow">
-          <h3 className="text-xl font-medium font-bold text-gray-800 mb-2">Đặt dịch vụ</h3>
+          <h3 className="text-xl font-bold text-gray-800 mb-2">Đặt dịch vụ</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
@@ -194,9 +211,10 @@ const CarPagevi = () => {
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-[#356D3D] text-white py-2 rounded-md hover:bg-[#2b4d33] transition"
           >
-            ĐẶT NGAY
+            {loading ? 'Đang xử lý...' : 'ĐẶT NGAY'}
           </button>
         </div>
       </div>

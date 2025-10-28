@@ -21,7 +21,7 @@ const FamousPlaces = () => {
 
   return (
     <div className="w-full relative mt-[-60px] lg:mt-[-190px]">
-      <div className="bg-[#F1EBE5]/40 w-full">
+      <div className=" w-full">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
 
           {/* Tiêu đề */}

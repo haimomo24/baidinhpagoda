@@ -67,7 +67,7 @@ const ImageMapvi = () => {
 
   return (
     <div className="w-full mt-[-50px] lg:mt-[-150px] relative">
-      <div className="bg-[#F1EBE5]/60 min-h-screen w-full flex justify-center items-center font-sans">
+      <div className="min-h-screen w-full flex justify-center items-center font-sans">
         <main className="container mx-auto flex flex-col md:flex-row items-center md:items-stretch justify-center md:justify-start gap-6 md:gap-8 lg:gap-12 p-4 sm:p-6 lg:p-8">
           
           {/* === Cột bên trái: Slider === */}
