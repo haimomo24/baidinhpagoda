@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // ✅ Thêm import
+import { useRouter } from "next/navigation";
 
 const BlogDashboard = () => {
-  const router = useRouter(); // ✅ Khởi tạo router
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -15,9 +15,15 @@ const BlogDashboard = () => {
     images_2: null,
     images_2Preview: null,
     title_3: "",
+    title_4: "",
+    images_3: null,
+    images_3Preview: null,
+    title_5: "",
+    images_4: null,
+    images_4Preview: null,
   });
 
-  // Thay đổi input text / textarea
+  // Xử lý thay đổi input
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -25,7 +31,7 @@ const BlogDashboard = () => {
     });
   };
 
-  // Chọn file ảnh
+  // Xử lý chọn ảnh
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     const name = e.target.name;
@@ -36,7 +42,7 @@ const BlogDashboard = () => {
     });
   };
 
-  // Xóa ảnh đã chọn
+  // Xóa ảnh
   const handleRemoveImage = (name) => {
     setFormData({
       ...formData,
@@ -54,8 +60,13 @@ const BlogDashboard = () => {
       formToSend.append("title_1", formData.title_1);
       formToSend.append("title_2", formData.title_2);
       formToSend.append("title_3", formData.title_3);
+      formToSend.append("title_4", formData.title_4);
+      formToSend.append("title_5", formData.title_5);
+
       if (formData.images_1) formToSend.append("images_1", formData.images_1);
       if (formData.images_2) formToSend.append("images_2", formData.images_2);
+      if (formData.images_3) formToSend.append("images_3", formData.images_3);
+      if (formData.images_4) formToSend.append("images_4", formData.images_4);
 
       const res = await fetch("http://113.160.202.187:1989/api/blog", {
         method: "POST",
@@ -65,7 +76,7 @@ const BlogDashboard = () => {
       const data = await res.json();
       if (res.ok) {
         alert("✅ Đăng blog thành công!");
-        router.push("/dashboard/blog"); // ✅ Chuyển về trang blog
+        router.push("/dashboard/blog");
       } else {
         alert("❌ Lỗi: " + data.error);
       }
@@ -75,10 +86,38 @@ const BlogDashboard = () => {
     }
   };
 
+  // Hàm hiển thị vùng chọn ảnh
+  const renderImageUpload = (label, name, preview) => (
+    <div>
+      <label className="block font-semibold mb-2 text-lg">{label}</label>
+      {!preview ? (
+        <label className="inline-block bg-red-600 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-red-700">
+          Chọn ảnh
+          <input type="file" name={name} onChange={handleFileChange} className="hidden" />
+        </label>
+      ) : (
+        <div className="relative inline-block mt-4">
+          <img
+            src={preview}
+            alt={name}
+            className="max-h-80 rounded-xl shadow-md border"
+          />
+          <button
+            type="button"
+            onClick={() => handleRemoveImage(name)}
+            className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600"
+          >
+            ❌
+          </button>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div className="p-10 min-h-screen text-black">
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Tên tiêu đề chính */}
+        {/* Tiêu đề chính */}
         <div>
           <label className="block font-semibold mb-2 text-lg">Tên tiêu đề chính:</label>
           <input
@@ -92,7 +131,7 @@ const BlogDashboard = () => {
           />
         </div>
 
-        {/* Title 1 */}
+        {/* --- Mở bài --- */}
         <div>
           <label className="block font-semibold mb-2 text-lg">Mở bài</label>
           <textarea
@@ -102,89 +141,51 @@ const BlogDashboard = () => {
             rows="4"
             placeholder="Nhập nội dung mở bài..."
             className="w-full border-b-2 border-gray-500 p-2 focus:outline-none focus:border-blue-400 resize-none"
-            required
           />
         </div>
+        {renderImageUpload("Ảnh 1:", "images_1", formData.images_1Preview)}
 
-        {/* Ảnh 1 */}
+        {/* --- Thân bài 1 --- */}
         <div>
-          <label className="block font-semibold mb-2 text-lg">Ảnh 1:</label>
-          {!formData.images_1Preview ? (
-            <label className="inline-block bg-red-600 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-red-700">
-              Chọn ảnh
-              <input type="file" name="images_1" onChange={handleFileChange} className="hidden" />
-            </label>
-          ) : (
-            <div className="relative inline-block mt-4">
-              <img
-                src={formData.images_1Preview}
-                alt="Preview 1"
-                className="max-h-80 rounded-xl shadow-md border"
-              />
-              <button
-                type="button"
-                onClick={() => handleRemoveImage("images_1")}
-                className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600"
-              >
-                ❌
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Title 2 */}
-        <div>
-          <label className="block font-semibold mb-2 text-lg">Thân bài</label>
+          <label className="block font-semibold mb-2 text-lg">Thân bài 1</label>
           <textarea
             name="title_2"
             value={formData.title_2}
             onChange={handleChange}
-            rows="5"
-            placeholder="Nhập nội dung thân bài..."
+            rows="4"
+            placeholder="Nhập nội dung thân bài 1..."
             className="w-full border-b-2 border-gray-500 p-2 focus:outline-none focus:border-blue-400 resize-none"
-            required
           />
         </div>
+        {renderImageUpload("Ảnh 2:", "images_2", formData.images_2Preview)}
 
-        {/* Ảnh 2 */}
+        {/* --- Thân bài 2 --- */}
         <div>
-          <label className="block font-semibold mb-2 text-lg">Ảnh 2:</label>
-          {!formData.images_2Preview ? (
-            <label className="inline-block bg-red-600 text-white px-6 py-3 rounded-xl cursor-pointer hover:bg-red-700">
-              Chọn ảnh
-              <input type="file" name="images_2" onChange={handleFileChange} className="hidden" />
-            </label>
-          ) : (
-            <div className="relative inline-block mt-4">
-              <img
-                src={formData.images_2Preview}
-                alt="Preview 2"
-                className="max-h-80 rounded-xl shadow-md border"
-              />
-              <button
-                type="button"
-                onClick={() => handleRemoveImage("images_2")}
-                className="absolute top-2 right-2 bg-red-500 text-white rounded-full px-2 py-1 hover:bg-red-600"
-              >
-                ❌
-              </button>
-            </div>
-          )}
+          <label className="block font-semibold mb-2 text-lg">Thân bài 2</label>
+          <textarea
+            name="title_4"
+            value={formData.title_4}
+            onChange={handleChange}
+            rows="4"
+            placeholder="Nhập nội dung thân bài 2..."
+            className="w-full border-b-2 border-gray-500 p-2 focus:outline-none focus:border-blue-400 resize-none"
+          />
         </div>
+        {renderImageUpload("Ảnh 3:", "images_3", formData.images_3Preview)}
 
-        {/* Title 3 */}
+        {/* --- Kết bài --- */}
         <div>
           <label className="block font-semibold mb-2 text-lg">Kết bài</label>
           <textarea
-            name="title_3"
-            value={formData.title_3}
+            name="title_5"
+            value={formData.title_5}
             onChange={handleChange}
             rows="3"
             placeholder="Nhập nội dung kết bài..."
             className="w-full border-b-2 border-gray-500 p-2 focus:outline-none focus:border-blue-400 resize-none"
-            required
           />
         </div>
+        {renderImageUpload("Ảnh 4:", "images_4", formData.images_4Preview)}
 
         <div className="flex justify-center">
           <button

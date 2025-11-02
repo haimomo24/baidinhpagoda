@@ -32,6 +32,7 @@ export default function HeaderPageVi() {
       name: "DỊCH VỤ",
       link: "#",
       subMenu: [
+         { name: "Vé combo", link: "/vi/combo" },
         { name: "Hành trình di sản", link: "/vi/hanh-trinh-di-san" },
         { name: "Xe Điện", link: "/vi/car" },
         { name: "Tour Bái Đính về đêm", link: "/vi/bai-dinh-ve-dem" },

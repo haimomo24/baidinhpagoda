@@ -38,7 +38,7 @@ export default function FloatingButtons() {
                      transition-all duration-300 hover:scale-110"
           >
             {/* Sóng lan tỏa */}
-            <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
+            <span className="absolute inline-flex h-full w-full rounded-full  opacity-75 animate-ping"></span>
            <img
                 src="/images/phone-call.png"
                 alt="Logo Front"
@@ -86,11 +86,31 @@ export default function FloatingButtons() {
            <img
                 src="/images/messenger.png"
                 alt="Logo Front"
-                className=" w-6 h-6 object-contain backface-hidden"
+                className=" w-6 h-6 object-contain backface-hidden   "
               />
           </a>
           <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-500 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             Facebook Messenger
+            <div className="absolute left-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-l-gray-500"></div>
+          </div>
+        </div>
+        <div className="group relative">
+          <a
+            href="/vi/combo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center w-10 h-10
+                        text-white rounded-full shadow-lg 
+                       transition-all duration-300 hover:scale-110"
+          >
+           <img
+                src="/images/pngtree-ticket-icon-png-image_3581539.jpg"
+                alt="Logo Front"
+                className=" w-8 h-8 object-contain backface-hidden rounded-full "
+              />
+          </a>
+          <div className="absolute right-full mr-3 top-1/2 transform -translate-y-1/2 bg-gray-500 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Combo ticket
             <div className="absolute left-full top-1/2 transform -translate-y-1/2 border-4 border-transparent border-l-gray-500"></div>
           </div>
         </div>

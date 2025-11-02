@@ -12,9 +12,13 @@ const BlogTable = () => {
   const [uploadFiles, setUploadFiles] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
 
+  // 🔹 Phân trang
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+
   const API_URL = "http://113.160.202.187:1989/api/blog";
 
-  // Fetch blog
+  // 📌 Fetch blog
   const fetchBlogs = async () => {
     try {
       const res = await fetch(API_URL);
@@ -31,7 +35,7 @@ const BlogTable = () => {
     fetchBlogs();
   }, []);
 
-  // Xoá blog
+  // 🗑 Xoá blog
   const handleDelete = async (id) => {
     if (!confirm("Bạn có chắc chắn muốn xoá blog này?")) return;
     try {
@@ -45,7 +49,7 @@ const BlogTable = () => {
     }
   };
 
-  // Hiển thị title rút gọn
+  // ✂️ Hiển thị tiêu đề rút gọn
   const renderTitle = (blogId, field, text) => {
     const key = `${blogId}-${field}`;
     const isExpanded = expanded[key];
@@ -66,7 +70,7 @@ const BlogTable = () => {
     );
   };
 
-  // Mở modal edit
+  // 📝 Mở modal sửa
   const openEditModal = (blog) => {
     setEditBlog(blog);
     setFormData({
@@ -82,7 +86,6 @@ const BlogTable = () => {
     setUploadFiles({});
   };
 
-  // Thay đổi form
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -95,7 +98,6 @@ const BlogTable = () => {
     }
   };
 
-  // Submit edit
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     if (!editBlog) return;
@@ -124,22 +126,30 @@ const BlogTable = () => {
 
   if (loading) return <p className="text-center text-gray-600">Đang tải dữ liệu...</p>;
 
-  // Lọc danh sách theo name
+  // 🔍 Lọc danh sách theo tên
   const filteredBlogs = blogs.filter((blog) =>
     blog.name?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // 📄 Phân trang
+  const totalPages = Math.ceil(filteredBlogs.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedBlogs = filteredBlogs.slice(startIndex, startIndex + itemsPerPage);
+
   return (
     <div className="relative overflow-x-auto">
+      {/* Thanh tìm kiếm và thêm mới */}
       <div className="flex justify-between mb-4">
         <input
           type="text"
           placeholder="Tìm kiếm..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+            setCurrentPage(1);
+          }}
           className="px-4 py-2 border rounded w-1/3"
         />
-
         <Link
           href="/dashboard/blog/addblog"
           className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
@@ -148,6 +158,7 @@ const BlogTable = () => {
         </Link>
       </div>
 
+      {/* Bảng danh sách blog */}
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
@@ -162,8 +173,8 @@ const BlogTable = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredBlogs.length > 0 ? (
-            filteredBlogs.map((blog) => (
+          {paginatedBlogs.length > 0 ? (
+            paginatedBlogs.map((blog) => (
               <tr key={blog.id} className="bg-white border-b">
                 <td className="px-6 py-4">{blog.id}</td>
                 <td className="px-6 py-4">{blog.name}</td>
@@ -220,7 +231,40 @@ const BlogTable = () => {
         </tbody>
       </table>
 
-      {/* Modal edit blog */}
+      {/* 🔹 Phân trang */}
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-6">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+            disabled={currentPage === 1}
+            className="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50"
+          >
+            « Trước
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i + 1}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-3 py-1 border rounded ${
+                currentPage === i + 1 ? "bg-blue-600 text-white" : "hover:bg-gray-100"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 border rounded hover:bg-gray-100 disabled:opacity-50"
+          >
+            Sau »
+          </button>
+        </div>
+      )}
+
+      {/* Modal sửa blog */}
       {editBlog && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-white p-8 rounded-lg w-[90%] h-[90%] overflow-y-auto relative">
@@ -233,9 +277,7 @@ const BlogTable = () => {
             <h2 className="text-xl font-bold mb-6">Sửa Blog: {editBlog.name}</h2>
 
             <form onSubmit={handleEditSubmit} className="grid grid-cols-1 gap-4">
-              {/* Tiếng Việt */}
               <h3 className="text-lg font-semibold text-blue-600">🌐 Tiếng Việt</h3>
-
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Tên Blog</label>
                 <input
@@ -273,11 +315,11 @@ const BlogTable = () => {
                 className="border rounded px-3 py-2 w-full resize-y"
               />
 
-              {/* Tiếng Anh */}
               <h3 className="text-lg font-semibold text-green-600 mt-6">🇬🇧 English</h3>
-
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Blog Name (EN)</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Blog Name (EN)
+                </label>
                 <input
                   type="text"
                   name="name_en"
@@ -312,25 +354,23 @@ const BlogTable = () => {
                 className="border rounded px-3 py-2 w-full resize-y"
               />
 
-              {/* Ảnh */}
+              {/* 4 ảnh */}
               <div className="grid grid-cols-2 gap-4 mt-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Ảnh 1</label>
-                  <input
-                    type="file"
-                    name="images_1"
-                    onChange={handleFileChange}
-                    className="w-full"
-                  />
+                  <input type="file" name="images_1" onChange={handleFileChange} className="w-full" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Ảnh 2</label>
-                  <input
-                    type="file"
-                    name="images_2"
-                    onChange={handleFileChange}
-                    className="w-full"
-                  />
+                  <input type="file" name="images_2" onChange={handleFileChange} className="w-full" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Ảnh 3</label>
+                  <input type="file" name="images_3" onChange={handleFileChange} className="w-full" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">Ảnh 4</label>
+                  <input type="file" name="images_4" onChange={handleFileChange} className="w-full" />
                 </div>
               </div>
 

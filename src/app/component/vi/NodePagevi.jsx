@@ -8,34 +8,34 @@ const NodePagevi = () => {
     {
       img: "/images/node1.jpg", // ✅ Đặt file này trong thư mục public/images/
       title: "THỊ THỰC",
-      link: "vi/blog/19",
+      link: "vi/blog/29",
     },
     {
       img: "/images/History white_0.jpg",
       title: "LỊCH SỬ",
-      link: "vi/blog/18",
+      link: "vi/blog/30",
     },
     {
       img: "/images/Transport_1.jpg",
       title: "Phương Tiện",
-      link: "vi/blog/17",
+      link: "vi/blog/31",
     },
     {
       img: "/images/Visas_1.jpg",
       title: "SỰ AN TOÀN",
-      link: "vi/blog/16",
+      link: "vi/blog/32",
     },
     {
       img: "/images/Weather white_1.jpg",
       title: "Thời Tiết",
-      link: "vi/blog/14",
+      link: "vi/blog/33",
     },
   ];
 
   return (
     <div className="bg-white mt-[-80px] py-14 px-8 text-center">
       {/* Tiêu đề */}
-      <h1 className="relative inline-block mb-6 select-none transition-transform duration-300 ease-out hover:scale-105">
+      <h1 className="relative mr-[40%] inline-block mb-6 select-none transition-transform  duration-300 ease-out hover:scale-105">
               <span
                 className="relative z-10 block px-10 py-3 
                   text-2xl sm:text-2xl lg:text-2xl font-bold
@@ -51,9 +51,7 @@ const NodePagevi = () => {
                    MẸO DU LỊCH
               </span>
             </h1>
-      <p className="text-gray-600 mb-12 text-lg">
-        Chuẩn bị cho chuyến đi của bạn với những bài viết thực tế này
-      </p>
+      
 
       {/* Danh sách các mục */}
       <div className="flex flex-wrap justify-center gap-30">

@@ -72,7 +72,7 @@ const MobileSlider = () => {
 
   return (
     <div
-      className="relative w-full px-4 block sm:hidden" // chỉ hiện mobile
+      className="relative  w-full px-4 block sm:hidden" // chỉ hiện mobile
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -169,7 +169,7 @@ const DesktopSlider = () => {
 // ========== MAIN ==========
 const BlogPage = () => {
   return (
-    <div className="w-full mt-[-20px]  py-12">
+    <div className="w-full mt-[-80px] mb-[30px]  py-12">
       <div className="max-w-6xl mx-auto flex justify-start mb-10 px-4">
         <h2 className="
     inline-block px-6 py-3
