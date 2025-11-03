@@ -72,7 +72,7 @@ export default function RestaurantPage() {
     };
 
     try {
-      const res = await fetch("http://113.160.202.187:1989/api/restaurant", {
+      const res = await fetch("http://113.160.202.187:1985/api/restaurant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

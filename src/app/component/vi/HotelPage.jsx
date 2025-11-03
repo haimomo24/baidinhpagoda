@@ -14,7 +14,7 @@ export default function HotelPage() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await axios.get('http://113.160.202.187:1989/api/room')
+        const res = await axios.get('http://113.160.202.187:1985/api/room')
         setRooms(res.data)
       } catch (err) {
         console.error('❌ Lỗi khi lấy danh sách phòng:', err)
@@ -46,7 +46,7 @@ export default function HotelPage() {
                 <img
                   src={
                     room.image1
-                      ? `http://113.160.202.187:1989${room.image1}`
+                      ? `http://113.160.202.187:1985${room.image1}`
                       : '/uploads/placeholder.jpg'
                   }
                   alt={room.room_name}

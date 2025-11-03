@@ -27,7 +27,7 @@ const HotelList = () => {
     image4: null,
   });
 
-  const API_URL = "http://113.160.202.187:1989/api/room";
+  const API_URL = "http://113.160.202.187:1985/api/room";
 
   /* 🛡️ Kiểm tra quyền truy cập */
  useEffect(() => {

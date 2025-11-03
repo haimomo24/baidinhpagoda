@@ -11,7 +11,7 @@ const HanhtrinhdisanDashboard = () => {
   // 📡 Lấy dữ liệu từ API
   const fetchData = async () => {
     try {
-      const res = await fetch("http://113.160.202.187:1989/api/ticket");
+      const res = await fetch("http://113.160.202.187:1985/api/ticket");
       const data = await res.json();
       setTickets(data);
     } catch (err) {
@@ -28,7 +28,7 @@ const HanhtrinhdisanDashboard = () => {
   // 📝 Hàm cập nhật trạng thái
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      await fetch(`http://113.160.202.187:1989/api/ticket/${id}/status`, {
+      await fetch(`http://113.160.202.187:1985/api/ticket/${id}/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),

@@ -25,7 +25,7 @@ const ContactVi = () => {
     setLoading(true);
     setIsSubmitting(true);
     try {
-      const res = await fetch("http://113.160.202.187:1989/api/contactpage", {
+      const res = await fetch("http://113.160.202.187:1985/api/contactpage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

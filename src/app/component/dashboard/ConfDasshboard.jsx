@@ -11,7 +11,7 @@ const ConfDashboard = () => {
   // Lấy dữ liệu từ API
   const fetchData = async () => {
     try {
-      const res = await fetch("http://113.160.202.187:1989/api/conference");
+      const res = await fetch("http://113.160.202.187:1985/api/conference");
       const data = await res.json();
       setBookings(data);
     } catch (err) {
@@ -28,7 +28,7 @@ const ConfDashboard = () => {
   // Cập nhật trạng thái
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      await fetch(`http://113.160.202.187:1989/api/conference/${id}/status`, {
+      await fetch(`http://113.160.202.187:1985/api/conference/${id}/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),

@@ -5,7 +5,7 @@ import Image from "next/image";
 import MapPage from "../MapPage";
 
 const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1989";
+  process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1985";
 
 const ArrowLeftIcon = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none"

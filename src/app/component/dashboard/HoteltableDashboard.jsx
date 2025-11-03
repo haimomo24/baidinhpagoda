@@ -10,7 +10,7 @@ const HoteltableDashboard = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await axios.get('http://113.160.202.187:1989/api/booking')
+        const res = await axios.get('http://113.160.202.187:1985/api/booking')
         setBookings(res.data)
       } catch (err) {
         console.error('❌ Lỗi khi lấy danh sách đơn đặt phòng:', err)
@@ -24,7 +24,7 @@ const HoteltableDashboard = () => {
   // 🟢 Xác nhận đơn đặt phòng
   const handleConfirm = async id => {
   try {
-    const res = await axios.put(`http://113.160.202.187:1989/api/booking/${id}/status`, {
+    const res = await axios.put(`http://113.160.202.187:1985/api/booking/${id}/status`, {
       status: 'Đã xác nhận'
     })
     alert(res.data.message)

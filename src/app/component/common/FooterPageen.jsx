@@ -7,11 +7,11 @@ const FooterPageen = () => {
     
       useEffect(() => {
         // Ghi nhận 1 lượt truy cập
-        fetch("http://113.160.202.187:1989/api/see", { method: "POST" })
+        fetch("http://113.160.202.187:1985/api/see", { method: "POST" })
           .catch(err => console.error("❌ Lỗi ghi lượt truy cập:", err))
     
         // Lấy tổng lượt truy cập
-        fetch("http://113.160.202.187:1989/api/see/total")
+        fetch("http://113.160.202.187:1985/api/see/total")
           .then(res => res.json())
           .then(data => {
             if (data?.view_count !== undefined) {

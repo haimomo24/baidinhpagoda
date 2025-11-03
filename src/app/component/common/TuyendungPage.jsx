@@ -11,7 +11,7 @@ const TuyendungPage = () => {
   // 📌 Lấy danh sách ứng viên
   const fetchData = async () => {
     try {
-      const res = await fetch("http://113.160.202.187:1989/api/recruitment");
+      const res = await fetch("http://113.160.202.187:1985/api/recruitment");
       const data = await res.json();
       setCandidates(data);
     } catch (err) {
@@ -30,7 +30,7 @@ const TuyendungPage = () => {
   const handleDelete = async (id) => {
     if (!confirm("Bạn có chắc muốn xóa ứng viên này?")) return;
     try {
-      const res = await fetch(`http://113.160.202.187:1989/api/recruitment/${id}`, {
+      const res = await fetch(`http://113.160.202.187:1985/api/recruitment/${id}`, {
         method: "DELETE",
       });
       const result = await res.json();
@@ -51,7 +51,7 @@ const TuyendungPage = () => {
   const handleDownloadCV = (filename) => {
     if (!filename) return alert("Ứng viên chưa tải lên CV!");
     const link = document.createElement("a");
-    link.href = `http://113.160.202.187:1989/uploads/${filename}`;
+    link.href = `http://113.160.202.187:1985/uploads/${filename}`;
     link.download = filename;
     link.click();
   };

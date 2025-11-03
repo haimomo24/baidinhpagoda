@@ -21,11 +21,11 @@ const ShowHotel = () => {
   useEffect(() => {
     const fetchRoomDetail = async () => {
       try {
-        const res = await axios.get(`http://113.160.202.187:1989/api/room/${id}`)
+        const res = await axios.get(`http://113.160.202.187:1985/api/room/${id}`)
         setRoom(res.data)
         const images = [res.data.image1, res.data.image2, res.data.image3, res.data.image4]
           .filter(Boolean)
-          .map(img => `http://113.160.202.187:1989${img}`)
+          .map(img => `http://113.160.202.187:1985${img}`)
         setSelectedImage(images[0])
 
         // 🟢 Gán sẵn loại phòng trong form
@@ -50,7 +50,7 @@ const ShowHotel = () => {
     e.preventDefault()
 
     try {
-      const res = await axios.post('http://113.160.202.187:1989/api/booking', {
+      const res = await axios.post('http://113.160.202.187:1985/api/booking', {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -93,7 +93,7 @@ const ShowHotel = () => {
   // 🟢 Mảng ảnh phòng
   const images = [room.image1, room.image2, room.image3, room.image4]
     .filter(Boolean)
-    .map(img => `http://113.160.202.187:1989${img}`)
+    .map(img => `http://113.160.202.187:1985${img}`)
 
   return (
     <section className="py-8 bg-white mb-[100px] md:py-16 antialiased">

@@ -12,7 +12,7 @@ const nextConfig = {
       {
         protocol: "http",
         hostname: "113.160.202.187",
-        port: "1989",
+        port: "1985",
         pathname: "/uploads/**", // Cho phép tất cả ảnh trong thư mục uploads
       },
     ],

@@ -12,7 +12,7 @@ const BlogPage = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch("http://113.160.202.187:1989/api/blog");
+        const res = await fetch("http://113.160.202.187:1985/api/blog");
         const data = await res.json();
         setBlogs(data);
       } catch (error) {

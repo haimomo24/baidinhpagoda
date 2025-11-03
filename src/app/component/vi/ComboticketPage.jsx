@@ -73,7 +73,7 @@ const ComboticketPage = () => {
 
   try {
     setLoading(true);
-    const res = await fetch("http://113.160.202.187:1989/api/combo-ticket", {
+    const res = await fetch("http://113.160.202.187:1985/api/combo-ticket", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dataToSend),

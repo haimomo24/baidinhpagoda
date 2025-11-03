@@ -61,7 +61,7 @@ const CarPagevi = () => {
 
   try {
     setLoading(true);
-    const res = await fetch("http://113.160.202.187:1989/api/bookingcar", {
+    const res = await fetch("http://113.160.202.187:1985/api/bookingcar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

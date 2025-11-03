@@ -48,7 +48,7 @@ const TuyenDung = () => {
     form.append("message", formData.message);
     form.append("cv_file", formData.cv); // tên trùng với cột trong SQL
 
-    const res = await fetch("http://113.160.202.187:1989/api/recruitment", {
+    const res = await fetch("http://113.160.202.187:1985/api/recruitment", {
       method: "POST",
       body: form,
     });

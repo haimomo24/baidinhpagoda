@@ -16,7 +16,7 @@ const BlogTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const API_URL = "http://113.160.202.187:1989/api/blog";
+  const API_URL = "http://113.160.202.187:1985/api/blog";
 
   // 📌 Fetch blog
   const fetchBlogs = async () => {

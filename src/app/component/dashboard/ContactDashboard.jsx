@@ -11,7 +11,7 @@ const ContactDashboard = () => {
       // Lấy dữ liệu từ API
       const fetchData = async () => {
         try {
-          const res = await fetch("http://113.160.202.187:1989/api/contactpage");
+          const res = await fetch("http://113.160.202.187:1985/api/contactpage");
           const data = await res.json();
           setContacts(data);
         } catch (err) {
@@ -28,7 +28,7 @@ const ContactDashboard = () => {
       // Hàm cập nhật trạng thái
       const handleUpdateStatus = async (id, newStatus) => {
         try {
-          await fetch(`http://113.160.202.187:1989/api/contact/${id}/status`, {
+          await fetch(`http://113.160.202.187:1985/api/contact/${id}/status`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: newStatus }),
