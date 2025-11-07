@@ -1,3 +1,4 @@
+
 import "../globals.css";
 import HeaderPageVi from "../component/common/HeaderPage.vi";
 import FooterPage from "../component/common/FooterPage";

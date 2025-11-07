@@ -33,9 +33,10 @@ const NodePagevi = () => {
   ];
 
   return (
-    <div className="bg-white mt-[-80px] py-14 px-8 text-center">
+    <div className="bg-white mb-[10px] mt-[-80px] py-16 px-8 ">
       {/* Tiêu đề */}
-      <h1 className="relative mr-[40%] inline-block mb-6 select-none transition-transform  duration-300 ease-out hover:scale-105">
+       <div className="relative max-w-6xl mt-[-40px] mb-[40px] mx-auto overflow-hidden">
+    <h1 className="relative inline-block ml-[10px] mb-6 select-none transition-transform duration-300 ease-out hover:scale-105">
               <span
                 className="relative z-10 block px-10 py-3 
                   text-2xl sm:text-2xl lg:text-2xl font-bold
@@ -51,6 +52,8 @@ const NodePagevi = () => {
                    MẸO DU LỊCH
               </span>
             </h1>
+       </div>
+      
       
 
       {/* Danh sách các mục */}

@@ -27,7 +27,7 @@ export default function HeaderPageVi() {
 
   const menuItems = [
     { name: "TRANG CHỦ", link: "/vi" },
-    { name: "TIN TỨC", link: "#blog" },
+    { name: "VỀ CHÚNG TÔI", link: "#blog" },
     {
       name: "DỊCH VỤ",
       link: "#",

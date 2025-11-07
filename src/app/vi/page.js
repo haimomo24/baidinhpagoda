@@ -1,3 +1,4 @@
+import CommentPage from "../component/common/CommentPage";
 import HeaderBookingvi from "../component/common/HeaderBookingvi";
 import SliderImage from "../component/common/SliderImage";
 import VideoPage from "../component/common/VideoPage";
@@ -34,6 +35,7 @@ export default function ViHome() {
       </div> */}
       <NodePagevi/>
    <VideoPage/>
+   <CommentPage/>
   </div>
   
   </>
