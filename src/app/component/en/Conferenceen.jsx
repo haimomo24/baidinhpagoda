@@ -77,7 +77,7 @@ const Conferenceen = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("http://113.160.202.187:1989/api/conference", {
+      const res = await fetch("http://113.160.202.187:1985/api/conference", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

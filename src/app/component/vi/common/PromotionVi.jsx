@@ -174,7 +174,7 @@ const PromotionVi = () => {
               <img
                 src={img}
                 alt={`${currentEvent.title} ${index + 1}`}
-                className="w-full h-56 object-cover transition-all duration-500 group-hover:brightness-110"
+                className="w-full h-76 object-cover transition-all duration-500 group-hover:brightness-110"
               />
               <div className="bg-black/50 text-white py-2 text-sm text-center">
                 <p className="text-xs">{currentEvent.title}</p>

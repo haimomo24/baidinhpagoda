@@ -1,98 +1,78 @@
 "use client"
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import React from "react";
+import Link from "next/link"; 
 
 const BlogPageen = () => {
-     const [blogs, setBlogs] = useState([]);
-      const [loading, setLoading] = useState(true);
-    
-      const [currentPage, setCurrentPage] = useState(1);
-      const itemsPerPage = 9;
-    
-      useEffect(() => {
-        const fetchBlogs = async () => {
-          try {
-            const res = await fetch("http://113.160.202.187:1989/api/blog");
-            const data = await res.json();
-            setBlogs(data);
-          } catch (error) {
-            console.error("Lỗi khi fetch blogs:", error);
-          } finally {
-            setLoading(false);
-          }
-        };
-    
-        fetchBlogs();
-      }, []);
-    
-      const indexOfLast = currentPage * itemsPerPage;
-      const indexOfFirst = indexOfLast - itemsPerPage;
-      const currentBlogs = blogs.slice(indexOfFirst, indexOfLast);
-    
-      const totalPages = Math.ceil(blogs.length / itemsPerPage);
-    
-      if (loading) {
-        return <div className="text-center py-10">Đang tải dữ liệu...</div>;
-      }
+    const tips = [
+    {
+      img: "/images/node1.jpg", // ✅ Đặt file này trong thư mục public/images/
+      title: "VISA",
+      link: "en/blog/29",
+    },
+    {
+      img: "/images/History white_0.jpg",
+      title: "HISTORY",
+      link: "en/blog/30",
+    },
+    {
+      img: "/images/Transport_1.jpg",
+      title: "Vehicle",
+      link: "en/blog/31",
+    },
+    {
+      img: "/images/Visas_1.jpg",
+      title: "SAFETY",
+      link: "en/blog/32",
+    },
+    {
+      img: "/images/Weather white_1.jpg",
+      title: "Weather",
+      link: "en/blog/33",
+    },
+  ];
+
   return (
-    <div
-      className="w-full min-h-screen mt-[-40px] bg-center bg-no-repeat relative"
-      style={{
-        backgroundImage: `url("https://png.pngtree.com/thumb_back/fh260/background/20210827/pngtree-color-block-texture-watercolor-smudge-beige-background-image_770429.jpg")`,
-        backgroundSize: "100% 100%",
-      }}
-    >
-      {/* lớp phủ mờ */}
-      <div className="bg-[#F1EBE5]/60 min-h-screen">
-        <div className="max-w-6xl mx-auto py-10 px-4">
-          <h2  className="
-    relative inline-block px-10 py-3 mb-6
-    text-2xl sm:text-2xl lg:text-2xl font-bold
-    text-[#0F7F3E] text-center md:text-left
-    bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
-    rounded-xl shadow-2xl
-    transition-all duration-300 ease-out
-
-    hover:text-red-600 hover:scale-105 hover:shadow-amber-500/50 hover:shadow-xl hover-shake
-  "
->GENERAL NEWS</h2>
-
-          {/* Grid 3 cột */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {currentBlogs.map((item) => (
-              <Link key={item.id} href={`/en/blog/${item.id}`}>
-                <div className="rounded-lg overflow-hidden group cursor-pointer shadow-md bg-white">
-                  <img
-                    src={item.images_1 ? item.images_1 : "/default.jpg"}
-                    alt={item.title_1 || item.name}
-                    className="w-full h-52 object-cover transform transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="p-4 bg-white">
-                    <h3 className="text-lg hover-shake font-bold mb-2 truncate">{item.title_1_en}</h3>
-                    <p className="text-gray-600 hover-shake text-sm line-clamp-2">{item.name_en}</p>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          {/* Phân trang */}
-          <div className="flex justify-end mt-6 space-x-2">
-            {[...Array(totalPages)].map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentPage(i + 1)}
-                className={`px-3 py-1 rounded ${
-                  currentPage === i + 1
-                    ? "bg-[#005F5A] text-white"
-                    : "bg-gray-200"
-                }`}
+   <div className="bg-white mb-[10px]  py-16 px-8 ">
+      {/* Tiêu đề */}
+       <div className="relative max-w-6xl mt-[-40px] mb-[40px] mx-auto overflow-hidden">
+    <h1 className="relative inline-block ml-[10px] mb-6 select-none transition-transform duration-300 ease-out hover:scale-105">
+              <span
+                className="relative z-10 block px-10 py-3 
+                  text-2xl sm:text-2xl lg:text-2xl font-bold
+                  text-[#176734] text-center
+                  bg-gradient-to-r from-stone-200 via-amber-300 to-stone-500
+                  rounded-xl 
+                  shadow-[0_8px_20px_rgba(0,0,0,0.25)]
+                  transition-all duration-300 ease-out
+                  hover:text-red-500 hover:shadow-[0_12px_25px_rgba(0,0,0,0.45)]
+                  hover:from-gray-300 hover:to-gray-500"
               >
-                {i + 1}
-              </button>
-            ))}
-          </div>
-        </div>
+                 
+                   TRAVEL TIPS
+              </span>
+            </h1>
+       </div>
+      
+      
+
+      {/* Danh sách các mục */}
+      <div className="flex flex-wrap justify-center gap-30">
+        {tips.map((tip, index) => (
+          <Link
+            key={index}
+            href={tip.link}
+            className="flex flex-col items-center space-y-3 transition-transform hover:scale-110 hover:opacity-90"
+          >
+            <img
+              src={tip.img}
+              alt={tip.title}
+              className="w-16 h-16 object-contain mb-2"
+            />
+            <p className="text-gray-700 font-medium tracking-wide">
+              {tip.title}
+            </p>
+          </Link>
+        ))}
       </div>
     </div>
   )

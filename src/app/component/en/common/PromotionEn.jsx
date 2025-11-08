@@ -1,136 +1,206 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const PromotionEn = () => {
-  const [promotions, setPromotions] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsPerSlide, setItemsPerSlide] = useState(4);
-  const router = useRouter();
-
-  // Cập nhật số lượng items theo kích thước màn hình
-  const handleResize = () => {
-    if (window.innerWidth < 768) setItemsPerSlide(1); // Mobile
-    else if (window.innerWidth < 1024) setItemsPerSlide(2); // Tablet
-    else setItemsPerSlide(4); // Desktop
-  };
-
-  useEffect(() => {
-    handleResize(); // set lần đầu
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  // Lấy dữ liệu promotion tiếng Anh
-  useEffect(() => {
-    const fetchPromotions = async () => {
-      try {
-        const res = await fetch("http://113.160.202.187:1989/api/promotion/en");
-        const data = await res.json();
-        setPromotions(data);
-      } catch (err) {
-        console.error("Lỗi khi load promotions:", err);
-      }
-    };
-    fetchPromotions();
-  }, []);
-
-  const nextSlide = () => {
-    if (currentIndex < promotions.length - itemsPerSlide) {
-      setCurrentIndex(currentIndex + 1);
-    }
-  };
-
-  const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-    }
-  };
-
-  const handleClick = (id) => {
-    router.push(`/vi/khuyenmai/${id}`);
-  };
-
-  if (promotions.length === 0)
-    return <p className="text-center py-10">Chưa có khuyến mãi nào</p>;
+ const events = [
+     {
+       month: "T1",
+       title: "Bai Dinh Pagoda Festival Opening Ceremony",
+       images: [
+         "/images/skthang/skth1_1.JPG",
+         "/images/skthang/skthang1_2.JPG",
+         "/images/skthang/sktha1_3.JPG",
+         "/images/skthang/skthg1_4.JPG",
+       ],
+       link: "/en/blog/20",
+     },
+     {
+       month: "T2",
+       title: "The Five Hundred Names Ceremony",
+       images: [
+         "/images/skthang/skth2_1.JPG",
+         "/images/skthang/skth2_2.JPG",
+         "/images/skthang/skth2_3.JPG",
+         "/images/skthang/skth2_4.JPG",
+       ],
+       link: "/en/blog/23",
+     },
+     {
+       month: "T3",
+       title: "Flower Fair",
+       images: [
+         "https://cdn.nhandan.vn/images/cb7e630123585f7e41144ef894e164898a40de23027349cd0f484f27969649ec7fd81905a0745e27ff21dfc24fd8bf1c/img-1773-5499.jpg",
+         "https://cdn.nbtv.vn/upload/news/8_2024/9_19042611082024.jpg",
+         "https://cdn.nhandan.vn/images/cb7e630123585f7e41144ef894e164898a40de23027349cd0f484f27969649ec7a34c7f6eef0aa63a166f42359355956/img-1951-4421.jpg",
+         "https://cdn.nbtv.vn/upload/news/4_2024/_14294515042024.jpg",
+       ],
+       link: "/en/blog/24",
+     },
+     {
+       month: "T4",
+       title: "Buddha's Birthday",
+       images: [
+         "/images/skthang/skth4_1.jpg",
+         "/images/skthang/skth4_2.jpg",
+         "/images/skthang/skth4_3.jpg",
+         "/images/skthang/skth4_4.jpg",
+       ],
+       link: "/en/blog/21",
+     },
+     {
+       month: "T5",
+       title: "First and fifteenth day of the lunar month",
+       images: [
+         "/images/skthang/m1_1.JPG",
+         "/images/skthang/m1_2.JPG",
+         "/images/skthang/m1_3.JPG",
+         "/images/skthang/m1_4.JPG",
+       ],
+       link: "/en/blog/24",
+     },
+     {
+       month: "T6",
+       title: "Summer Retreat",
+       images: [
+         "https://cdn.nbtv.vn/upload/news/6_2023/1_15374514062023.jpg",
+         "https://cdn.nbtv.vn/upload/news/6_2024/448976675_1036279037862405_8804307667957224360_n_16395024062024.jpg",
+         "https://cdn.nbtv.vn/upload/news/6_2024/yen_khanh_dien_tap_pclb__tkcn_nam_2024_hong_nam_00_02_30_08_still009_16345524062024.jpg",
+         "https://lh3.googleusercontent.com/abl-_HUrwQenzm4l0FBk6OACbVd3dnWDY2gbEVr1FRuOAi1r74R_tnQlgZvnqgn-1lsgTpgj1Iu3Z6RF5vLQvqXnd2y5CWEBlvcPc4LmOPZnTIYEEyekfrNGnic0PqLdjUW_Pgt02Cs=w450-h300-no",
+       ],
+       link: "/en/blog/25",
+     },
+     {
+       month: "T7",
+       title: "Vu Lan Festival of Filial Piety",
+       images: [
+         "/images/skthang/skth7_1.jpg",
+         "/images/skthang/skth7_2.jpg",
+         "/images/skthang/skth7_3.jpg",
+         "/images/skthang/skth7_4.jpg",
+       ],
+       link: "/en/blog/26",
+     },
+     {
+       month: "T8",
+       title: "First and fifteenth day of the lunar month",
+       images: [
+         "/images/skthang/m1_1.JPG",
+         "/images/skthang/m1_2.JPG",
+         "/images/skthang/m1_3.JPG",
+         "/images/skthang/m1_4.JPG",
+       ],
+       link: "/en/blog/24",
+     },
+     {
+       month: "T9",
+       title: "First and fifteenth day of the lunar month",
+       images: [
+         "/images/skthang/m1_1.JPG",
+         "/images/skthang/m1_2.JPG",
+         "/images/skthang/m1_3.JPG",
+         "/images/skthang/m1_4.JPG",
+       ],
+       link: "/en/blog/24",
+     },
+     {
+       month: "T10",
+       title: "Taboo of National Teacher Nguyen Minh Khong",
+       images: [
+         "/images/skthang/skth10_1.JPG",
+         "/images/skthang/skth10_2.JPG",
+         "/images/skthang/skth10_3.JPG",
+         "/images/skthang/skth10_4.JPG",
+       ],
+       link: "/en/blog/27",
+     },
+     {
+       month: "T11",
+       title: "Memorial of the late Venerable Thich Thanh Tu",
+       images: [
+         "/images/skthang/skth11_1.JPG",
+         "/images/skthang/skth11_2.JPG",
+         "/images/skthang/skth11_3.JPG",
+         "/images/skthang/skth11_4.JPG",
+       ],
+       link: "/en/blog/28",
+     },
+     {
+       month: "T12",
+       title: "First and fifteenth day of the lunar month",
+       images: [
+         "/images/skthang/m1_1.JPG",
+         "/images/skthang/m1_2.JPG",
+         "/images/skthang/m1_3.JPG",
+         "/images/skthang/m1_4.JPG",
+       ],
+       link: "/en/blog/24",
+     },
+   ];
+ 
+   const [activeMonth, setActiveMonth] = useState(0);
+   const handleMonthClick = (index) => setActiveMonth(index);
+   const currentEvent = events[activeMonth];
 
   return (
-    <div className="bg-[#F1EBE5]/70 py-10">
-      <div className="relative max-w-6xl mx-auto px-4">
-        <h2
-          className="
-            relative inline-block px-10 py-3 mb-6
-            text-2xl sm:text-3xl font-bold
-            text-[#0F7F3E] text-center md:text-left
-            bg-gradient-to-r from-stone-200 via-amber-200 to-stone-300
-            rounded-xl shadow-2xl
-            transition-all duration-300 ease-out
-            hover:text-red-600 hover:scale-105 hover:shadow-xl
-          "
-        >
-          FEATURED EVENTS
-        </h2>
-
-        {/* Nút trái */}
-        {currentIndex > 0 && (
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 md:-left-6 top-1/2 -translate-y-1/2 bg-red-600 w-10 h-10 flex items-center justify-center rounded-full shadow-lg z-20 hover:bg-red-700 transition-colors"
+   <div className="py-14 mt-[-60px]">
+      <div className="relative max-w-6xl mx-auto overflow-hidden">
+        {/* 🟢 Tiêu đề — giữ nguyên bên trái */}
+        <h1 className="relative inline-block ml-[10px] mb-6 select-none transition-transform duration-300 ease-out hover:scale-105">
+          <span
+            className="relative z-10 block px-10 py-3 
+              text-2xl font-bold
+              text-[#176734]
+              bg-gradient-to-r from-stone-200 via-amber-300 to-stone-500
+              rounded-xl 
+              shadow-[0_8px_20px_rgba(0,0,0,0.25)]
+              transition-all duration-300 ease-out
+              hover:text-red-500 hover:shadow-[0_12px_25px_rgba(0,0,0,0.45)]
+              hover:from-gray-300 hover:to-gray-500"
           >
-            <FaChevronLeft className="text-white" />
-          </button>
-        )}
+            MONTHLY EVENTS
+          </span>
+        </h1>
 
-        {/* Slide container */}
-        <div className="overflow-hidden">
-          <div
-            className="flex transition-transform duration-500"
-            style={{
-              transform: `translateX(-${(currentIndex * 100) / itemsPerSlide}%)`,
-            }}
-          >
-            {promotions.map((item) => (
+        {/* 🟢 Hiển thị ảnh — responsive */}
+        <div className="flex justify-center gap-6 flex-wrap transition-all duration-500">
+          {currentEvent.images.map((img, index) => (
+            <a
+              key={index}
+              href={currentEvent.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-full sm:w-[48%] md:w-[40%] lg:w-[22%] block rounded-md overflow-hidden hover:scale-105 transition-transform"
+            >
+              <img
+                src={img}
+                alt={`${currentEvent.title} ${index + 1}`}
+                className="w-full h-56 object-cover transition-all duration-500 group-hover:brightness-110"
+              />
+              <div className="bg-black/50 text-white py-2 text-sm text-center">
+                <p className="text-xs">{currentEvent.title}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* 🟢 Thanh chọn tháng */}
+        <div className="bg-[#176734] py-6 mt-10 overflow-x-auto scrollbar-hide">
+          <div className="flex justify-center gap-3 sm:gap-5 md:gap-7 min-w-max px-4">
+            {events.map((event, index) => (
               <div
-                key={item.id}
-                className={`px-2 shrink-0 w-full ${
-                  itemsPerSlide === 4
-                    ? "md:w-1/2 lg:w-1/4"
-                    : itemsPerSlide === 2
-                    ? "w-1/2"
-                    : "w-full"
+                key={event.month}
+                onClick={() => handleMonthClick(index)}
+                className={`cursor-pointer px-3 sm:px-4 py-1 border-2 text-sm font-semibold rounded-md transition-all duration-300 whitespace-nowrap ${
+                  activeMonth === index
+                    ? "bg-[#B43620] border-[#f4b01b] text-white"
+                    : "border-[#f4b01b] text-[#f4b01b] hover:bg-[#f4b01b]/80 hover:text-white"
                 }`}
-                onClick={() => handleClick(item.id)}
               >
-                <div className="relative rounded-lg overflow-hidden group cursor-pointer shadow-md">
-                  <img
-                    src={item.image}
-                    alt={item.title_en || item.title}
-                    className="w-full h-48 object-cover rounded-md transform transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/40 flex items-end p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <p className="text-white text-sm line-clamp-2">
-                      {item.description_en || item.description || "No description"}
-                    </p>
-                  </div>
-                </div>
-                <h3 className="text-black text-base font-bold mt-2 line-clamp-1">
-                  {item.title_en || item.title || "No title"}
-                </h3>
+                {event.month}
               </div>
             ))}
           </div>
         </div>
-
-        {/* Nút phải */}
-        {currentIndex < promotions.length - itemsPerSlide && (
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 md:-right-6 top-1/2 -translate-y-1/2 bg-red-600 w-10 h-10 flex items-center justify-center rounded-full shadow-lg z-20 hover:bg-red-700 transition-colors"
-          >
-            <FaChevronRight className="text-white" />
-          </button>
-        )}
       </div>
     </div>
   );

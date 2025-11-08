@@ -17,7 +17,7 @@ const NodePagevi = () => {
     },
     {
       img: "/images/Transport_1.jpg",
-      title: "Phương Tiện",
+      title: "PHƯƠNG TIỆN",
       link: "vi/blog/31",
     },
     {
@@ -27,13 +27,13 @@ const NodePagevi = () => {
     },
     {
       img: "/images/Weather white_1.jpg",
-      title: "Thời Tiết",
+      title: "THỜI TIẾT",
       link: "vi/blog/33",
     },
   ];
 
   return (
-    <div className="bg-white mb-[10px] mt-[-80px] py-16 px-8 ">
+    <div className=" mb-[40px] mt-[-80px] py-16 px-8 ">
       {/* Tiêu đề */}
        <div className="relative max-w-6xl mt-[-40px] mb-[40px] mx-auto overflow-hidden">
     <h1 className="relative inline-block ml-[10px] mb-6 select-none transition-transform duration-300 ease-out hover:scale-105">
@@ -67,9 +67,9 @@ const NodePagevi = () => {
             <img
               src={tip.img}
               alt={tip.title}
-              className="w-16 h-16 object-contain mb-2"
+              className="w-16 h-46 object-contain mb-2"
             />
-            <p className="text-gray-700 font-medium tracking-wide">
+            <p className="text-[#176734] font-medium tracking-wide">
               {tip.title}
             </p>
           </Link>
