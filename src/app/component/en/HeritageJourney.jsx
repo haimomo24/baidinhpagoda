@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const combos = [
   {
     id: 1,
@@ -127,7 +128,7 @@ const HeritageJourney = () => {
  
      try {
        setLoading(true);
-       const res = await fetch("http://113.160.202.187:1989/api/ticket", {
+       const res = await fetch(`${API_URL}/api/ticket`, {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(dataToSend),

@@ -1,6 +1,7 @@
 // src/pages/HanhtrinhdisanPage.jsx
 'use client'
 import React, { useState } from "react";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const combos = [
   {
@@ -136,7 +137,7 @@ const HanhtrinhdisanPage = () => {
 
     try {
       setLoading(true);
-      const res = await fetch("http://113.160.202.187:1985/api/ticket", {
+      const res = await fetch(`${API_URL}/api/ticket`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataToSend),

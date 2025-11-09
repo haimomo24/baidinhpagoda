@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const HoteltableDashboard = () => {
   const [bookings, setBookings] = useState([])
   const [loading, setLoading] = useState(true)
@@ -10,7 +11,7 @@ const HoteltableDashboard = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await axios.get('http://113.160.202.187:1985/api/booking')
+        const res = await axios.get(`${API_URL}/api/booking`)
         setBookings(res.data)
       } catch (err) {
         console.error('❌ Lỗi khi lấy danh sách đơn đặt phòng:', err)
@@ -24,7 +25,7 @@ const HoteltableDashboard = () => {
   // 🟢 Xác nhận đơn đặt phòng
   const handleConfirm = async id => {
   try {
-    const res = await axios.put(`http://113.160.202.187:1985/api/booking/${id}/status`, {
+    const res = await axios.put(`${API_URL}/api/booking/${id}/status`, {
       status: 'Đã xác nhận'
     })
     alert(res.data.message)

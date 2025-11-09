@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const BaidinhNighten = () => {
     const [lightbox, setLightbox] = useState(null);
     const [formData, setFormData] = useState({
@@ -73,7 +73,7 @@ const BaidinhNighten = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("http://113.160.202.187:1985/api/baidinhnight", {
+      const res = await fetch(`${API_URL}/api/baidinhnight`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

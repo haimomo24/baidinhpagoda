@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { CheckCircleIcon, WifiIcon } from '@heroicons/react/24/solid'
 import axios from 'axios'
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function HotelPage() {
   const router = useRouter()
@@ -14,7 +15,7 @@ export default function HotelPage() {
   useEffect(() => {
     const fetchRooms = async () => {
       try {
-        const res = await axios.get('http://113.160.202.187:1985/api/room')
+        const res = await axios.get(`${API_URL}/api/room`)
         setRooms(res.data)
       } catch (err) {
         console.error('❌ Lỗi khi lấy danh sách phòng:', err)

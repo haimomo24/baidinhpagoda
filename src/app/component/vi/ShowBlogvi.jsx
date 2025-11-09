@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const ShowBlogvi = () => {
   const { id } = useParams()
   const [blog, setBlog] = useState(null)
@@ -14,7 +14,7 @@ const ShowBlogvi = () => {
     if (!id) return
     const fetchBlog = async () => {
       try {
-        const res = await fetch(`http://113.160.202.187:1985/api/blog/${id}`)
+        const res = await fetch(`${API_URL}/api/blog/${id}`)
         const data = await res.json()
         setBlog(data)
       } catch (error) {
@@ -30,7 +30,7 @@ const ShowBlogvi = () => {
   useEffect(() => {
     const fetchRelated = async () => {
       try {
-        const res = await fetch('http://113.160.202.187:1985/api/blog')
+        const res = await fetch(`${API_URL}/api/blog`)
         const data = await res.json()
         if (Array.isArray(data)) {
           const filtered = data

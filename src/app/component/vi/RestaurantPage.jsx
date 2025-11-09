@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export default function RestaurantPage() {
   const [lightbox, setLightbox] = useState(null);
 
@@ -72,7 +72,7 @@ export default function RestaurantPage() {
     };
 
     try {
-      const res = await fetch("http://113.160.202.187:1985/api/restaurant", {
+      const res = await fetch(`${API_URL}/api/restaurant`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),

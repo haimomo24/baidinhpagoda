@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1985"
+const API_URL = process.env.NEXT_PUBLIC_API_URL  ;
 
 const ShowVisiten = () => {
     const { id } = useParams()

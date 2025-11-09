@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const ComboTicket = () => {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ const ComboTicket = () => {
   // 📡 Lấy dữ liệu từ API combo ticket
   const fetchData = async () => {
     try {
-      const res = await fetch("http://113.160.202.187:1985/api/combo-ticket");
+      const res = await fetch(`${API_URL}/api/combo-ticket`);
       const data = await res.json();
       setTickets(data);
     } catch (err) {
@@ -28,7 +29,7 @@ const ComboTicket = () => {
   // 📝 Hàm cập nhật trạng thái
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      await fetch(`http://113.160.202.187:1985/api/combo-ticket/${id}/status`, {
+      await fetch(`${API_URL}/api/combo-ticket/${id}/status`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),

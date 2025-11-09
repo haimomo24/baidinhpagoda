@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const Conferenceen = () => {
   const [lightbox, setLightbox] = useState(null);
   const [formData, setFormData] = useState({
@@ -77,7 +78,7 @@ const Conferenceen = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("http://113.160.202.187:1985/api/conference", {
+      const res = await fetch(`${API_URL}/api/conference`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

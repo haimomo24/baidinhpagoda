@@ -10,7 +10,7 @@ const prices = {
   'Touch spirituality (children)': 100000,
 }
 
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const ElectricCar = () => {
      const [bookingDate, setBookingDate] = useState(() =>
         new Date().toISOString().split('T')[0]

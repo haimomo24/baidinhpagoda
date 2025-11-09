@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const BlogDashboard = () => {
   const router = useRouter();
 
@@ -68,7 +69,7 @@ const BlogDashboard = () => {
       if (formData.images_3) formToSend.append("images_3", formData.images_3);
       if (formData.images_4) formToSend.append("images_4", formData.images_4);
 
-      const res = await fetch("http://113.160.202.187:1985/api/blog", {
+      const res = await fetch(`${API_URL}/api/blog`, {
         method: "POST",
         body: formToSend,
       });

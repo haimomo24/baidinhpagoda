@@ -54,7 +54,7 @@ const AddKhuyenmai = () => {
       formToSend.append("title", formData.title);
       if (formData.image) formToSend.append("image", formData.image);
 
-      const res = await fetch("http://113.160.202.187:1985/api/promotion", {
+      const res = await fetch(`${API_URL}/api/promotion`, {
         method: "POST",
         body: formToSend,
       });

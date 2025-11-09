@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const ContactVi = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +26,7 @@ const ContactVi = () => {
     setLoading(true);
     setIsSubmitting(true);
     try {
-      const res = await fetch("http://113.160.202.187:1985/api/contactpage", {
+      const res = await fetch(`${API_URL}/api/contactpage`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

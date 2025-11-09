@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const BlogTable = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +16,7 @@ const BlogTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const API_URL = "http://113.160.202.187:1985/api/blog";
+  const API_URL = `${API_URL}/api/blog`;
 
   // 📌 Fetch blog
   const fetchBlogs = async () => {

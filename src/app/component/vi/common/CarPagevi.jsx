@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const prices = {
   'Đồng hành an nhiên (TE)': 70000,
   'Đồng hành an nhiên (NL)': 100000,
@@ -61,7 +62,7 @@ const CarPagevi = () => {
 
   try {
     setLoading(true);
-    const res = await fetch("http://113.160.202.187:1985/api/bookingcar", {
+    const res = await fetch(`${API_URL}/api/bookingcar`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

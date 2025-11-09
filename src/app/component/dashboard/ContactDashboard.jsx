@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const ContactDashboard = () => {
      const [contacts, setContacts] = useState([]);
       const [loading, setLoading] = useState(true);
@@ -11,7 +12,7 @@ const ContactDashboard = () => {
       // Lấy dữ liệu từ API
       const fetchData = async () => {
         try {
-          const res = await fetch("http://113.160.202.187:1985/api/contactpage");
+          const res = await fetch(`${API_URL}/api/contactpage`);
           const data = await res.json();
           setContacts(data);
         } catch (err) {
@@ -28,7 +29,7 @@ const ContactDashboard = () => {
       // Hàm cập nhật trạng thái
       const handleUpdateStatus = async (id, newStatus) => {
         try {
-          await fetch(`http://113.160.202.187:1985/api/contact/${id}/status`, {
+          await fetch(`${API_URL}/api/contact/${id}/status`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: newStatus }),

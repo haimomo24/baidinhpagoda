@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const BaidinhNight = () => {
   const [lightbox, setLightbox] = useState(null);
@@ -72,7 +73,7 @@ const BaidinhNight = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("http://113.160.202.187:1985/api/baidinhnight", {
+      const res = await fetch(`${API_URL}/api/baidinhnight`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

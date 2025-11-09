@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://113.160.202.187:1985";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ;
 
 const VisitTable = () => {
   const [visits, setVisits] = useState([]);

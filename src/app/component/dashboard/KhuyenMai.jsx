@@ -15,7 +15,7 @@ const KhuyenMai = () => {
   // Fetch dữ liệu
   const fetchData = async () => {
     try {
-      const res = await fetch("http://113.160.202.187:1985/api/promotion");
+      const res = await fetch(`${API_URL}/api/promotion`);
       const result = await res.json();
       setData(result);
       setFilteredData(result);
@@ -50,7 +50,7 @@ const KhuyenMai = () => {
   const handleDelete = async (id) => {
     if (!confirm("Bạn có chắc chắn muốn xoá mục này?")) return;
     try {
-      const res = await fetch(`http://113.160.202.187:1985/api/promotion/${id}`, {
+      const res = await fetch(`${API_URL}/api/promotion/${id}`, {
         method: "DELETE",
       });
       if (res.ok) {

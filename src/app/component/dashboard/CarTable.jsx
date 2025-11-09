@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 const CarTable = () => {
   const [bookings, setBookings] = useState([])
   const [loading, setLoading] = useState(true)
@@ -10,7 +11,7 @@ const CarTable = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const res = await axios.get('http://113.160.202.187:1985/api/bookingcar')
+        const res = await axios.get(`${API_URL}/api/bookingcar`)
         setBookings(res.data)
       } catch (err) {
         console.error('❌ Lỗi khi lấy danh sách vé xe điện:', err)
@@ -26,7 +27,7 @@ const CarTable = () => {
   const handleConfirm = async id => {
     try {
       const res = await axios.put(
-        `http://113.160.202.187:1985/api/bookingcar/${id}/status`,
+        `${API_URL}/api/bookingcar/${id}/status`,
         { status: 1 } // ✅ Gửi kiểu số (1) đúng với backend
       )
       alert(res.data.message)
