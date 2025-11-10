@@ -1,4 +1,5 @@
 import SliderImage from "../component/common/SliderImage";
+import CommentPageen from "../component/en/CommentPageen";
 import AllVisiten from "../component/en/common/AllVisiten";
 import BlogPageen from "../component/en/common/BlogPageen";
 import FamousPlacesen from "../component/en/common/FamousPlacesen";
@@ -26,6 +27,7 @@ export default function EnHome() {
       <BlogPageen/>
     </div>
     <VideoPageen/>
+    <CommentPageen/>
    
     </div>
     </>
