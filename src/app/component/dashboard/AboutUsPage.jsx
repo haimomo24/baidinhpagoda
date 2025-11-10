@@ -26,10 +26,10 @@ const AboutUsPage = () => {
     rating: 5,
   });
 
-  /* 🟢 Lấy danh sách ảnh */
+  // 🟢 Lấy danh sách ảnh
   const fetchImages = async () => {
     try {
-      const res = await fetch(API_URL);
+      const res = await fetch(`${API_URL}/api/photo-review`);
       const data = await res.json();
       setImages(data);
     } catch (err) {
@@ -41,10 +41,10 @@ const AboutUsPage = () => {
     fetchImages();
   }, []);
 
-  /* 🟢 Lấy bình luận theo ảnh */
+  // 🟢 Lấy bình luận theo ảnh
   const fetchComments = async (photoId) => {
     try {
-      const res = await fetch(`${API_URL}/${photoId}/comments`);
+      const res = await fetch(`${API_URL}/api/photo-review/${photoId}/comments`);
       const data = await res.json();
       setComments((prev) => ({ ...prev, [photoId]: data }));
     } catch (err) {
@@ -52,7 +52,7 @@ const AboutUsPage = () => {
     }
   };
 
-  /* 🟡 Thêm hoặc cập nhật ảnh */
+  // 🟡 Thêm / Sửa ảnh
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -67,7 +67,9 @@ const AboutUsPage = () => {
 
     try {
       const res = await fetch(
-        editId ? `${API_URL}/${editId}` : API_URL,
+        editId
+          ? `${API_URL}/api/photo-review/${editId}`
+          : `${API_URL}/api/photo-review`,
         {
           method: editId ? "PUT" : "POST",
           body: uploadData,
@@ -76,13 +78,7 @@ const AboutUsPage = () => {
 
       if (res.ok) {
         alert(editId ? "✅ Cập nhật thành công!" : "✅ Thêm ảnh thành công!");
-        setFormData({
-          title: "",
-          title2: "",
-          title3: "",
-          title4: "",
-          description: "",
-        });
+        setFormData({ title: "", title2: "", title3: "", title4: "", description: "" });
         setFiles({ image_url: null, image_url2: null, image_url3: null });
         setEditId(null);
         fetchImages();
@@ -94,11 +90,11 @@ const AboutUsPage = () => {
     }
   };
 
-  /* 🔴 Xóa ảnh */
+  // 🔴 Xóa ảnh
   const handleDelete = async (id) => {
     if (!window.confirm("Bạn có chắc muốn xóa ảnh này không?")) return;
     try {
-      const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API_URL}/api/photo-review/${id}`, { method: "DELETE" });
       if (res.ok) {
         alert("🗑️ Đã xóa ảnh!");
         fetchImages();
@@ -110,7 +106,7 @@ const AboutUsPage = () => {
     }
   };
 
-  /* ✏️ Sửa ảnh */
+  // ✏️ Sửa ảnh
   const handleEdit = (img) => {
     setEditId(img.id);
     setFormData({
@@ -123,10 +119,10 @@ const AboutUsPage = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  /* 💬 Gửi bình luận */
+  // 💬 Gửi bình luận
   const handleAddComment = async (photoId) => {
     try {
-      const res = await fetch(`${API_URL}/${photoId}/comments`, {
+      const res = await fetch(`${API_URL}/api/photo-review/${photoId}/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newComment),
@@ -150,11 +146,8 @@ const AboutUsPage = () => {
         Quản lý Ảnh & Bình luận - Về Chúng Tôi
       </h2>
 
-      {/* 🟢 Form Thêm / Sửa Ảnh */}
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4 mb-8 bg-white p-6 rounded-lg shadow-lg"
-      >
+      {/* Form Thêm / Sửa Ảnh */}
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8 bg-white p-6 rounded-lg shadow-lg">
         <div className="grid sm:grid-cols-3 gap-4">
           {["Ảnh 1", "Ảnh 2", "Ảnh 3"].map((label, i) => (
             <div key={i}>
@@ -163,10 +156,7 @@ const AboutUsPage = () => {
                 type="file"
                 accept="image/*"
                 onChange={(e) =>
-                  setFiles({
-                    ...files,
-                    [`image_url${i === 0 ? "" : i + 1}`]: e.target.files[0],
-                  })
+                  setFiles({ ...files, [`image_url${i === 0 ? "" : i + 1}`]: e.target.files[0] })
                 }
               />
             </div>
@@ -180,9 +170,7 @@ const AboutUsPage = () => {
               type="text"
               placeholder={`Tiêu đề ${i + 1}`}
               value={formData[t]}
-              onChange={(e) =>
-                setFormData({ ...formData, [t]: e.target.value })
-              }
+              onChange={(e) => setFormData({ ...formData, [t]: e.target.value })}
               className="border border-gray-300 rounded-lg p-2"
             />
           ))}
@@ -191,9 +179,7 @@ const AboutUsPage = () => {
         <textarea
           placeholder="Mô tả..."
           value={formData.description}
-          onChange={(e) =>
-            setFormData({ ...formData, description: e.target.value })
-          }
+          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
           className="border border-gray-300 rounded-lg p-2 min-h-[80px]"
         ></textarea>
 
@@ -205,16 +191,13 @@ const AboutUsPage = () => {
         </button>
       </form>
 
-      {/* 🖼️ Danh sách ảnh */}
+      {/* Danh sách ảnh */}
       {images.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {images.map((img) => (
-            <div
-              key={img.id}
-              className="bg-white rounded-xl shadow-lg overflow-hidden group"
-            >
+            <div key={img.id} className="bg-white rounded-xl shadow-lg overflow-hidden group">
               <img
-                src={img.image_url}
+                src={`${API_URL}${img.image_url}`}
                 alt={img.title}
                 className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
               />
@@ -224,43 +207,27 @@ const AboutUsPage = () => {
                 <p className="text-gray-400 text-xs mt-2">
                   📅 {new Date(img.created_at).toLocaleString()}
                 </p>
+
                 <div className="flex gap-2 mt-3">
-                  <button
-                    onClick={() => handleEdit(img)}
-                    className="bg-blue-500 text-white px-3 py-1 rounded-md text-sm"
-                  >
-                    Sửa
-                  </button>
-                  <button
-                    onClick={() => handleDelete(img.id)}
-                    className="bg-red-500 text-white px-3 py-1 rounded-md text-sm"
-                  >
-                    Xóa
-                  </button>
-                  <button
-                    onClick={() => fetchComments(img.id)}
-                    className="bg-gray-500 text-white px-3 py-1 rounded-md text-sm"
-                  >
+                  <button onClick={() => handleEdit(img)} className="bg-blue-500 text-white px-3 py-1 rounded-md text-sm">Sửa</button>
+                  <button onClick={() => handleDelete(img.id)} className="bg-red-500 text-white px-3 py-1 rounded-md text-sm">Xóa</button>
+                  <button onClick={() => fetchComments(img.id)} className="bg-gray-500 text-white px-3 py-1 rounded-md text-sm">
                     Bình luận ({img.comment_count})
                   </button>
                 </div>
 
-                {/* 💬 Khu vực bình luận */}
+                {/* Bình luận */}
                 {comments[img.id] && (
                   <div className="mt-4 border-t pt-3">
                     {comments[img.id].length > 0 ? (
                       comments[img.id].map((c) => (
                         <div key={c.id} className="mb-2">
-                          <p className="text-sm font-semibold">
-                            {c.username} - ⭐{c.rating}
-                          </p>
+                          <p className="text-sm font-semibold">{c.username} - ⭐{c.rating}</p>
                           <p className="text-sm">{c.comment}</p>
                         </div>
                       ))
                     ) : (
-                      <p className="text-gray-500 text-sm">
-                        Chưa có bình luận nào.
-                      </p>
+                      <p className="text-gray-500 text-sm">Chưa có bình luận nào.</p>
                     )}
 
                     {/* Form thêm bình luận */}
@@ -269,51 +236,29 @@ const AboutUsPage = () => {
                         type="text"
                         placeholder="Tên..."
                         value={newComment.username}
-                        onChange={(e) =>
-                          setNewComment({
-                            ...newComment,
-                            username: e.target.value,
-                          })
-                        }
+                        onChange={(e) => setNewComment({ ...newComment, username: e.target.value })}
                         className="border p-1 rounded w-full mb-2"
                       />
                       <input
                         type="email"
                         placeholder="Email..."
                         value={newComment.email}
-                        onChange={(e) =>
-                          setNewComment({
-                            ...newComment,
-                            email: e.target.value,
-                          })
-                        }
+                        onChange={(e) => setNewComment({ ...newComment, email: e.target.value })}
                         className="border p-1 rounded w-full mb-2"
                       />
                       <textarea
                         placeholder="Bình luận..."
                         value={newComment.comment}
-                        onChange={(e) =>
-                          setNewComment({
-                            ...newComment,
-                            comment: e.target.value,
-                          })
-                        }
+                        onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
                         className="border p-1 rounded w-full mb-2"
                       />
                       <select
                         value={newComment.rating}
-                        onChange={(e) =>
-                          setNewComment({
-                            ...newComment,
-                            rating: Number(e.target.value),
-                          })
-                        }
+                        onChange={(e) => setNewComment({ ...newComment, rating: Number(e.target.value) })}
                         className="border p-1 rounded w-full mb-2"
                       >
                         {[1, 2, 3, 4, 5].map((r) => (
-                          <option key={r} value={r}>
-                            {r} sao
-                          </option>
+                          <option key={r} value={r}>{r} sao</option>
                         ))}
                       </select>
                       <button

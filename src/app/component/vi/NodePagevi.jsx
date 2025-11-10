@@ -6,27 +6,27 @@ import Link from "next/link"; // ✅ Đúng: Link của Next.js, không phải l
 const NodePagevi = () => {
   const tips = [
     {
-      img: "/images/node1.jpg", // ✅ Đặt file này trong thư mục public/images/
+      img: "/images/vector-01.png", // ✅ Đặt file này trong thư mục public/images/
       title: "THỊ THỰC",
       link: "vi/blog/29",
     },
     {
-      img: "/images/History white_0.jpg",
+      img: "/images/vector-05.png",
       title: "LỊCH SỬ",
       link: "vi/blog/30",
     },
     {
-      img: "/images/Transport_1.jpg",
+      img: "/images/vector-03.png",
       title: "PHƯƠNG TIỆN",
       link: "vi/blog/31",
     },
     {
-      img: "/images/Visas_1.jpg",
+      img: "/images/vector-02.png",
       title: "SỰ AN TOÀN",
       link: "vi/blog/32",
     },
     {
-      img: "/images/Weather white_1.jpg",
+      img: "/images/vector-04.png",
       title: "THỜI TIẾT",
       link: "vi/blog/33",
     },
@@ -67,9 +67,9 @@ const NodePagevi = () => {
             <img
               src={tip.img}
               alt={tip.title}
-              className="w-16 h-46 object-contain mb-2"
+              className="w-36 h-46 object-contain mb-2"
             />
-            <p className="text-[#176734] font-medium tracking-wide">
+            <p className="text-[#176734] font-bold hover:text-red-500 tracking-wide">
               {tip.title}
             </p>
           </Link>

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL ;
 
 const CommentPage = () => {
   const [images, setImages] = useState([]);
@@ -12,12 +12,14 @@ const CommentPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  // Lấy danh sách ảnh
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await fetch(API_URL, { cache: "no-store" });
-        if (!res.ok) throw new Error("Không thể tải ảnh");
+        const res = await fetch(`${API_URL}/api/photo-review`, { cache: "no-store" });
+        console.log("FETCH STATUS:", res.status);
         const data = await res.json();
+        console.log("DATA FROM API:", data);
         setImages(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Lỗi khi tải ảnh:", err);
@@ -27,10 +29,10 @@ const CommentPage = () => {
     fetchImages();
   }, []);
 
+  // Lấy bình luận của ảnh
   const fetchComments = async (photoId) => {
     try {
-      const res = await fetch(`${API_URL}/${photoId}/comments`, { cache: "no-store" });
-      if (!res.ok) throw new Error("Không thể tải bình luận");
+      const res = await fetch(`${API_URL}/api/photo-review/${photoId}/comments`, { cache: "no-store" });
       const data = await res.json();
       setSelectedImage((prev) => ({ ...prev, comments: data || [] }));
     } catch (err) {
@@ -46,7 +48,6 @@ const CommentPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!name.trim() || !email.trim() || !comment.trim() || rating === 0) {
       alert("⚠️ Vui lòng nhập đầy đủ thông tin và chọn số sao!");
       return;
@@ -60,7 +61,7 @@ const CommentPage = () => {
     };
 
     try {
-      const res = await fetch(`${API_URL}/${selectedImage.id}/comments`, {
+      const res = await fetch(`${API_URL}/api/photo-review/${selectedImage.id}/comments`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newComment),
@@ -88,20 +89,18 @@ const CommentPage = () => {
       : `${namePart[0]}***@${domain}`;
   };
 
-  const BASE_URL = API_URL.replace("/api/photo-review", "");
-
-  // Tạo mảng xen kẽ: [image1, title1, image2, title2, ...]
+  // Tạo mảng xen kẽ ảnh + tiêu đề + mô tả
   const buildInterleaved = (img) => {
     const items = [];
-   if (img.title) items.push({ type: "title", text: img.title });
-  if (img.image_url) items.push({ type: "image", src: `${BASE_URL}${img.image_url}` });
-  if (img.title2) items.push({ type: "title", text: img.title2 });
-  if (img.image_url2) items.push({ type: "image", src: `${BASE_URL}${img.image_url2}` });
-  if (img.title3) items.push({ type: "title", text: img.title3 });
-  if (img.image_url3) items.push({ type: "image", src: `${BASE_URL}${img.image_url3}` });
-  if (img.title4) items.push({ type: "title", text: img.title4 });
-  if (img.description) items.push({ type: "desc", text: img.description });
-  return items;
+    if (img.title) items.push({ type: "title", text: img.title });
+    if (img.image_url) items.push({ type: "image", src: `${API_URL}${img.image_url}` });
+    if (img.title2) items.push({ type: "title", text: img.title2 });
+    if (img.image_url2) items.push({ type: "image", src: `${API_URL}${img.image_url2}` });
+    if (img.title3) items.push({ type: "title", text: img.title3 });
+    if (img.image_url3) items.push({ type: "image", src: `${API_URL}${img.image_url3}` });
+    if (img.title4) items.push({ type: "title", text: img.title4 });
+    if (img.description) items.push({ type: "desc", text: img.description });
+    return items;
   };
 
   return (
@@ -110,7 +109,7 @@ const CommentPage = () => {
         VỀ CHÚNG TÔI
       </h2>
 
-      {/* DANH SÁCH ẢNH: GIỮ NGUYÊN GIAO DIỆN BAN ĐẦU */}
+      {/* DANH SÁCH ẢNH */}
       {!selectedImage && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
           {images.length > 0 ? (
@@ -121,7 +120,7 @@ const CommentPage = () => {
                 className="overflow-hidden rounded-2xl shadow-md cursor-pointer hover:scale-105 transition-transform duration-300"
               >
                 <img
-                  src={`${BASE_URL}${img.image_url}`}
+                  src={`${API_URL}${img.image_url}`}
                   alt={`Ảnh ${img.id}`}
                   className="w-full h-64 object-cover"
                 />
@@ -133,7 +132,7 @@ const CommentPage = () => {
         </div>
       )}
 
-      {/* CHI TIẾT KHI CLICK: HIỂN THỊ XEN KẼ ẢNH - TITLE (KHÔNG THAY ĐỔI FORM BÌNH LUẬN) */}
+      {/* CHI TIẾT ẢNH */}
       {selectedImage && (
         <div className="bg-white shadow-md rounded-2xl p-6">
           <button
@@ -149,7 +148,7 @@ const CommentPage = () => {
               if (it.type === "image") {
                 return (
                   <div key={idx} className="w-full overflow-hidden rounded-lg shadow-sm">
-                    <img src={it.src} alt={`img-${idx}`} className="w-full object-cover" style={{maxHeight: 420}} />
+                    <img src={it.src} alt={`img-${idx}`} className="w-full object-cover" style={{ maxHeight: 420 }} />
                   </div>
                 );
               }
@@ -171,7 +170,7 @@ const CommentPage = () => {
             })}
           </div>
 
-          {/* ⭐ Rating (giữ nguyên) */}
+          {/* Form đánh giá */}
           <h3 className="text-lg font-semibold mb-4">Đánh giá của bạn</h3>
           <div className="flex items-center mb-4 space-x-1">
             {[...Array(5)].map((_, i) => {
@@ -185,15 +184,13 @@ const CommentPage = () => {
                   onMouseLeave={() => setHover(rating)}
                   className="text-3xl transition-colors"
                 >
-                  <span style={{ color: current <= (hover || rating) ? "#facc15" : "#d1d5db" }}>
-                    ★
-                  </span>
+                  <span style={{ color: current <= (hover || rating) ? "#facc15" : "#d1d5db" }}>★</span>
                 </button>
               );
             })}
           </div>
 
-          {/* 💬 Form bình luận (giữ nguyên) */}
+          {/* Form bình luận */}
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -216,12 +213,15 @@ const CommentPage = () => {
               rows={4}
               className="w-full border border-gray-300 rounded-lg p-3 mb-4 focus:ring-2 focus:ring-yellow-400 focus:outline-none"
             />
-            <button type="submit" className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-5 py-2 rounded-lg transition">
+            <button
+              type="submit"
+              className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium px-5 py-2 rounded-lg transition"
+            >
               Gửi bình luận
             </button>
           </form>
 
-          {/* Danh sách bình luận (giữ nguyên) */}
+          {/* Danh sách bình luận */}
           {selectedImage.comments?.length > 0 ? (
             <div className="mt-8 space-y-4">
               <h3 className="text-lg font-semibold mb-3">Bình luận gần đây</h3>
