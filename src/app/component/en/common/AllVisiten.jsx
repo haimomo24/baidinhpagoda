@@ -76,7 +76,7 @@ const MobileSlider = () => {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <div className="w-full h-72 rounded-xl overflow-hidden shadow-lg relative">
+      <div className="w-full h-72 rounded-xl overflow-hidden  relative">
         <img src={blog.img} alt={blog.title} className="w-full h-full object-cover" />
         <div className="absolute inset-0 flex items-center justify-center bg-black/40">
           <p className="text-white text-xl font-bold">{blog.title}</p>
@@ -169,7 +169,7 @@ const DesktopSlider = () => {
 
 const AllVisiten = () => {
   return (
-     <div className="w-full mt-[-20px] bg-[#F1EBE5]/70 py-12">
+     <div className="w-full mt-[-20px]  py-12">
       <div className="max-w-6xl mx-auto flex justify-start mb-10 px-4">
         <h2 className="
     inline-block px-6 py-3
