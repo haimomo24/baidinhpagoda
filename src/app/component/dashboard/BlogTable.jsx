@@ -1,7 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+import Image from "next/image";
+
+const API_URL_BASE = process.env.NEXT_PUBLIC_API_URL; // URL gốc từ env
+const API_BLOG_URL = `${API_URL_BASE}/api/blog`; // URL API blog
+
 const BlogTable = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,12 +20,10 @@ const BlogTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const API_URL = `${API_URL}/api/blog`;
-
   // 📌 Fetch blog
   const fetchBlogs = async () => {
     try {
-      const res = await fetch(API_URL);
+      const res = await fetch(API_BLOG_URL);
       const data = await res.json();
       setBlogs(data);
     } catch (error) {
@@ -39,7 +41,7 @@ const BlogTable = () => {
   const handleDelete = async (id) => {
     if (!confirm("Bạn có chắc chắn muốn xoá blog này?")) return;
     try {
-      const res = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+      const res = await fetch(`${API_BLOG_URL}/${id}`, { method: "DELETE" });
       if (res.ok) {
         alert("Xoá thành công!");
         setBlogs((prev) => prev.filter((b) => b.id !== id));
@@ -107,7 +109,7 @@ const BlogTable = () => {
       Object.keys(formData).forEach((key) => fd.append(key, formData[key]));
       Object.keys(uploadFiles).forEach((key) => fd.append(key, uploadFiles[key]));
 
-      const res = await fetch(`${API_URL}/${editBlog.id}`, {
+      const res = await fetch(`${API_BLOG_URL}/${editBlog.id}`, {
         method: "PUT",
         body: fd,
       });
@@ -183,10 +185,12 @@ const BlogTable = () => {
                 <td className="px-6 py-4">{renderTitle(blog.id, "title_3", blog.title_3)}</td>
                 <td className="px-6 py-4">
                   {blog.images_1 ? (
-                    <img
+                    <Image
                       src={blog.images_1}
                       alt="image1"
-                      className="w-16 h-16 object-cover rounded cursor-pointer hover:scale-105 transition"
+                      width={64}
+                      height={64}
+                      className="object-cover rounded cursor-pointer hover:scale-105 transition"
                       onClick={() => setSelectedBlog(blog)}
                     />
                   ) : (
@@ -195,10 +199,12 @@ const BlogTable = () => {
                 </td>
                 <td className="px-6 py-4">
                   {blog.images_2 ? (
-                    <img
+                    <Image
                       src={blog.images_2}
                       alt="image2"
-                      className="w-16 h-16 object-cover rounded cursor-pointer hover:scale-105 transition"
+                      width={64}
+                      height={64}
+                      className="object-cover rounded cursor-pointer hover:scale-105 transition"
                       onClick={() => setSelectedBlog(blog)}
                     />
                   ) : (
