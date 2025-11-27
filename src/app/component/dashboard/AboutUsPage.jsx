@@ -26,7 +26,7 @@ const AboutUsPage = () => {
     rating: 5,
   });
 
-  // 🟢 Lấy danh sách ảnh
+  // Lấy danh sách ảnh
   const fetchImages = async () => {
     try {
       const res = await fetch(`${API_URL}/api/photo-review`);
@@ -41,7 +41,7 @@ const AboutUsPage = () => {
     fetchImages();
   }, []);
 
-  // 🟢 Lấy bình luận theo ảnh
+  // Lấy bình luận theo ảnh
   const fetchComments = async (photoId) => {
     try {
       const res = await fetch(`${API_URL}/api/photo-review/${photoId}/comments`);
@@ -52,15 +52,23 @@ const AboutUsPage = () => {
     }
   };
 
-  // 🟡 Thêm / Sửa ảnh
+  // Thêm / Sửa ảnh
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const uploadData = new FormData();
+
+    // File mới
     if (files.image_url) uploadData.append("image_url", files.image_url);
     if (files.image_url2) uploadData.append("image_url2", files.image_url2);
     if (files.image_url3) uploadData.append("image_url3", files.image_url3);
 
+    // Nếu sửa, giữ file cũ nếu không upload mới
+    if (editId && !files.image_url) uploadData.append("image_url", formData.image_url || "");
+    if (editId && !files.image_url2) uploadData.append("image_url2", formData.image_url2 || "");
+    if (editId && !files.image_url3) uploadData.append("image_url3", formData.image_url3 || "");
+
+    // Text fields
     Object.entries(formData).forEach(([key, value]) => {
       uploadData.append(key, value);
     });
@@ -90,7 +98,7 @@ const AboutUsPage = () => {
     }
   };
 
-  // 🔴 Xóa ảnh
+  // Xóa ảnh
   const handleDelete = async (id) => {
     if (!window.confirm("Bạn có chắc muốn xóa ảnh này không?")) return;
     try {
@@ -106,7 +114,7 @@ const AboutUsPage = () => {
     }
   };
 
-  // ✏️ Sửa ảnh
+  // Sửa ảnh
   const handleEdit = (img) => {
     setEditId(img.id);
     setFormData({
@@ -115,12 +123,23 @@ const AboutUsPage = () => {
       title3: img.title3 || "",
       title4: img.title4 || "",
       description: img.description || "",
+      image_url: img.image_url || "",
+      image_url2: img.image_url2 || "",
+      image_url3: img.image_url3 || "",
     });
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // 💬 Gửi bình luận
+  // Thêm bình luận
   const handleAddComment = async (photoId) => {
+    if (
+      !newComment.username.trim() ||
+      !newComment.email.trim() ||
+      !newComment.comment.trim()
+    ) {
+      alert("⚠️ Vui lòng nhập đầy đủ thông tin!");
+      return;
+    }
     try {
       const res = await fetch(`${API_URL}/api/photo-review/${photoId}/comments`, {
         method: "POST",
@@ -147,7 +166,10 @@ const AboutUsPage = () => {
       </h2>
 
       {/* Form Thêm / Sửa Ảnh */}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 mb-8 bg-white p-6 rounded-lg shadow-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 mb-8 bg-white p-6 rounded-lg shadow-lg"
+      >
         <div className="grid sm:grid-cols-3 gap-4">
           {["Ảnh 1", "Ảnh 2", "Ảnh 3"].map((label, i) => (
             <div key={i}>
@@ -159,6 +181,14 @@ const AboutUsPage = () => {
                   setFiles({ ...files, [`image_url${i === 0 ? "" : i + 1}`]: e.target.files[0] })
                 }
               />
+              {/* Show current image when edit */}
+              {editId && formData[`image_url${i === 0 ? "" : i + 1}`] && (
+                <img
+                  src={`${API_URL}${formData[`image_url${i === 0 ? "" : i + 1}`]}`}
+                  alt={`Ảnh hiện tại ${i + 1}`}
+                  className="w-24 h-24 object-cover mt-2 rounded"
+                />
+              )}
             </div>
           ))}
         </div>
@@ -209,9 +239,22 @@ const AboutUsPage = () => {
                 </p>
 
                 <div className="flex gap-2 mt-3">
-                  <button onClick={() => handleEdit(img)} className="bg-blue-500 text-white px-3 py-1 rounded-md text-sm">Sửa</button>
-                  <button onClick={() => handleDelete(img.id)} className="bg-red-500 text-white px-3 py-1 rounded-md text-sm">Xóa</button>
-                  <button onClick={() => fetchComments(img.id)} className="bg-gray-500 text-white px-3 py-1 rounded-md text-sm">
+                  <button
+                    onClick={() => handleEdit(img)}
+                    className="bg-blue-500 text-white px-3 py-1 rounded-md text-sm"
+                  >
+                    Sửa
+                  </button>
+                  <button
+                    onClick={() => handleDelete(img.id)}
+                    className="bg-red-500 text-white px-3 py-1 rounded-md text-sm"
+                  >
+                    Xóa
+                  </button>
+                  <button
+                    onClick={() => fetchComments(img.id)}
+                    className="bg-gray-500 text-white px-3 py-1 rounded-md text-sm"
+                  >
                     Bình luận ({img.comment_count})
                   </button>
                 </div>
@@ -222,7 +265,9 @@ const AboutUsPage = () => {
                     {comments[img.id].length > 0 ? (
                       comments[img.id].map((c) => (
                         <div key={c.id} className="mb-2">
-                          <p className="text-sm font-semibold">{c.username} - ⭐{c.rating}</p>
+                          <p className="text-sm font-semibold">
+                            {c.username} - ⭐{c.rating}
+                          </p>
                           <p className="text-sm">{c.comment}</p>
                         </div>
                       ))
@@ -236,29 +281,39 @@ const AboutUsPage = () => {
                         type="text"
                         placeholder="Tên..."
                         value={newComment.username}
-                        onChange={(e) => setNewComment({ ...newComment, username: e.target.value })}
+                        onChange={(e) =>
+                          setNewComment({ ...newComment, username: e.target.value })
+                        }
                         className="border p-1 rounded w-full mb-2"
                       />
                       <input
                         type="email"
                         placeholder="Email..."
                         value={newComment.email}
-                        onChange={(e) => setNewComment({ ...newComment, email: e.target.value })}
+                        onChange={(e) =>
+                          setNewComment({ ...newComment, email: e.target.value })
+                        }
                         className="border p-1 rounded w-full mb-2"
                       />
                       <textarea
                         placeholder="Bình luận..."
                         value={newComment.comment}
-                        onChange={(e) => setNewComment({ ...newComment, comment: e.target.value })}
+                        onChange={(e) =>
+                          setNewComment({ ...newComment, comment: e.target.value })
+                        }
                         className="border p-1 rounded w-full mb-2"
                       />
                       <select
                         value={newComment.rating}
-                        onChange={(e) => setNewComment({ ...newComment, rating: Number(e.target.value) })}
+                        onChange={(e) =>
+                          setNewComment({ ...newComment, rating: Number(e.target.value) })
+                        }
                         className="border p-1 rounded w-full mb-2"
                       >
                         {[1, 2, 3, 4, 5].map((r) => (
-                          <option key={r} value={r}>{r} sao</option>
+                          <option key={r} value={r}>
+                            {r} sao
+                          </option>
                         ))}
                       </select>
                       <button

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const CommentPage = () => {
   const [images, setImages] = useState([]);
@@ -17,9 +17,7 @@ const CommentPage = () => {
     const fetchImages = async () => {
       try {
         const res = await fetch(`${API_URL}/api/photo-review`, { cache: "no-store" });
-        console.log("FETCH STATUS:", res.status);
         const data = await res.json();
-        console.log("DATA FROM API:", data);
         setImages(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Lỗi khi tải ảnh:", err);
@@ -89,7 +87,6 @@ const CommentPage = () => {
       : `${namePart[0]}***@${domain}`;
   };
 
-  // Tạo mảng xen kẽ ảnh + tiêu đề + mô tả
   const buildInterleaved = (img) => {
     const items = [];
     if (img.title) items.push({ type: "title", text: img.title });
@@ -117,13 +114,21 @@ const CommentPage = () => {
               <div
                 key={img.id}
                 onClick={() => handleSelectImage(img)}
-                className="overflow-hidden rounded-2xl shadow-md cursor-pointer hover:scale-105 transition-transform duration-300"
+                className="cursor-pointer rounded-2xl shadow-md overflow-hidden hover:scale-105 transition-transform duration-300"
               >
+                {/* Ảnh */}
                 <img
                   src={`${API_URL}${img.image_url}`}
                   alt={`Ảnh ${img.id}`}
                   className="w-full h-64 object-cover"
                 />
+
+                {/* Description luôn hiển thị dưới ảnh */}
+                {img.description && (
+                  <div className="mt-2 px-2 text-gray-700 text-sm line-clamp-3 overflow-hidden">
+                    {img.description}
+                  </div>
+                )}
               </div>
             ))
           ) : (
@@ -142,13 +147,17 @@ const CommentPage = () => {
             ← Quay lại
           </button>
 
-          {/* Interleaved layout */}
           <div className="grid gap-4 mb-6">
             {buildInterleaved(selectedImage).map((it, idx) => {
               if (it.type === "image") {
                 return (
                   <div key={idx} className="w-full overflow-hidden rounded-lg shadow-sm">
-                    <img src={it.src} alt={`img-${idx}`} className="w-full object-cover" style={{ maxHeight: 420 }} />
+                    <img
+                      src={it.src}
+                      alt={`img-${idx}`}
+                      className="w-full object-cover"
+                      style={{ maxHeight: 420 }}
+                    />
                   </div>
                 );
               }
@@ -162,7 +171,7 @@ const CommentPage = () => {
               if (it.type === "desc") {
                 return (
                   <div key={idx} className="px-2">
-                    <p className="text-gray-600 italic">{it.text}</p>
+                    <p className="text-gray-600 italic line-clamp-3">{it.text}</p>
                   </div>
                 );
               }
@@ -170,7 +179,6 @@ const CommentPage = () => {
             })}
           </div>
 
-          {/* Form đánh giá */}
           <h3 className="text-lg font-semibold mb-4">Đánh giá của bạn</h3>
           <div className="flex items-center mb-4 space-x-1">
             {[...Array(5)].map((_, i) => {
@@ -190,7 +198,6 @@ const CommentPage = () => {
             })}
           </div>
 
-          {/* Form bình luận */}
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -221,7 +228,6 @@ const CommentPage = () => {
             </button>
           </form>
 
-          {/* Danh sách bình luận */}
           {selectedImage.comments?.length > 0 ? (
             <div className="mt-8 space-y-4">
               <h3 className="text-lg font-semibold mb-3">Bình luận gần đây</h3>
